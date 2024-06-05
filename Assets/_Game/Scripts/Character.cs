@@ -4,50 +4,41 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] private List<Material> materials = new List<Material>();
-
+    //[SerializeField] private List<Material> materials = new List<Material>();
+    [SerializeField] private DataSO data;
     [SerializeField] private Animator animator;
+    [SerializeField] private MeshRenderer currentMeshRenderer;
+    [SerializeField] private float moveSpeed;
+    //[SerializeField] private Color 
 
     private List<Brick> bricks = new List<Brick>();
 
     private string currentAnimationName;
-    private ColorType currentColorType;
-    private Direction currentDirection;
-    private MeshRenderer currentMeshRenderer;
+    private CommonEnum.ColorType currentColorType;
+    private CommonEnum.Direction currentDirection;
+    //private MeshRenderer currentMeshRenderer;
 
-    public enum Direction
-    {
-        None = 0,
-        Forward = 1,
-        Backward = 2,
-        Left = 3,
-        Right = 4,
-    }
-
-    public enum ColorType
-    {
-        None = 0,
-        Red = 1,
-        Blue = 2,
-        Green = 3,
-        Yellow = 4,
-        Orange = 5,
-        Purple = 6,
-    }
 
     private void Start()
     {
-        
+        OnInit();
     }
 
     public virtual void OnInit()
     {
-        currentDirection = Direction.None;
+        currentDirection = CommonEnum.Direction.None;
+        GetData();
     }
 
     public virtual void OnDespawn()
     {
 
+    }
+
+    public void GetData()
+    {
+        currentColorType = data.color;
+        currentMeshRenderer.material = data.GetMaterial(currentColorType);
     }
 
     public void ChangeAnimation(string animationName)
@@ -60,11 +51,11 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void ChangeColor(ColorType colorType)
-    {
-        this.currentColorType = colorType;
-        this.currentMeshRenderer.material = materials[(int)colorType];
-    }
+    //public void ChangeColor(CommonEnum.ColorType colorType)
+    //{
+    //    this.currentColorType = colorType;
+    //    this.currentMeshRenderer.material = materials[(int)colorType];
+    //}
 
     public void AddBrick(Brick brick)
     {
@@ -79,5 +70,17 @@ public class Character : MonoBehaviour
     public void ClearBrick()
     {
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Constants.TAG_BRICK))
+        {
+            Brick brick = other.GetComponent<Brick>();
+            if (currentColorType == brick.GetColorType())
+            {
+                AddBrick(brick);
+            }
+        }
     }
 }

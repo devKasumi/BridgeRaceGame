@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SimplePool
 {
-    private static Dictionary<PoolColorType, Pool> poolInstance = new Dictionary<PoolColorType, Pool>();
+    private static Dictionary<CommonEnum.ColorType, Pool> poolInstance = new Dictionary<CommonEnum.ColorType, Pool>();
 
     // khoi tao pool moi
     public static void PreLoad(Brick prefab, int amount, Transform parent)
@@ -15,44 +15,44 @@ public static class SimplePool
             return;
         }
 
-        if (!poolInstance.ContainsKey(prefab.PoolColorType) || poolInstance[prefab.PoolColorType] == null)
+        if (!poolInstance.ContainsKey(prefab.GetColorType()) || poolInstance[prefab.GetColorType()] == null)
         {
             Pool p = new Pool();
             p.PreLoad(prefab, amount, parent);
-            poolInstance[prefab.PoolColorType] = p;
+            poolInstance[prefab.GetColorType()] = p;
         }
     }
 
     // lay phan tu ra tu pool
-    public static T Spawn<T>(PoolColorType poolColorType, Vector3 pos, Quaternion rot) where T : Brick
+    public static T Spawn<T>(CommonEnum.ColorType colorType, Vector3 pos, Quaternion rot) where T : Brick
     {
-        if (!poolInstance.ContainsKey(poolColorType))
+        if (!poolInstance.ContainsKey(colorType))
         {
-            Debug.LogError(poolColorType + " IS NOT PRELOAD!");
+            Debug.LogError(colorType + " IS NOT PRELOAD!");
             return null;
         }
 
-        return poolInstance[poolColorType].Spawn(pos, rot) as T;
+        return poolInstance[colorType].Spawn(pos, rot) as T;
     }
 
     // tra pha tu vao trong pool
     public static void Despawn(Brick brick)
     {
-        if (!poolInstance.ContainsKey(brick.PoolColorType))
+        if (!poolInstance.ContainsKey(brick.GetColorType()))
         {
-            Debug.LogError(brick.PoolColorType + " IS NOT PRELOAD!");
+            Debug.LogError(brick.GetColorType() + " IS NOT PRELOAD!");
         }
-        poolInstance[brick.PoolColorType].Despawn(brick);
+        poolInstance[brick.GetColorType()].Despawn(brick);
     }
 
     // thu thap phan tu
-    public static void Collect(PoolColorType poolColorType)
+    public static void Collect(CommonEnum.ColorType colorType)
     {
-        if (!poolInstance.ContainsKey(poolColorType))
+        if (!poolInstance.ContainsKey(colorType))
         {
-            Debug.LogError(poolColorType + " IS NOT PRELOAD!");
+            Debug.LogError(colorType + " IS NOT PRELOAD!");
         }
-        poolInstance[poolColorType].Collect();
+        poolInstance[colorType].Collect();
     }
 
     // thu thap tat ca phan tu
@@ -65,13 +65,13 @@ public static class SimplePool
     }
 
     // destroy 1 pool
-    public static void Release(PoolColorType poolColorType)
+    public static void Release(CommonEnum.ColorType colorType)
     {
-        if (!poolInstance.ContainsKey(poolColorType))
+        if (!poolInstance.ContainsKey(colorType))
         {
-            Debug.LogError(poolColorType + " IS NOT PRELOAD!");
+            Debug.LogError(colorType + " IS NOT PRELOAD!");
         }
-        poolInstance[poolColorType].Release();
+        poolInstance[colorType].Release();
     }
 
     // destroy tat ca pools
@@ -89,7 +89,7 @@ public class Pool
     Transform parent;
     Brick prefab;
 
-    Stack<Brick> inactives = new Stack<Brick>();    
+    Queue<Brick> inactives = new Queue<Brick>();    
 
     List<Brick> actives = new List<Brick>();
 
@@ -116,7 +116,7 @@ public class Pool
         }
         else
         {
-            brick = inactives.Pop();
+            brick = inactives.Dequeue();
         }
 
         brick.TF.SetPositionAndRotation(pos, rot);
@@ -131,8 +131,9 @@ public class Pool
     {
         if (brick != null && brick.gameObject.activeSelf)
         {
+            //Debug.Log("despawn !!!!");
             actives.Remove(brick);
-            inactives.Push(brick);
+            inactives.Enqueue(brick);
             brick.gameObject.SetActive(false);
         }
     }
@@ -153,7 +154,7 @@ public class Pool
 
         while (inactives.Count > 0)
         {
-            GameObject.Destroy(inactives.Peek().gameObject);
+            GameObject.Destroy(inactives.Dequeue().gameObject);
         }
         inactives.Clear();
     }

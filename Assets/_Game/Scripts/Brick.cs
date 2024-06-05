@@ -5,11 +5,11 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     [SerializeField] private MeshRenderer currentMeshRenderer;
-    private CommonEnum.ColorType currentColorType;
+    [SerializeField] private CommonEnum.ColorType currentColorType;
 
     private Transform tf;
 
-    public PoolColorType PoolColorType;
+    //public PoolColorType PoolColorType;
 
     public void ChangeColor(CommonEnum.ColorType colorType)
     {
@@ -26,35 +26,35 @@ public class Brick : MonoBehaviour
         return currentColorType;
     }
 
-    public void SetPoolColorType(CommonEnum.ColorType colorType)
-    {
-        switch (colorType)
-        {
-            case CommonEnum.ColorType.None:
-                PoolColorType = PoolColorType.None; 
-                break;
-            case CommonEnum.ColorType.Red:
-                PoolColorType = PoolColorType.Red;
-                break;
-            case CommonEnum.ColorType.Blue:
-                PoolColorType = PoolColorType.Blue;
-                break;
-            case CommonEnum.ColorType.Green:
-                PoolColorType = PoolColorType.Green;
-                break;
-            case CommonEnum.ColorType.Yellow:
-                PoolColorType = PoolColorType.Yellow;
-                break;
-            case CommonEnum.ColorType.Orange:
-                PoolColorType = PoolColorType.Orange;
-                break;
-            case CommonEnum.ColorType.Purple:
-                PoolColorType = PoolColorType.Purple;
-                break;
-            default:
-                break;
-        }
-    }
+    //public void SetPoolColorType(CommonEnum.ColorType colorType)
+    //{
+    //    switch (colorType)
+    //    {
+    //        case CommonEnum.ColorType.None:
+    //            PoolColorType = PoolColorType.None; 
+    //            break;
+    //        case CommonEnum.ColorType.Red:
+    //            PoolColorType = PoolColorType.Red;
+    //            break;
+    //        case CommonEnum.ColorType.Blue:
+    //            PoolColorType = PoolColorType.Blue;
+    //            break;
+    //        case CommonEnum.ColorType.Green:
+    //            PoolColorType = PoolColorType.Green;
+    //            break;
+    //        case CommonEnum.ColorType.Yellow:
+    //            PoolColorType = PoolColorType.Yellow;
+    //            break;
+    //        case CommonEnum.ColorType.Orange:
+    //            PoolColorType = PoolColorType.Orange;
+    //            break;
+    //        case CommonEnum.ColorType.Purple:
+    //            PoolColorType = PoolColorType.Purple;
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 
     public Transform TF
     {

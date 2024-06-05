@@ -20,6 +20,10 @@ public class Character : MonoBehaviour
 
     [SerializeField] private Brick correspondBrick;
 
+    private void Awake()
+    {
+
+    }
 
     private void Start()
     {
@@ -41,13 +45,14 @@ public class Character : MonoBehaviour
     {
         currentColorType = data.color;
         currentMeshRenderer.material = data.GetMaterial(currentColorType);
-        correspondBrick.ChangeColor(currentColorType);
-        correspondBrick.ChangeMaterial(currentMeshRenderer.material);
-        correspondBrick.SetPoolColorType(currentColorType);
+        correspondBrick.ChangeColor(data.color);
+        correspondBrick.ChangeMaterial(data.GetMaterial(data.color));
+        //correspondBrick.SetPoolColorType(currentColorType);
     }
 
     public Brick GetCorrespondBrick()
     {
+        Debug.Log(correspondBrick.GetColorType());
         return correspondBrick;
     }
 

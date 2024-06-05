@@ -18,6 +18,8 @@ public class Character : MonoBehaviour
     private CommonEnum.Direction currentDirection;
     //private MeshRenderer currentMeshRenderer;
 
+    [SerializeField] private Brick correspondBrick;
+
 
     private void Start()
     {
@@ -39,6 +41,14 @@ public class Character : MonoBehaviour
     {
         currentColorType = data.color;
         currentMeshRenderer.material = data.GetMaterial(currentColorType);
+        correspondBrick.ChangeColor(currentColorType);
+        correspondBrick.ChangeMaterial(currentMeshRenderer.material);
+        correspondBrick.SetPoolColorType(currentColorType);
+    }
+
+    public Brick GetCorrespondBrick()
+    {
+        return correspondBrick;
     }
 
     public void ChangeAnimation(string animationName)

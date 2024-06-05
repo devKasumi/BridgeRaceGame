@@ -4,5 +4,25 @@ using UnityEngine;
 
 public class Bot : Character
 {
-    
+    // Start is called before the first frame update
+    void Start()
+    {
+        OnInit();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public override void OnInit()
+    {
+        base.OnInit();
+    }
+
+    public override void OnDespawn()
+    {
+        base.OnDespawn();
+    }
 }

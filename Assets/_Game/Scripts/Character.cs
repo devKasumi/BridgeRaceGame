@@ -50,6 +50,11 @@ public class Character : MonoBehaviour
         //correspondBrick.SetPoolColorType(currentColorType);
     }
 
+    public CommonEnum.ColorType GetCurrentColor()
+    {
+        return currentColorType;
+    }
+
     public Brick GetCorrespondBrick()
     {
         Debug.Log(correspondBrickPrefab.GetColorType());
@@ -95,6 +100,8 @@ public class Character : MonoBehaviour
             if (currentColorType == brick.GetColorType())
             {
                 AddBrick(brick);
+                //Destroy(other.gameObject);
+                BrickPool.Despawn(brick);
             }
         }
     }

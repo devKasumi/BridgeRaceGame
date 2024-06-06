@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class SimplePool
+public static class BrickPool
 {
     private static Dictionary<CommonEnum.ColorType, Pool> poolInstance = new Dictionary<CommonEnum.ColorType, Pool>();
+    private static int amount = 5;
+
+    public static int GetAmount()
+    {
+        return amount;
+    }
 
     // khoi tao pool moi
-    public static void PreLoad(Brick prefab, int amount, Transform parent)
+    public static void PreLoad(Brick prefab/*, int amount*/, Transform parent)
     {
         if (!prefab)
         {
@@ -31,6 +37,8 @@ public static class SimplePool
             Debug.LogError(colorType + " IS NOT PRELOAD!");
             return null;
         }
+
+        Debug.LogError("spwan brick" + colorType);
 
         return poolInstance[colorType].Spawn(pos, rot) as T;
     }

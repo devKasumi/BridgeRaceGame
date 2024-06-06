@@ -11,7 +11,7 @@ public class PoolControl : MonoBehaviour
         for (int i = 0; i < characters.Count; i++)
         {
             characters[i].GetData();
-            SimplePool.PreLoad(characters[i].GetCorrespondBrick(), 5, new GameObject("Brick_" + i).transform);
+            BrickPool.PreLoad(characters[i].GetCorrespondBrick()/*, SimplePool.GetAmount()*/, new GameObject("Brick_" + i).transform);
         }
     }
 

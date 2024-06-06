@@ -18,16 +18,16 @@ public class Character : MonoBehaviour
     private CommonEnum.Direction currentDirection;
     //private MeshRenderer currentMeshRenderer;
 
-    [SerializeField] private Brick correspondBrick;
+    [SerializeField] private Brick correspondBrickPrefab;
 
     private void Awake()
     {
-
+        OnInit();
     }
 
     private void Start()
     {
-        OnInit();
+        
     }
 
     public virtual void OnInit()
@@ -45,15 +45,15 @@ public class Character : MonoBehaviour
     {
         currentColorType = data.color;
         currentMeshRenderer.material = data.GetMaterial(currentColorType);
-        correspondBrick.ChangeColor(data.color);
-        correspondBrick.ChangeMaterial(data.GetMaterial(data.color));
+        correspondBrickPrefab.ChangeColor(data.color);
+        correspondBrickPrefab.ChangeMaterial(data.GetMaterial(data.color));
         //correspondBrick.SetPoolColorType(currentColorType);
     }
 
     public Brick GetCorrespondBrick()
     {
-        Debug.Log(correspondBrick.GetColorType());
-        return correspondBrick;
+        Debug.Log(correspondBrickPrefab.GetColorType());
+        return correspondBrickPrefab;
     }
 
     public void ChangeAnimation(string animationName)

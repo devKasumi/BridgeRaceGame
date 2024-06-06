@@ -9,8 +9,6 @@ public class Brick : MonoBehaviour
 
     private Transform tf;
 
-    //public PoolColorType PoolColorType;
-
     public void ChangeColor(CommonEnum.ColorType colorType)
     {
         this.currentColorType = colorType;

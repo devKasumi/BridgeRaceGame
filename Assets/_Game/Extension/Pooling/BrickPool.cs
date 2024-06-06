@@ -5,7 +5,8 @@ using UnityEngine;
 public static class BrickPool
 {
     private static Dictionary<CommonEnum.ColorType, Pool> poolInstance = new Dictionary<CommonEnum.ColorType, Pool>();
-    private static int amount = 5;
+    private static int amount = 40;
+    //private static int amountCount = 0;
 
     public static int GetAmount()
     {
@@ -50,6 +51,7 @@ public static class BrickPool
         {
             Debug.LogError(brick.GetColorType() + " IS NOT PRELOAD!");
         }
+
         poolInstance[brick.GetColorType()].Despawn(brick);
     }
 

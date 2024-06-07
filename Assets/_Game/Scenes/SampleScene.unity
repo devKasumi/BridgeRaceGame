@@ -219,7 +219,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ebc2b52a55886684ab550dcc6b1402f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -338,7 +338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ebc2b52a55886684ab550dcc6b1402f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1219,7 +1219,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: e1208a320bd7da64bbacfb21b0f40584, type: 2}
   animator: {fileID: 1852740082}
   currentMeshRenderer: {fileID: 430574888}
-  moveSpeed: 7
+  moveSpeed: 6
   characterImage: {fileID: 0}
   firstBrickY: -0.5
   firstBrickZ: -0.6
@@ -1578,7 +1578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4718976295208453154, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.07
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: 4718976295208453154, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1586,7 +1586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4718976295208453154, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.63
+      value: 9.02
       objectReference: {fileID: 0}
     - target: {fileID: 4718976295208453154, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1770,7 +1770,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ebc2b52a55886684ab550dcc6b1402f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

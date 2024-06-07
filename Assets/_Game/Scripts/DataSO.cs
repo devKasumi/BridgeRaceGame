@@ -23,10 +23,10 @@ public class DataSO : ScriptableObject
 
     public CommonEnum.ColorType color;
 
-    public Material GetMaterial(CommonEnum.ColorType color)
-    {
-        return materials[(int)color];
-    }
+    public Material GetMaterial(CommonEnum.ColorType color) => materials[(int)color];
+    //{
+    //    return materials[(int)color];
+    //}
     //public 
 
 }

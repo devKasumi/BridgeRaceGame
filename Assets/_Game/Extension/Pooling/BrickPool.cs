@@ -8,10 +8,7 @@ public static class BrickPool
     private static int amount = 40;
     //private static int amountCount = 0;
 
-    public static int GetAmount()
-    {
-        return amount;
-    }
+    public static int GetAmount() => amount;
 
     // khoi tao pool moi
     public static void PreLoad(Brick prefab/*, int amount*/, Transform parent)

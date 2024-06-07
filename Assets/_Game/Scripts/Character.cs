@@ -44,10 +44,10 @@ public class Character : MonoBehaviour
 
     }
 
-    public float GetMoveSpeed()
-    {
-        return moveSpeed;
-    }
+    public float GetMoveSpeed() => moveSpeed;
+    //{
+    //    return moveSpeed;
+    //}
 
     public void GetData()
     {
@@ -58,16 +58,16 @@ public class Character : MonoBehaviour
         //correspondBrick.SetPoolColorType(currentColorType);
     }
 
-    public CommonEnum.ColorType GetCurrentColor()
-    {
-        return currentColorType;
-    }
+    public CommonEnum.ColorType GetCurrentColor() => currentColorType;
+    //{
+    //    return currentColorType;
+    //}
 
-    public Brick GetCorrespondBrick()
-    {
-        Debug.Log(correspondBrickPrefab.GetColorType());
-        return correspondBrickPrefab;
-    }
+    public Brick GetCorrespondBrick() => correspondBrickPrefab;
+    //{
+    //    Debug.Log(correspondBrickPrefab.GetColorType());
+    //    return correspondBrickPrefab;
+    //}
 
     public void ChangeAnimation(string animationName)
     {

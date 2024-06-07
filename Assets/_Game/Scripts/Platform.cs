@@ -10,9 +10,9 @@ public class Platform : MonoBehaviour
     private int count = 0;
 
     private int minX = -5;
-    private int minZ = 0;
+    private int minZ = 1;
     private int maxX = 7;
-    private int maxZ = 10;
+    private int maxZ = 11;
     private const float yPos = -0.8f;
 
     // Start is called before the first frame update

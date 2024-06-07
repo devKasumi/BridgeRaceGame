@@ -39,7 +39,7 @@ public static class BrickPool
             return null;
         }
 
-        Debug.LogError("spwan brick" + colorType);
+        //Debug.LogError("spwan brick" + colorType);
 
         return poolInstance[colorType].Spawn(pos, rot) as T;
     }

@@ -9,6 +9,9 @@ public class Character : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private MeshRenderer currentMeshRenderer;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private Transform characterImage;
+    [SerializeField] private float firstBrickY = -0.5f;
+    [SerializeField] private float firstBrickZ = -0.6f;
     //[SerializeField] private Color 
 
     private List<Brick> bricks = new List<Brick>();
@@ -39,6 +42,11 @@ public class Character : MonoBehaviour
     public virtual void OnDespawn()
     {
 
+    }
+
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
     }
 
     public void GetData()
@@ -79,7 +87,9 @@ public class Character : MonoBehaviour
 
     public void AddBrick(Brick brick)
     {
+        brick.gameObject.SetActive(true);
         bricks.Add(brick);
+        StackBrick();
     }
 
     public void RemoveBrick(Brick brick)
@@ -92,6 +102,21 @@ public class Character : MonoBehaviour
 
     }
 
+    public void StackBrick()
+    {
+        Transform brickTransform = bricks[bricks.Count - 1].transform;
+        brickTransform.SetParent(transform);
+        if (bricks.Count == 1)
+        {
+            brickTransform.localPosition = new Vector3(0f, firstBrickY, firstBrickZ);
+        }
+        else
+        {
+            brickTransform.localPosition = new Vector3(0f, firstBrickY + (bricks.Count - 1) * 0.3f, firstBrickZ);
+        }
+        Debug.Log("is set active: " + bricks[bricks.Count - 1].gameObject.activeSelf);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constants.TAG_BRICK))
@@ -101,7 +126,7 @@ public class Character : MonoBehaviour
             {
                 AddBrick(brick);
                 //Destroy(other.gameObject);
-                BrickPool.Despawn(brick);
+                //BrickPool.Despawn(brick);
             }
         }
     }

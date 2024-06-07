@@ -7,6 +7,8 @@ public class Platform : MonoBehaviour
     //[SerializeField] private Player player;
     [SerializeField] private Character[] characters;
 
+    //private List<Vector3> brickPositions = new List<Vector3>();
+
     private int count = 0;
 
     private int minX = -5;
@@ -24,9 +26,24 @@ public class Platform : MonoBehaviour
             {
                 int randomIndex = Random.Range(0, characters.Length);
                 Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), new Vector3(i, yPos, j), transform.rotation);
-
+                //brickPositions.Add(new Vector3(i, yPos, j));
             }
         }
+
+        //for (int i = 0; i < brickPositions.Count; i++)
+        //{
+        //    int randomIndex = Random.Range(0, characters.Length);
+        //    Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), brickPositions[i], transform.rotation);
+        //}
+        
+        //while (count < BrickPool.GetAmount())
+        //{
+        //    for (int i = 0; i < characters.Length; i++)
+        //    {
+        //        Brick brick = BrickPool.Spawn<Brick>(characters[i].GetCurrentColor(), )
+        //    }
+        //    count++;
+        //}
     }
 
     // Update is called once per frame

@@ -40,25 +40,6 @@ public class Brick : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag(Constants.TAG_PLAYER))
-        //{
-        //    switch (other.tag)
-        //    {
-        //        case Constants.TAG_PLAYER:
-        //            {
-        //                Player player = other.GetComponent<Player>();
-        //                player.AddBrick(this);
-        //            }
-        //            break;
-        //        case Constants.TAG_BOT:
-        //            {   
-        //                Bot bot = other.GetComponent<Bot>();
-        //                bot.GetComponent<Bot>().AddBrick(this);   
-        //            }
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
+        
     }
 }

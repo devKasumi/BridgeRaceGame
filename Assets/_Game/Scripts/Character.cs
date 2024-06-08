@@ -45,9 +45,6 @@ public class Character : MonoBehaviour
     }
 
     public float GetMoveSpeed() => moveSpeed;
-    //{
-    //    return moveSpeed;
-    //}
 
     public void GetData()
     {
@@ -55,19 +52,13 @@ public class Character : MonoBehaviour
         currentMeshRenderer.material = data.GetMaterial(currentColorType);
         correspondBrickPrefab.ChangeColor(data.color);
         correspondBrickPrefab.ChangeMaterial(data.GetMaterial(data.color));
-        //correspondBrick.SetPoolColorType(currentColorType);
     }
 
     public CommonEnum.ColorType GetCurrentColor() => currentColorType;
-    //{
-    //    return currentColorType;
-    //}
 
     public Brick GetCorrespondBrick() => correspondBrickPrefab;
-    //{
-    //    Debug.Log(correspondBrickPrefab.GetColorType());
-    //    return correspondBrickPrefab;
-    //}
+
+    public Material GetCurrentMeshMaterial() => currentMeshRenderer.material;
 
     public void ChangeAnimation(string animationName)
     {
@@ -79,12 +70,6 @@ public class Character : MonoBehaviour
         }
     }
 
-    //public void ChangeColor(CommonEnum.ColorType colorType)
-    //{
-    //    this.currentColorType = colorType;
-    //    this.currentMeshRenderer.material = materials[(int)colorType];
-    //}
-
     public void AddBrick(Brick brick)
     {
         brick.gameObject.SetActive(true);
@@ -94,12 +79,27 @@ public class Character : MonoBehaviour
 
     public void RemoveBrick(Brick brick)
     {
-        bricks.Remove(brick);
+        if (bricks.Count > 0)
+        {
+            bricks.Remove(brick);
+            brick.transform.parent = null;
+            BrickPool.Despawn(brick);
+        }
     }
 
     public void ClearBrick()
     {
 
+    }
+
+    public Brick GetLastBrick()
+    {
+        return bricks.Count > 0 ? bricks[bricks.Count - 1] : null;
+    }
+
+    public int GetCurrentTotalBricks()
+    {
+        return bricks.Count;
     }
 
     public void StackBrick()
@@ -125,8 +125,6 @@ public class Character : MonoBehaviour
             if (currentColorType == brick.GetColorType())
             {
                 AddBrick(brick);
-                //Destroy(other.gameObject);
-                //BrickPool.Despawn(brick);
             }
         }
     }

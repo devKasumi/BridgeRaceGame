@@ -25,7 +25,9 @@ public class Platform : MonoBehaviour
             for (int j = minZ; j < maxZ; j++)
             {
                 int randomIndex = Random.Range(0, characters.Length);
-                Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), new Vector3(i, yPos, j), transform.rotation);
+                Vector3 pos = new Vector3(i, yPos, j);
+                Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), pos, transform.rotation);
+                characters[randomIndex].AddBrickPosition(pos);
                 //brickPositions.Add(new Vector3(i, yPos, j));
             }
         }

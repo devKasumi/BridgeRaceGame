@@ -12,9 +12,9 @@ public class Character : MonoBehaviour
     [SerializeField] private Transform characterImage;
     [SerializeField] private float firstBrickY = -0.5f;
     [SerializeField] private float firstBrickZ = -0.6f;
-    //[SerializeField] private Color 
 
     private List<Brick> bricks = new List<Brick>();
+    private List<Vector3> brickPositions = new List<Vector3>();
 
     private string currentAnimationName;
     private CommonEnum.ColorType currentColorType;
@@ -114,7 +114,19 @@ public class Character : MonoBehaviour
         {
             brickTransform.localPosition = new Vector3(0f, firstBrickY + (bricks.Count - 1) * 0.3f, firstBrickZ);
         }
-        Debug.Log("is set active: " + bricks[bricks.Count - 1].gameObject.activeSelf);
+        //Debug.Log("is set active: " + bricks[bricks.Count - 1].gameObject.activeSelf);
+    }
+
+    public void AddBrickPosition(Vector3 pos)
+    {
+        brickPositions.Add(pos);
+    }
+
+    public Vector3 GetTargetBrickPosition()
+    {
+        int index = Random.Range(0, brickPositions.Count);
+        //return brickPositions[index] != vec ? brickPositions[index] : Vector3.zero;
+        return brickPositions[index];
     }
 
     private void OnTriggerEnter(Collider other)

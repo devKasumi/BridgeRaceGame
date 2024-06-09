@@ -8,8 +8,6 @@ public class Bot : Character
     [SerializeField] private Rigidbody rb;
     [SerializeField] private NavMeshAgent navMeshAgent;
 
-    
-
     private IState currentState;
 
     // Start is called before the first frame update
@@ -24,6 +22,20 @@ public class Bot : Character
         if (currentState != null)
         {
             currentState.OnExecute(this);
+        }
+
+        if (GetTargetBrickPosition() == Vector3.zero)
+        {
+            SetTargetBrickPosition();
+        }
+        else
+        {
+            Debug.Log("target not zero: " + Vector3.Distance(transform.position, GetTargetBrickPosition()));
+            if (IsCharacterReachTarget())
+            {
+                Debug.Log("set new target");
+                SetTargetBrickPosition();
+            }
         }
     }
 
@@ -61,6 +73,8 @@ public class Bot : Character
 
     public void MoveToBrick(Vector3 pos)
     {
+        Debug.LogError("bot move!!!!" + pos);
         navMeshAgent.destination = pos;
+        //isMoving = true;
     }
 }

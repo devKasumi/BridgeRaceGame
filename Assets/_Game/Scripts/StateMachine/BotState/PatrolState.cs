@@ -9,18 +9,23 @@ public class PatrolState : IState
 
     public void OnEnter(Bot bot)
     {
-        //timer = 0f;
-        //randomTime = Random.Range(4f, 7f);
+        timer = 0f;
+        randomTime = Random.Range(4f, 7f);
+        //if (bot.GetTargetBrickPosition() != null)
+        //{
+        //    bot.MoveToBrick(bot.GetTargetBrickPosition());
+
+        //}
     }
 
     public void OnExecute(Bot bot)
     {
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
+        bot.MoveToBrick(bot.GetTargetBrickPosition());
+        //if (bot.GetTargetBrickPosition() != null)
+        //{
 
-        if (bot.GetTargetBrickPosition() != null)
-        {
-            bot.MoveToBrick(bot.GetTargetBrickPosition());
-        }
+        //}
         //else
         //{
         //    if (timer < randomTime)
@@ -29,6 +34,7 @@ public class PatrolState : IState
         //    }
         //    else bot.ChangeState(new IdleState());
         //}
+
     }
 
     public void OnExit(Bot bot)

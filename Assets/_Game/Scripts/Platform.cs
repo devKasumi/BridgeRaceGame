@@ -27,7 +27,7 @@ public class Platform : MonoBehaviour
                 int randomIndex = Random.Range(0, characters.Length);
                 Vector3 pos = new Vector3(i, yPos, j);
                 Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), pos, transform.rotation);
-                characters[randomIndex].AddBrickPosition(pos);
+                characters[randomIndex].AddBrickPosition(brick.transform);
                 //brickPositions.Add(new Vector3(i, yPos, j));
             }
         }

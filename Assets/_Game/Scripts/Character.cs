@@ -14,12 +14,16 @@ public class Character : MonoBehaviour
     [SerializeField] private float firstBrickZ = -0.6f;
 
     private List<Brick> bricks = new List<Brick>();
-    private List<Vector3> brickPositions = new List<Vector3>();
+    private List<Transform> brickPositions = new List<Transform>();
 
     private string currentAnimationName;
     private CommonEnum.ColorType currentColorType;
     private CommonEnum.Direction currentDirection;
     //private MeshRenderer currentMeshRenderer;
+
+    private Vector3 currentTargetPosition = Vector3.zero;
+
+    public bool isMoving;
 
     [SerializeField] private Brick correspondBrickPrefab;
 
@@ -30,7 +34,8 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        
+        //currentTargetPosition = brickPositions[0];
+        //SetTargetBrickPosition();
     }
 
     public virtual void OnInit()
@@ -41,7 +46,7 @@ public class Character : MonoBehaviour
 
     public virtual void OnDespawn()
     {
-
+        
     }
 
     public float GetMoveSpeed() => moveSpeed;
@@ -118,16 +123,32 @@ public class Character : MonoBehaviour
         //Debug.Log("is set active: " + bricks[bricks.Count - 1].gameObject.activeSelf);
     }
 
-    public void AddBrickPosition(Vector3 pos)
+    public void AddBrickPosition(Transform pos)
     {
         brickPositions.Add(pos);
     }
 
-    public Vector3 GetTargetBrickPosition()
+    public void SetTargetBrickPosition()
     {
         int index = Random.Range(0, brickPositions.Count);
         //return brickPositions[index] != vec ? brickPositions[index] : Vector3.zero;
-        return brickPositions[index];
+        if (brickPositions[index] != null)
+        {
+            currentTargetPosition = brickPositions[index].position;
+            //brickPositions.Remove(brickPositions[index]);
+        }
+        Debug.LogError("set target brick:  " + currentTargetPosition);
+        //return currentTargetPosition;
+    }
+
+    public Vector3 GetTargetBrickPosition()
+    {
+        return currentTargetPosition;
+    }
+
+    public bool IsCharacterReachTarget()
+    {
+        return (Vector3.Distance(transform.position, currentTargetPosition) < 1f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -138,6 +159,7 @@ public class Character : MonoBehaviour
             if ((int)currentColorType == (int)brick.GetColorType())
             {
                 AddBrick(brick);
+                brickPositions.Remove(brick.transform);
             }
         }
     }

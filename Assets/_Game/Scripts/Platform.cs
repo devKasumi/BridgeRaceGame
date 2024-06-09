@@ -31,39 +31,16 @@ public class Platform : MonoBehaviour
                 //brickPositions.Add(new Vector3(i, yPos, j));
             }
         }
-
-        //for (int i = 0; i < brickPositions.Count; i++)
-        //{
-        //    int randomIndex = Random.Range(0, characters.Length);
-        //    Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), brickPositions[i], transform.rotation);
-        //}
-        
-        //while (count < BrickPool.GetAmount())
-        //{
-        //    for (int i = 0; i < characters.Length; i++)
-        //    {
-        //        Brick brick = BrickPool.Spawn<Brick>(characters[i].GetCurrentColor(), )
-        //    }
-        //    count++;
-        //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (count < BrickPool.GetAmount())
-        //{
-        //    SpawnBrick();
 
-        //}
     }
 
     public void SpawnBrick()
     {
-        //while (count < BrickPool.GetAmount())
-        //{
-        //    Brick brick = BrickPool.Spawn<Brick>(player.GetCurrentColor(), new Vector3(Random.Range(-10,11), transform.position.y, Random.Range(-10,11)), transform.rotation);
-        //    count++;
-        //}
+        
     }
 }

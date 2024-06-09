@@ -106,6 +106,7 @@ public class Character : MonoBehaviour
     {
         Transform brickTransform = bricks[bricks.Count - 1].transform;
         brickTransform.SetParent(transform);
+        brickTransform.rotation = transform.rotation;
         if (bricks.Count == 1)
         {
             brickTransform.localPosition = new Vector3(0f, firstBrickY, firstBrickZ);
@@ -134,7 +135,7 @@ public class Character : MonoBehaviour
         if (other.CompareTag(Constants.TAG_BRICK))
         {
             Brick brick = other.GetComponent<Brick>();
-            if (currentColorType == brick.GetColorType())
+            if ((int)currentColorType == (int)brick.GetColorType())
             {
                 AddBrick(brick);
             }

@@ -31,7 +31,7 @@ public class Bot : Character
     {
         base.OnInit();
 
-        ChangeState(new IdleState());
+        ChangeState(new PatrolState());
     }
 
     public override void OnDespawn()

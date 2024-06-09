@@ -9,19 +9,19 @@ public class IdleState : IState
 
     public void OnEnter(Bot bot)
     {
-        bot.StopMoving();
-        timer = 0;
-        randomTime = Random.Range(0f, 2f);
+        //bot.StopMoving();
+        //timer = 0;
+        //randomTime = Random.Range(0f, 2f);
     }
 
     public void OnExecute(Bot bot) 
     {
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
 
-        if (timer > randomTime)
-        {
-            bot.ChangeState(new PatrolState());
-        }
+        //if (timer > randomTime)
+        //{
+        //    bot.ChangeState(new PatrolState());
+        //}
     }
 
     public void OnExit(Bot bot)

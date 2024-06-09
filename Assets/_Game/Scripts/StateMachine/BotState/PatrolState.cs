@@ -9,8 +9,8 @@ public class PatrolState : IState
 
     public void OnEnter(Bot bot)
     {
-        timer = 0f;
-        randomTime = Random.Range(4f, 7f);
+        //timer = 0f;
+        //randomTime = Random.Range(4f, 7f);
     }
 
     public void OnExecute(Bot bot)
@@ -21,14 +21,14 @@ public class PatrolState : IState
         {
             bot.MoveToBrick(bot.GetTargetBrickPosition());
         }
-        else
-        {
-            if (timer < randomTime)
-            {
-                Debug.Log("moving time");
-            }
-            else bot.ChangeState(new IdleState());
-        }
+        //else
+        //{
+        //    if (timer < randomTime)
+        //    {
+        //        Debug.Log("moving time");
+        //    }
+        //    else bot.ChangeState(new IdleState());
+        //}
     }
 
     public void OnExit(Bot bot)

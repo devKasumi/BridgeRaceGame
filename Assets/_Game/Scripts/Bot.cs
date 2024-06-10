@@ -30,10 +30,10 @@ public class Bot : Character
         }
         else
         {
-            Debug.Log("target not zero: " + Vector3.Distance(transform.position, GetTargetBrickPosition()));
+            //Debug.Log("target not zero: " + Vector3.Distance(transform.position, GetTargetBrickPosition()));
             if (IsCharacterReachTarget())
             {
-                Debug.Log("set new target");
+                //Debug.Log("set new target");
                 SetTargetBrickPosition();
             }
         }
@@ -73,7 +73,7 @@ public class Bot : Character
 
     public void MoveToBrick(Vector3 pos)
     {
-        Debug.LogError("bot move!!!!" + pos);
+        //Debug.LogError("bot move!!!!" + pos);
         navMeshAgent.destination = pos;
         //isMoving = true;
     }

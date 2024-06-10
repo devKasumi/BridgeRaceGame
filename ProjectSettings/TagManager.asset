@@ -7,11 +7,12 @@ TagManager:
   - Bot
   - Brick
   - Stair
+  - Bridge
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bridge
   - Water
   - UI
   - 

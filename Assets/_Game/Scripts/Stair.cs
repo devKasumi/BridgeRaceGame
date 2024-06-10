@@ -39,9 +39,19 @@ public class Stair : MonoBehaviour
             currentMeshRenderer.enabled = true;
             character.RemoveBrick(character.GetLastBrick());
             bridge.IncreaseStairActive();
+            //if (!currentMeshRenderer.enabled)
+            //{
+            //    currentMeshRenderer.enabled = true;
+            //    character.RemoveBrick(character.GetLastBrick());
+            //    bridge.IncreaseStairActive();
+            //}
+            //else
+            //{
+
+            //}
             if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
             {
-                //character.GetComponent<Player>().StopClimbSatir();
+                
             }
         }
     }

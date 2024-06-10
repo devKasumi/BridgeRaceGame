@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
 
     private Vector3 currentTargetPosition = Vector3.zero;
 
-    public bool isMoving;
+    //public bool isMoving;
 
     [SerializeField] private Brick correspondBrickPrefab;
 
@@ -137,7 +137,7 @@ public class Character : MonoBehaviour
             currentTargetPosition = brickPositions[index].position;
             //brickPositions.Remove(brickPositions[index]);
         }
-        Debug.LogError("set target brick:  " + currentTargetPosition);
+        //Debug.LogError("set target brick:  " + currentTargetPosition);
         //return currentTargetPosition;
     }
 
@@ -161,6 +161,10 @@ public class Character : MonoBehaviour
                 AddBrick(brick);
                 brickPositions.Remove(brick.transform);
             }
+        }
+        else if (other.CompareTag(Constants.TAG_STAIR))
+        {
+
         }
     }
 }

@@ -6,8 +6,9 @@ public class Player : Character
 {
     [SerializeField] private JoystickManager joystickManager;
     [SerializeField] private Rigidbody rb;
-    //[SerializeField] private float playerHeight;
-    //[SerializeField] private float maxSlopeAngle;
+    [SerializeField] private float playerHeight;
+    [SerializeField] private float maxSlopeAngle;
+    [SerializeField] private LayerMask bridgeLayer;
 
     private float inputX;
     private float inputZ;
@@ -25,7 +26,6 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-        
 
         Move();
     }
@@ -40,62 +40,37 @@ public class Player : Character
         base.OnDespawn();
     }
 
-    //private bool OnSlope()
-    //{
-    //    if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
-    //    {
-    //        Debug.LogError("checking onslope!!!!");
-    //        float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-    //        return angle < maxSlopeAngle && angle != 0;
-    //    }
+    private bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f, bridgeLayer))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle != 0;
+        }
 
-    //    return false;
-    //}
+        return false;
+    }
 
-    //private Vector3 GetSlopeMoveDirection()
-    //{
-    //    return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
-    //}
+    private Vector3 GetSlopeMoveDirection()
+    {
+        Debug.Log(Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized);
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+    }
 
     public void Move()
     {
-        //if (OnSlope())
-        //{
-        //    Debug.Log("onslope true");
-
-        //    rb.AddForce(GetSlopeMoveDirection() * GetMoveSpeed(), ForceMode.Force);
-
-        //    if (rb.velocity.y > 0)
-        //    {
-        //        rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-        //    }
-        //}
-
-        //rb.useGravity = !OnSlope();
-
         inputX = joystickManager.InputHorizontal();
         inputZ = joystickManager.InputVertical();
 
-        //if (inputX > 0f) moveDirection = Vector3.forward;
-        //else moveDirection = Vector3.back;
+        moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 
-        //if (inputZ > 0f) moveDirection = Vector3.right;
-        //else moveDirection = Vector3.left;
-
-        //if (OnSlope())
-        //{
-        //    if (rb.velocity.magnitude > GetMoveSpeed())
-        //    {
-        //        rb.velocity = rb.velocity.normalized * GetMoveSpeed();
-        //    }
-        //}
-
-        rb.velocity = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
+        if (OnSlope())
+        {
+            //Debug.Log("on slope!!!");
+            rb.useGravity = !OnSlope();
+            rb.velocity = GetSlopeMoveDirection() * 5f;
+        }
+        else rb.velocity = moveDirection;
     }
 
-    public void StopClimbSatir()
-    {
-        //Debug.Log("pokemon xDDDDDD");
-        inputZ = 0f;
-    }
 }

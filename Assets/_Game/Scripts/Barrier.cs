@@ -6,8 +6,8 @@ public class Barrier : MonoBehaviour
 {
     [SerializeField] private BoxCollider BoxCollider;
 
-    //public BoxCollider GetObjectBoxCollider()
-    //{
-    //    return BoxCollider;
-    //}
+    public BoxCollider GetObjectBoxCollider()
+    {
+        return BoxCollider;
+    }
 }

@@ -42,9 +42,14 @@ public class Bridge : MonoBehaviour
         return stairs.IndexOf(stair);
     }
 
-    public void EnableBarrierBox(int index)
+    //public void EnableBarrierBox(int index)
+    //{
+    //    barriers[index + 1].GetComponent<BoxCollider>().enabled = true;
+    //}
+
+    public void EnableWall(int index)
     {
-        barriers[index + 1].GetComponent<BoxCollider>().enabled = true;
+        stairs[index + 1].EnableWall();
     }
 
     public void IncreaseStairActive()
@@ -55,6 +60,22 @@ public class Bridge : MonoBehaviour
     public bool IsEnoughStairForBridge()
     {
         return totalStairsActive == totalStairNumbers;
+    }
+
+    //public void ResetBarrier()
+    //{
+    //    for (int i = 0; i<barriers.Count; i++)
+    //    {
+    //        barriers[i].GetObjectBoxCollider().enabled = false; 
+    //    }
+    //}
+
+    public void ResetStair()
+    {
+        for (int i = 0;i <stairs.Count; i++)
+        {
+            stairs[i].ResetStairToNormal();
+        }
     }
 
 }

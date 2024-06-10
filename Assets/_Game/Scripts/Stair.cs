@@ -7,6 +7,8 @@ public class Stair : MonoBehaviour
     [SerializeField] private MeshRenderer currentMeshRenderer;
     [SerializeField] private CommonEnum.ColorType currentColorType = CommonEnum.ColorType.None;
     [SerializeField] private Bridge bridge;
+    [SerializeField] private BoxCollider boxCollider;
+    private Vector3 originalScale;
 
     public void ChangeColor(CommonEnum.ColorType colorType)
     {
@@ -21,6 +23,28 @@ public class Stair : MonoBehaviour
     public CommonEnum.ColorType GetColorType()
     {
         return currentColorType;
+    }
+
+    //public Vector3 GetOriginalScale()
+    //{
+    //    return originalScale;
+    //}
+
+    public void EnableWall()
+    {
+        transform.localScale = new Vector3(originalScale.x, originalScale.y * 10, originalScale.z);
+        boxCollider.isTrigger = false;
+    }
+
+    public void ResetStairToNormal()
+    {
+        transform.localScale = originalScale;
+        boxCollider.isTrigger = true;
+    }
+
+    private void Start()
+    {
+        originalScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -42,18 +66,24 @@ public class Stair : MonoBehaviour
                     ChangeMaterial(character.GetCurrentMeshMaterial());
                     character.RemoveBrick(character.GetLastBrick());
                     bridge.IncreaseStairActive();
+                    BrickPool.Despawn(character.GetLastBrick());
                 }
                 currentMeshRenderer.enabled = true;
 
                 if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
                 {
                     // player or bot can not move 
-                    bridge.EnableBarrierBox(bridge.GetStairIndex(this));
+                    //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
+                    bridge.EnableWall(bridge.GetStairIndex(this));
                 }
             }
             else
             {
-                
+                if (currentColorType != character.GetCurrentColor())
+                {
+                    //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
+                    bridge.EnableWall(bridge.GetStairIndex(this));
+                }
             }
         }
     }

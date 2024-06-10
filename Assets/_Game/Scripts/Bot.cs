@@ -77,4 +77,6 @@ public class Bot : Character
         navMeshAgent.destination = pos;
         //isMoving = true;
     }
+
+    
 }

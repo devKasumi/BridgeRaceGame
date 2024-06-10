@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stair : MonoBehaviour
 {
     [SerializeField] private MeshRenderer currentMeshRenderer;
-    [SerializeField] private CommonEnum.ColorType currentColorType;
+    [SerializeField] private CommonEnum.ColorType currentColorType = CommonEnum.ColorType.None;
     [SerializeField] private Bridge bridge;
 
     public void ChangeColor(CommonEnum.ColorType colorType)
@@ -34,23 +34,26 @@ public class Stair : MonoBehaviour
         if (other.CompareTag(Constants.TAG_PLAYER) || other.CompareTag(Constants.TAG_BOT))
         {
             Character character = other.GetComponent<Character>();
-            ChangeColor(character.GetCurrentColor());
-            ChangeMaterial(character.GetCurrentMeshMaterial());
-            currentMeshRenderer.enabled = true;
-            character.RemoveBrick(character.GetLastBrick());
-            bridge.IncreaseStairActive();
-            //if (!currentMeshRenderer.enabled)
-            //{
-            //    currentMeshRenderer.enabled = true;
-            //    character.RemoveBrick(character.GetLastBrick());
-            //    bridge.IncreaseStairActive();
-            //}
-            //else
-            //{
-
-            //}
-            if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
+            if (character.GetCurrentTotalBricks() > 0)
             {
+                if (currentColorType != character.GetCurrentColor())
+                {
+                    ChangeColor(character.GetCurrentColor());
+                    ChangeMaterial(character.GetCurrentMeshMaterial());
+                    character.RemoveBrick(character.GetLastBrick());
+                    bridge.IncreaseStairActive();
+                }
+                currentMeshRenderer.enabled = true;
+
+                if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
+                {
+                    // player or bot can not move 
+                    
+                }
+            }
+            else
+            {
+                // player or bot can not move
                 
             }
         }

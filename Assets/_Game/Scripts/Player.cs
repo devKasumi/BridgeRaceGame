@@ -26,7 +26,6 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-
         Move();
     }
 
@@ -53,7 +52,7 @@ public class Player : Character
 
     private Vector3 GetSlopeMoveDirection()
     {
-        Debug.Log(Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized);
+        //Debug.Log(Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized);
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
@@ -61,6 +60,8 @@ public class Player : Character
     {
         inputX = joystickManager.InputHorizontal();
         inputZ = joystickManager.InputVertical();
+
+        //inputZ = -1f;
 
         moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 

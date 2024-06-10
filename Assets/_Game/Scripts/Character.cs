@@ -25,6 +25,8 @@ public class Character : MonoBehaviour
 
     //public bool isMoving;
 
+    //public bool canMove = true;
+
     [SerializeField] private Brick correspondBrickPrefab;
 
     private void Awake()
@@ -104,6 +106,7 @@ public class Character : MonoBehaviour
 
     public int GetCurrentTotalBricks()
     {
+        Debug.Log("current total bricks: " + bricks.Count);
         return bricks.Count;
     }
 
@@ -161,10 +164,6 @@ public class Character : MonoBehaviour
                 AddBrick(brick);
                 brickPositions.Remove(brick.transform);
             }
-        }
-        else if (other.CompareTag(Constants.TAG_STAIR))
-        {
-
         }
     }
 }

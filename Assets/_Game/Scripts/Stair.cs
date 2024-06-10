@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stair : MonoBehaviour
@@ -62,11 +63,15 @@ public class Stair : MonoBehaviour
             {
                 if (currentColorType != character.GetCurrentColor())
                 {
+                    Brick brick = character.GetLastBrick();
                     ChangeColor(character.GetCurrentColor());
                     ChangeMaterial(character.GetCurrentMeshMaterial());
-                    character.RemoveBrick(character.GetLastBrick());
+                    Vector3 pos = character.platformBricks[brick];
+                    Quaternion rot = Quaternion.identity;
+                    BrickPool.Despawn(brick);
+                    character.RemoveBrick(brick);
                     bridge.IncreaseStairActive();
-                    BrickPool.Despawn(character.GetLastBrick());
+                    StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
                 }
                 currentMeshRenderer.enabled = true;
 
@@ -86,5 +91,12 @@ public class Stair : MonoBehaviour
                 }
             }
         }
+    }
+
+    public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
+    {
+        yield return new WaitForSeconds(Random.Range(5f, 7f));
+        Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
+        yield return new WaitForSeconds(Random.Range(2f, 5f));
     }
 }

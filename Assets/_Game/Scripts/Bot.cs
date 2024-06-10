@@ -8,6 +8,7 @@ public class Bot : Character
     [SerializeField] private Rigidbody rb;
     [SerializeField] private NavMeshAgent navMeshAgent;
 
+
     private IState currentState;
 
     // Start is called before the first frame update

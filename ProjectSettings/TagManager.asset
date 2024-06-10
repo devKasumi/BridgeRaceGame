@@ -8,6 +8,7 @@ TagManager:
   - Brick
   - Stair
   - Bridge
+  - FinishBox
   layers:
   - Default
   - TransparentFX

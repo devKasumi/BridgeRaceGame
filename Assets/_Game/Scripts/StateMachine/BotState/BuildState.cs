@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class BuildState : IState
 {
-    private int maxCollectedBrick;
 
     public void OnEnter(Bot bot)
     {
         //maxCollectedBrick
+        bot.SetFinalTarget();
     }
 
     public void OnExecute(Bot bot)
     {
-
+        bot.SetFinalTarget();
     }
 
     public void OnExit(Bot bot)

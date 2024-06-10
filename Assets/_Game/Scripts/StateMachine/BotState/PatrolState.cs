@@ -34,7 +34,10 @@ public class PatrolState : IState
         //    }
         //    else bot.ChangeState(new IdleState());
         //}
-
+        if (bot.BuildBridge())
+        {
+            bot.ChangeState(new BuildState());
+        }
     }
 
     public void OnExit(Bot bot)

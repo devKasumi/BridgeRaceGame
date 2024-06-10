@@ -80,6 +80,10 @@ public class Stair : MonoBehaviour
                     // player or bot can not move 
                     //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
                     bridge.EnableWall(bridge.GetStairIndex(this));
+                    if (other.CompareTag(Constants.TAG_BOT))
+                    {
+                        other.GetComponent<Bot>().ChangeState(new PatrolState());
+                    }
                 }
             }
             else
@@ -88,6 +92,10 @@ public class Stair : MonoBehaviour
                 {
                     //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
                     bridge.EnableWall(bridge.GetStairIndex(this));
+                    if (other.CompareTag(Constants.TAG_BOT))
+                    {
+                        other.GetComponent<Bot>().ChangeState(new PatrolState());
+                    }
                 }
             }
         }

@@ -7,6 +7,11 @@ public class Bot : Character
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private Transform finishBox;
+    [SerializeField] private int minCollectedBricks;
+    [SerializeField] private int maxCollectedBricks;
+
+    private int collectedBrick;
 
 
     private IState currentState;
@@ -44,6 +49,8 @@ public class Bot : Character
     {
         base.OnInit();
 
+        collectedBrick = Random.Range(GetMinCollectedBrick(), GetMaxCollectedBrick());
+
         ChangeState(new PatrolState());
     }
 
@@ -79,5 +86,23 @@ public class Bot : Character
         //isMoving = true;
     }
 
+    public void SetFinalTarget()
+    {
+        navMeshAgent.destination = finishBox.position;
+    }
+
+    public int GetMinCollectedBrick()
+    {
+        return minCollectedBricks;
+    }
+
+    public int GetMaxCollectedBrick()
+    {
+        return maxCollectedBricks;
+    }
     
+    public bool BuildBridge()
+    {
+        return GetCurrentTotalBricks() == collectedBrick;
+    }
 }

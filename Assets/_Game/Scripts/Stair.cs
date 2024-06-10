@@ -48,13 +48,13 @@ public class Stair : MonoBehaviour
                 if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
                 {
                     // player or bot can not move 
-                    
+
                 }
             }
             else
             {
                 // player or bot can not move
-                
+
             }
         }
     }

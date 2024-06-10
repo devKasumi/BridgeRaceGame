@@ -43,6 +43,7 @@ public class Player : Character
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f, bridgeLayer))
         {
+            Debug.Log("raycast hit bridge!!!!!");
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
         }
@@ -61,17 +62,17 @@ public class Player : Character
         inputX = joystickManager.InputHorizontal();
         inputZ = joystickManager.InputVertical();
 
-        //inputZ = -1f;
-
         moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 
         if (OnSlope())
         {
-            //Debug.Log("on slope!!!");
-            rb.useGravity = !OnSlope();
+            Debug.Log("on slope!!!");
+            //rb.useGravity = !OnSlope();
             rb.velocity = GetSlopeMoveDirection() * 5f;
         }
         else rb.velocity = moveDirection;
+
+        Debug.Log(moveDirection);
     }
 
 }

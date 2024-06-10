@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private BoxCollider BoxCollider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //public BoxCollider GetObjectBoxCollider()
+    //{
+    //    return BoxCollider;
+    //}
 }

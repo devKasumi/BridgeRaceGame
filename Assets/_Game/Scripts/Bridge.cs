@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bridge : MonoBehaviour
 {
     [SerializeField] private Stair stair;
-    [SerializeField] private Barrier barrier;
+    //[SerializeField] private Barrier barrier;
     [SerializeField] private int totalStairNumbers;
     private List<Stair> stairs = new List<Stair>();
     private List<Barrier> barriers = new List<Barrier>();
@@ -19,7 +19,7 @@ public class Bridge : MonoBehaviour
     void Start()
     {
         firstStairPos = stair.transform.position;
-        firstBarrierPos = barrier.transform.position;
+        //firstBarrierPos = barrier.transform.position;
 
         for (int i = 0; i < totalStairNumbers; i++)
         {
@@ -28,10 +28,10 @@ public class Bridge : MonoBehaviour
                 firstStairPos.y + count * Constants.STAIR_DISTANCE_Y,
                 firstStairPos.z + count * Constants.STAIR_DISTANCE_Z), stair.transform.rotation));
 
-            barriers.Add(Instantiate(barrier, new Vector3(
-                firstBarrierPos.x,
-                firstBarrierPos.y + count * Constants.STAIR_DISTANCE_Y,
-                firstBarrierPos.z + count * Constants.STAIR_DISTANCE_Z), barrier.transform.rotation));
+            //barriers.Add(Instantiate(barrier, new Vector3(
+            //    firstBarrierPos.x,
+            //    firstBarrierPos.y + count * Constants.STAIR_DISTANCE_Y,
+            //    firstBarrierPos.z + count * Constants.STAIR_DISTANCE_Z), barrier.transform.rotation));
 
             count++;    
         }
@@ -76,6 +76,11 @@ public class Bridge : MonoBehaviour
         {
             stairs[i].ResetStairToNormal();
         }
+    }
+
+    public void ResetCurrentStair(Stair stair)
+    {
+        stair.ResetStairToNormal();
     }
 
 }

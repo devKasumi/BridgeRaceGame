@@ -10,6 +10,7 @@ public class Bot : Character
     [SerializeField] private Transform finishBox;
     [SerializeField] private int minCollectedBricks;
     [SerializeField] private int maxCollectedBricks;
+    [SerializeField] private List<ResetPoint> resetPoints = new List<ResetPoint>(); 
 
     private int collectedBrick;
 
@@ -43,6 +44,8 @@ public class Bot : Character
                 SetTargetBrickPosition();
             }
         }
+
+        //Debug.Log(Vector3.Distance(transform.position, navMeshAgent.destination));
     }
 
     public override void OnInit()
@@ -104,5 +107,16 @@ public class Bot : Character
     public bool BuildBridge()
     {
         return GetCurrentTotalBricks() == collectedBrick;
+    }
+
+    public void SetRandomTarget()
+    {
+        navMeshAgent.destination = resetPoints[Random.Range(0, resetPoints.Count)].transform.position;
+    }
+
+    public bool IsReachTarget()
+    {
+        
+        return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.5f;
     }
 }

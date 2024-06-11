@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
@@ -26,52 +27,41 @@ public class Platform : MonoBehaviour
 
     //int currentIndex = 0;
     //int indexCount = 0;
-    private void Awake()
-    {
-        for (int k = 0; k < characters.Length; k++)
-        {
-            indexNums.Add(k);
-        }
-    }
+    //private void Awake()
+    //{
+    //    for (int k = 0; k < characters.Length; k++)
+    //    {
+    //        indexNums.Add(k);
+    //    }
+    //}
 
     // Start is called before the first frame update
     void Start()
     {
         
 
-        for (int i = minZ; i <= maxZ; i++)
+        for (int i = minX; i <= maxX; i++)
         {
 
-            for (int j = minX; j <= maxX; j++)
+            for (int j = minZ; j <= maxZ; j++)
             {
-                Debug.Log(indexNums.Count);
-                if (indexNums.Count == 0)
-                {
-                    for (int k = 0; k < characters.Length; k++)
-                    {
-                        indexNums.Add(k);
-                    }
-                }
 
-                int randomIndex = indexNums[Random.Range(0, indexNums.Count)];
-                //while (!indexNums.Contains(randomIndex))
-                //{
-                //    randomIndex = Random.Range(0, characters.Length);
-                //}
+                //int randomIndex = Random.Range(0, characters.Length);
+
 
                 Vector3 pos = new Vector3(i, yPos, j);
-                Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), pos, transform.rotation);
-                characters[randomIndex].AddBrickPosition(brick.transform);
-                characters[randomIndex].AddPlatformBrick(brick, pos);
-                
-                if (indexNums.Count != 0)
-                {
+                Brick brick = BrickPool.Spawn<Brick>(characters[count].GetCurrentColor(), pos, transform.rotation);
+                characters[count].AddBrickPosition(brick.transform);
+                characters[count].AddPlatformBrick(brick, pos);
 
-                    indexNums.RemoveAt(randomIndex);
+                if (characters[count].GetCurrentTotalPlatformBrick() == BrickPool.GetAmount())
+                {
+                    count++;
                 }
-                Debug.Log(indexNums.Count); 
-                //indexCount++;
+
             }
+
+            
         }
     }
 

@@ -146,6 +146,7 @@ public class Stair : MonoBehaviour
                     Quaternion rot = Quaternion.identity;
                     BrickPool.Despawn(brick);
                     character.RemoveBrick(brick);
+                    bridge.ResetCurrentStair(this);
                     bridge.IncreaseStairActive();
                     StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
                 }

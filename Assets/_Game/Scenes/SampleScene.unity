@@ -280,8 +280,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stair: {fileID: 668417848}
-  barrier: {fileID: 1723131479}
   totalStairNumbers: 30
+  stairs: []
 --- !u!1 &57919788
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,8 +507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stair: {fileID: 219837719}
-  barrier: {fileID: 1460966247}
   totalStairNumbers: 30
+  stairs: []
 --- !u!1 &91264767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,7 +2052,7 @@ Transform:
   m_GameObject: {fileID: 941891188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3078,7 +3078,7 @@ MonoBehaviour:
   correspondBrickPrefab: {fileID: 6304859322704445671, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
   joystickManager: {fileID: 2002182531}
   rb: {fileID: 1380684230}
-  playerHeight: 0.5
+  playerHeight: 2
   maxSlopeAngle: 60
   bridgeLayer:
     serializedVersion: 2
@@ -4289,8 +4289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stair: {fileID: 1204627599}
-  barrier: {fileID: 2138713697}
   totalStairNumbers: 30
+  stairs: []
 --- !u!1 &1723131477
 GameObject:
   m_ObjectHideFlags: 0

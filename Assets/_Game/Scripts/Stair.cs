@@ -181,8 +181,8 @@ public class Stair : MonoBehaviour
 
     public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
     {
-        yield return new WaitForSeconds(Random.Range(5f, 7f));
+        yield return new WaitForSeconds(Random.Range(7f, 15f));
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
-        yield return new WaitForSeconds(Random.Range(2f, 5f));
+        yield return new WaitForSeconds(Random.Range(3f, 6f));
     }
 }

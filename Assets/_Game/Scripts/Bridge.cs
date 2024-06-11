@@ -7,8 +7,8 @@ public class Bridge : MonoBehaviour
     [SerializeField] private Stair stair;
     [SerializeField] private Barrier barrier;
     [SerializeField] private int totalStairNumbers;
-    private List<Stair> stairs = new List<Stair>();
-    private List<Barrier> barriers = new List<Barrier>();
+    public List<Stair> stairs = new List<Stair>();
+    public List<Barrier> barriers = new List<Barrier>();
     private Vector3 firstStairPos;
     private Vector3 firstBarrierPos;
     private int count = 1;

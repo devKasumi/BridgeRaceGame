@@ -7,6 +7,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private List<Level> levelPrefabs = new List<Level>();
 
     private Level currentLevel;
+    private int currentLevelIndex;  
 
     // Start is called before the first frame update
     void Start()
@@ -18,5 +19,40 @@ public class LevelManager : Singleton<LevelManager>
     void Update()
     {
         
+    }
+
+    public void OnInit()
+    {
+
+    }
+
+    public void OnDespawn()
+    {
+
+    }
+
+    public void InitLevel()
+    {
+
+    }
+
+    public void ReplayCurrentLevel()
+    {
+
+    }
+
+    public void LoadNextLevel()
+    {
+
+    }
+
+    public void LoadLevel()
+    {
+
+    }
+
+    public int GetCurrentLevelIndex()
+    {
+        return currentLevelIndex;
     }
 }

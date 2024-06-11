@@ -128,6 +128,7 @@ public class Stair : MonoBehaviour
                 if (currentColorType != character.GetCurrentColor())
                 {
                     //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
+                    bridge.ResetCurrentStair(this);
                     bridge.EnableWall(bridge.GetStairIndex(this));
                 }
             }

@@ -7,7 +7,7 @@ public class Bridge : MonoBehaviour
     [SerializeField] private Stair stair;
     //[SerializeField] private Barrier barrier;
     [SerializeField] private int totalStairNumbers;
-    private List<Stair> stairs = new List<Stair>();
+    public List<Stair> stairs = new List<Stair>();
     private List<Barrier> barriers = new List<Barrier>();
     private Vector3 firstStairPos;
     private Vector3 firstBarrierPos;
@@ -20,8 +20,8 @@ public class Bridge : MonoBehaviour
     {
         firstStairPos = stair.transform.position;
         //firstBarrierPos = barrier.transform.position;
-
-        for (int i = 0; i < totalStairNumbers; i++)
+        stairs.Add(stair);
+        for (int i = 1; i < totalStairNumbers; i++)
         {
             stairs.Add(Instantiate(stair, new Vector3(
                 firstStairPos.x,
@@ -49,7 +49,10 @@ public class Bridge : MonoBehaviour
 
     public void EnableWall(int index)
     {
-        stairs[index + 1].EnableWall();
+        if (index + 1 < stairs.Count)
+        {
+            stairs[index + 1].EnableWall();
+        }
     }
 
     public void IncreaseStairActive()

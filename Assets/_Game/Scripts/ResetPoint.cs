@@ -11,7 +11,7 @@ public class ResetPoint : MonoBehaviour
         if (other.CompareTag(Constants.TAG_PLAYER))
         {
             //bridge.ResetBarrier();  
-            Debug.LogError("reset stair!!!");
+            Debug.LogError("reset stair!!!" + bridge.stairs.Count);
             bridge.ResetStair();    
         }
     }

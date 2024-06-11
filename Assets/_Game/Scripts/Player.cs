@@ -85,6 +85,8 @@ public class Player : Character
             //moveDirection = new Vector3(inputX * GetMoveSpeed(), -slopeHit.point.y, inputZ * GetMoveSpeed());
             //Debug.Log("on slope!!!");
             transform.rotation = originRotation;
+            //moveDirection = new Vector3(GetSlopeMoveDirection().x * 5f, GetSlopeMoveDirection().y, GetSlopeMoveDirection().z * 5f);
+            //rb.velocity = moveDirection;
             rb.velocity = GetSlopeMoveDirection() * 5f;
             //rb.velocity = slopeMovement * 5f;
             //Debug.Log(slopeDirection);

@@ -5,9 +5,9 @@ using UnityEngine;
 public class Bridge : MonoBehaviour
 {
     [SerializeField] private Stair stair;
-    //[SerializeField] private Barrier barrier;
+    [SerializeField] private Barrier barrier;
     [SerializeField] private int totalStairNumbers;
-    public List<Stair> stairs = new List<Stair>();
+    private List<Stair> stairs = new List<Stair>();
     private List<Barrier> barriers = new List<Barrier>();
     private Vector3 firstStairPos;
     private Vector3 firstBarrierPos;
@@ -19,8 +19,9 @@ public class Bridge : MonoBehaviour
     void Start()
     {
         firstStairPos = stair.transform.position;
-        //firstBarrierPos = barrier.transform.position;
+        firstBarrierPos = barrier.transform.position;
         stairs.Add(stair);
+        barriers.Add(barrier);
         for (int i = 1; i < totalStairNumbers; i++)
         {
             stairs.Add(Instantiate(stair, new Vector3(
@@ -28,10 +29,10 @@ public class Bridge : MonoBehaviour
                 firstStairPos.y + count * Constants.STAIR_DISTANCE_Y,
                 firstStairPos.z + count * Constants.STAIR_DISTANCE_Z), stair.transform.rotation));
 
-            //barriers.Add(Instantiate(barrier, new Vector3(
-            //    firstBarrierPos.x,
-            //    firstBarrierPos.y + count * Constants.STAIR_DISTANCE_Y,
-            //    firstBarrierPos.z + count * Constants.STAIR_DISTANCE_Z), barrier.transform.rotation));
+            barriers.Add(Instantiate(barrier, new Vector3(
+                firstBarrierPos.x,
+                firstBarrierPos.y + count * Constants.STAIR_DISTANCE_Y,
+                firstBarrierPos.z + count * Constants.STAIR_DISTANCE_Z), barrier.transform.rotation));
 
             count++;    
         }
@@ -42,17 +43,14 @@ public class Bridge : MonoBehaviour
         return stairs.IndexOf(stair);
     }
 
-    //public void EnableBarrierBox(int index)
+    //public int GetBarrierIndex(Barrier barrier)
     //{
-    //    barriers[index + 1].GetComponent<BoxCollider>().enabled = true;
+    //    return barriers.IndexOf(barrier);
     //}
 
-    public void EnableWall(int index)
+    public void EnableBarrierBox(int index)
     {
-        if (index + 1 < stairs.Count)
-        {
-            stairs[index + 1].EnableWall();
-        }
+        barriers[index + 1].GetObjectBoxCollider().isTrigger = false;
     }
 
     public void IncreaseStairActive()
@@ -65,25 +63,17 @@ public class Bridge : MonoBehaviour
         return totalStairsActive == totalStairNumbers;
     }
 
-    //public void ResetBarrier()
-    //{
-    //    for (int i = 0; i<barriers.Count; i++)
-    //    {
-    //        barriers[i].GetObjectBoxCollider().enabled = false; 
-    //    }
-    //}
-
-    public void ResetStair()
+    public void ResetBarrier()
     {
-        for (int i = 0;i <stairs.Count; i++)
+        for (int i = 0; i < barriers.Count; i++)
         {
-            stairs[i].ResetStairToNormal();
+            barriers[i].GetObjectBoxCollider().isTrigger = true;
         }
     }
 
-    public void ResetCurrentStair(Stair stair)
+    public void ResetCurrentBarrier(int index)
     {
-        stair.ResetStairToNormal();
+        barriers[index].GetObjectBoxCollider().isTrigger = true;
     }
 
 }

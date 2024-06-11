@@ -10,6 +10,13 @@ public class Stair : MonoBehaviour
     [SerializeField] private Bridge bridge;
     [SerializeField] private BoxCollider boxCollider;
     private Vector3 originalScale;
+    private Vector3 originalPosition;
+
+    private void Start()
+    {
+        originalScale = transform.localScale;
+        originalPosition = transform.position;
+    }
 
     public void ChangeColor(CommonEnum.ColorType colorType)
     {
@@ -26,27 +33,29 @@ public class Stair : MonoBehaviour
         return currentColorType;
     }
 
-    //public Vector3 GetOriginalScale()
-    //{
-    //    return originalScale;
-    //}
+    public Vector3 GetOriginalScale()
+    {
+        return originalScale;
+    }
 
     public void EnableWall()
     {
-        transform.localScale = new Vector3(originalScale.x, originalScale.y * 10, originalScale.z);
+        transform.localScale = new Vector3(originalScale.x, originalScale.y * 10f, originalScale.z);
         boxCollider.isTrigger = false;
+        Debug.LogError("adasdasd:  " + transform.localScale);
     }
 
     public void ResetStairToNormal()
     {
+
         transform.localScale = originalScale;
-        boxCollider.isTrigger = true;
+        transform.position = originalPosition;
+        //boxCollider.isTrigger = true;
+        GetComponent<BoxCollider>().isTrigger = true;
+        Debug.LogError("origin localScale:  " + originalScale + "  istrigger:  " + boxCollider.isTrigger);
     }
 
-    private void Start()
-    {
-        originalScale = transform.localScale;
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -120,16 +129,18 @@ public class Stair : MonoBehaviour
                 currentMeshRenderer.enabled = true;
                 if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
                 {
-                    bridge.EnableWall(bridge.GetStairIndex(this));
+                    //bridge.EnableWall(bridge.GetStairIndex(this));
+                    bridge.EnableBarrierBox(bridge.GetStairIndex(this));
                 }
             }
             else
             {
                 if (currentColorType != character.GetCurrentColor())
                 {
-                    //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
-                    bridge.ResetCurrentStair(this);
-                    bridge.EnableWall(bridge.GetStairIndex(this));
+                    bridge.ResetCurrentBarrier(bridge.GetStairIndex(this));
+                    bridge.EnableBarrierBox(bridge.GetStairIndex(this));
+                    //bridge.ResetCurrentStair(this);
+                    //bridge.EnableWall(bridge.GetStairIndex(this));
                 }
             }
         }
@@ -150,7 +161,8 @@ public class Stair : MonoBehaviour
                     bridge.IncreaseStairActive();
                     StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
                 }
-                bridge.ResetCurrentStair(this);
+                //bridge.ResetCurrentStair(this);
+                bridge.ResetCurrentBarrier(bridge.GetStairIndex(this));
                 currentMeshRenderer.enabled = true;
                 if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
                 {

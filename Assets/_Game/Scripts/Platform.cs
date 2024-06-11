@@ -8,6 +8,8 @@ public class Platform : MonoBehaviour
     [SerializeField] private Character[] characters;
     [SerializeField] private List<Brick> bricks = new List<Brick>();
 
+    private List<int> indexNums = new List<int>();
+
     //private List<Vector3> brickPositions = new List<Vector3>();
 
     private int count = 0;
@@ -15,31 +17,60 @@ public class Platform : MonoBehaviour
     private int minX = -5;
     private int minZ = 1;
     //private float maxX = 8.5f;
-    private int maxX = 7;
-    //private int maxZ = 12;
-    private int maxZ = 11;
+    private int maxX = 4;
+    private int maxZ = 12;
+    //private int maxZ = 11;
     private const float yPos = -0.8f;
 
-    private float timer = 0f;
+    //private float timer = 0f;
+
+    //int currentIndex = 0;
+    //int indexCount = 0;
+    private void Awake()
+    {
+        for (int k = 0; k < characters.Length; k++)
+        {
+            indexNums.Add(k);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = minX; i <= maxX; i++)
+        
+
+        for (int i = minZ; i <= maxZ; i++)
         {
-            for (int j = minZ; j <= maxZ; j++)
+
+            for (int j = minX; j <= maxX; j++)
             {
-                int randomIndex = Random.Range(0, characters.Length);
-                //if (characters[randomIndex].GetCurrentTotalPlatformBrick() == BrickPool.GetAmount())
+                Debug.Log(indexNums.Count);
+                if (indexNums.Count == 0)
+                {
+                    for (int k = 0; k < characters.Length; k++)
+                    {
+                        indexNums.Add(k);
+                    }
+                }
+
+                int randomIndex = indexNums[Random.Range(0, indexNums.Count)];
+                //while (!indexNums.Contains(randomIndex))
                 //{
-                //    int currentIndex = randomIndex;
                 //    randomIndex = Random.Range(0, characters.Length);
                 //}
+
                 Vector3 pos = new Vector3(i, yPos, j);
                 Brick brick = BrickPool.Spawn<Brick>(characters[randomIndex].GetCurrentColor(), pos, transform.rotation);
                 characters[randomIndex].AddBrickPosition(brick.transform);
                 characters[randomIndex].AddPlatformBrick(brick, pos);
-                //brickPositions.Add(new Vector3(i, yPos, j));
+                
+                if (indexNums.Count != 0)
+                {
+
+                    indexNums.RemoveAt(randomIndex);
+                }
+                Debug.Log(indexNums.Count); 
+                //indexCount++;
             }
         }
     }

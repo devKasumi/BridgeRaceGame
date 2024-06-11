@@ -56,9 +56,53 @@ public class Stair : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Constants.TAG_PLAYER) || other.CompareTag(Constants.TAG_BOT))
+        //if (other.CompareTag(Constants.TAG_PLAYER) || other.CompareTag(Constants.TAG_BOT))
+        //{
+        //    Character character = other.GetComponent<Character>();
+        //    if (character.GetCurrentTotalBricks() > 0)
+        //    {
+        //        if (currentColorType != character.GetCurrentColor())
+        //        {
+        //            Brick brick = character.GetLastBrick();
+        //            ChangeColor(character.GetCurrentColor());
+        //            ChangeMaterial(character.GetCurrentMeshMaterial());
+        //            Vector3 pos = character.platformBricks[brick];
+        //            Quaternion rot = Quaternion.identity;
+        //            BrickPool.Despawn(brick);
+        //            character.RemoveBrick(brick);
+        //            bridge.IncreaseStairActive();
+        //            StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
+        //        }
+        //        currentMeshRenderer.enabled = true;
+
+        //        if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
+        //        {
+        //            // player or bot can not move 
+        //            //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
+        //            bridge.EnableWall(bridge.GetStairIndex(this));
+        //            if (other.CompareTag(Constants.TAG_BOT))
+        //            {
+        //                other.GetComponent<Bot>().ChangeState(new PatrolState());
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (currentColorType != character.GetCurrentColor())
+        //        {
+        //            //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
+        //            bridge.EnableWall(bridge.GetStairIndex(this));
+        //            if (other.CompareTag(Constants.TAG_BOT))
+        //            {
+        //                other.GetComponent<Bot>().ChangeState(new PatrolState());
+        //            }
+        //        }
+        //    }
+        //}
+
+        if (other.CompareTag(Constants.TAG_PLAYER))
         {
-            Character character = other.GetComponent<Character>();
+            Player character = other.GetComponent<Player>();
             if (character.GetCurrentTotalBricks() > 0)
             {
                 if (currentColorType != character.GetCurrentColor())
@@ -74,16 +118,9 @@ public class Stair : MonoBehaviour
                     StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
                 }
                 currentMeshRenderer.enabled = true;
-
                 if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
                 {
-                    // player or bot can not move 
-                    //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
                     bridge.EnableWall(bridge.GetStairIndex(this));
-                    if (other.CompareTag(Constants.TAG_BOT))
-                    {
-                        other.GetComponent<Bot>().ChangeState(new PatrolState());
-                    }
                 }
             }
             else
@@ -92,10 +129,37 @@ public class Stair : MonoBehaviour
                 {
                     //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
                     bridge.EnableWall(bridge.GetStairIndex(this));
-                    if (other.CompareTag(Constants.TAG_BOT))
-                    {
-                        other.GetComponent<Bot>().ChangeState(new PatrolState());
-                    }
+                }
+            }
+        }
+        else if (other.CompareTag(Constants.TAG_BOT))
+        {
+            Bot character = other.GetComponent<Bot>();
+            if (character.GetCurrentTotalBricks() > 0)
+            {
+                if (currentColorType != character.GetCurrentColor())
+                {
+                    Brick brick = character.GetLastBrick();
+                    ChangeColor(character.GetCurrentColor());
+                    ChangeMaterial(character.GetCurrentMeshMaterial());
+                    Vector3 pos = character.platformBricks[brick];
+                    Quaternion rot = Quaternion.identity;
+                    BrickPool.Despawn(brick);
+                    character.RemoveBrick(brick);
+                    bridge.IncreaseStairActive();
+                    StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
+                }
+                currentMeshRenderer.enabled = true;
+                if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
+                {
+                    character.ChangeState(new PatrolState());
+                }
+            }
+            else
+            {
+                if (currentColorType != character.GetCurrentColor())
+                {
+                    other.GetComponent<Bot>().ChangeState(new PatrolState());
                 }
             }
         }

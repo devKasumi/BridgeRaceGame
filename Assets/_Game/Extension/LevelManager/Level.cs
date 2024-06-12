@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] private Stage[] stages;    
+
+
     // Start is called before the first frame update
     void Start()
     {

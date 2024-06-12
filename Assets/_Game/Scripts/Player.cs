@@ -37,7 +37,7 @@ public class Player : Character
     {
         Move();
 
-        rb.useGravity = !OnSlope();
+        //rb.useGravity = !OnSlope();
 
     }
 
@@ -94,7 +94,7 @@ public class Player : Character
         }
         else
         {
-            //transform.rotation = Quaternion.LookRotation(rb.velocity);
+            transform.rotation = Quaternion.LookRotation(rb.velocity);
 
             rb.velocity = moveDirection;
         }

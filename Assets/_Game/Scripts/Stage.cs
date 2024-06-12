@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stage : MonoBehaviour
 {
     //[SerializeField] private List<Material> materials = new List<Material>();
+    [SerializeField] private Platform platform;
 
     // Start is called before the first frame update
     void Start()
@@ -17,4 +18,6 @@ public class Stage : MonoBehaviour
     {
         
     }
+
+    public Platform GetCurrentStagePlatform() => platform;
 }

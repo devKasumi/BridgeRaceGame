@@ -13,6 +13,7 @@ public class Stair : MonoBehaviour
     [SerializeField] private BoxCollider boxCollider;
     private Vector3 originalScale;
     private Vector3 originalPosition;
+    //private Vector3 originalBoxSize;
     //private float framerate = 5f;
     //private float time = 0;
     //private Character character;
@@ -23,16 +24,12 @@ public class Stair : MonoBehaviour
     {
         originalScale = transform.localScale;
         originalPosition = transform.position;
+        //originalBoxSize = boxCollider.size;
     }
 
     private void FixedUpdate()
     {
-        //time += Time.deltaTime;
-        //if (time >= framerate)
-        //{
-        //    time -= framerate;
-        //    ReSpawnBrick(character.GetCurrentColor(), pos, rot);
-        //}
+        
     }
 
     public void ChangeColor(CommonEnum.ColorType colorType)
@@ -93,7 +90,6 @@ public class Stair : MonoBehaviour
             {
                 if (currentColorType != character.GetCurrentColor())
                 {
-                    Debug.LogError("brick = 0!!! player");
                     bridge.EnableBarrierBox(bridge.GetStairIndex(this));
                 }
             }
@@ -142,6 +138,6 @@ public class Stair : MonoBehaviour
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
         character.AddBrickPosition(brick.transform);
         character.AddPlatformBrick(brick, pos);
-        yield return new WaitForSeconds(Random.Range(5f, 7f));
+        //yield return new WaitForSeconds(Random.Range(5f, 7f));
     }
 }

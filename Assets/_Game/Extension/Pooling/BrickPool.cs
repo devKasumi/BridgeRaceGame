@@ -5,13 +5,13 @@ using UnityEngine;
 public static class BrickPool
 {
     private static Dictionary<CommonEnum.ColorType, Pool> poolInstance = new Dictionary<CommonEnum.ColorType, Pool>();
-    private static int amount = 40;
+    //private static int amount = 40;
     //private static int amountCount = 0;
 
-    public static int GetAmount() => amount;
+    //public static int GetAmount() => amount;
 
     // khoi tao pool moi
-    public static void PreLoad(Brick prefab, /*int amount,*/ Transform parent)
+    public static void PreLoad(Brick prefab, int amount, Transform parent)
     {
         if (!prefab)
         {
@@ -36,10 +36,10 @@ public static class BrickPool
             return null;
         }
 
-        if (colorType == CommonEnum.ColorType.Green)
-        {
-            Debug.LogError("spwan brick" + colorType);
-        }
+        //if (colorType == CommonEnum.ColorType.Green)
+        //{
+        //    Debug.LogError("spwan brick" + colorType);
+        //}
 
         return poolInstance[colorType].Spawn(pos, rot) as T;
     }

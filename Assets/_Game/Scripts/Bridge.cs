@@ -7,8 +7,8 @@ public class Bridge : MonoBehaviour
     [SerializeField] private Stair stair;
     [SerializeField] private Barrier barrier;
     [SerializeField] private int totalStairNumbers;
-    public List<Stair> stairs = new List<Stair>();
-    public List<Barrier> barriers = new List<Barrier>();
+    private List<Stair> stairs = new List<Stair>();
+    private List<Barrier> barriers = new List<Barrier>();
     private Vector3 firstStairPos;
     private Vector3 firstBarrierPos;
     private int count = 1;
@@ -76,4 +76,11 @@ public class Bridge : MonoBehaviour
         barriers[index].GetObjectBoxCollider().isTrigger = true;
     }
 
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag(Constants.TAG_PLAYER))
+    //    {
+    //        collision.gameObject.GetComponent<Player>().ResetPlayerRotation();
+    //    }
+    //}
 }

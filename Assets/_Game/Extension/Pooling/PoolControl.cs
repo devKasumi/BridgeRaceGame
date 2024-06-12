@@ -5,13 +5,24 @@ using UnityEngine;
 public class PoolControl : MonoBehaviour
 {
     [SerializeField] private List<Character> characters = new List<Character>();
+    [SerializeField] private List<Platform> platforms = new List<Platform>();
 
     private void Awake()
     {
+        PreLoadPool(0);
+    }
+
+    public void PreLoadPool(int currentStageIndex)
+    {
         for (int i = 0; i < characters.Count; i++)
         {
-            characters[i].GetData();
-            BrickPool.PreLoad(characters[i].GetCorrespondBrick(), new GameObject(characters[i].GetCurrentColor().ToString()).transform);
+            if (characters[i].GetCurrentStageIndex() == currentStageIndex)
+            {
+                characters[i].GetData();
+                BrickPool.PreLoad(characters[i].GetCorrespondBrick(), 
+                                  platforms[currentStageIndex].GetBrickAmount(), 
+                                  new GameObject(characters[i].GetCurrentColor().ToString() + "_" + (characters[i].GetCurrentStageIndex()+1)).transform);
+            } 
         }
     }
 

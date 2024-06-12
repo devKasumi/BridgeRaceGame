@@ -28,17 +28,16 @@ public class Player : Character
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
     private void FixedUpdate()
     {
         Move();
 
-        //rb.useGravity = !OnSlope();
-
+        rb.useGravity = !OnSlope();
     }
 
     public override void OnInit()
@@ -81,27 +80,20 @@ public class Player : Character
 
         if (OnSlope())
         {
-            //Vector3 slopeDirection = Vector3.up - slopeHit.normal * Vector3.Dot(Vector3.up, slopeHit.normal);
-            //moveDirection = new Vector3(inputX * GetMoveSpeed(), -slopeHit.point.y, inputZ * GetMoveSpeed());
-            //Debug.Log("on slope!!!");
-            transform.rotation = originRotation;
-            //moveDirection = new Vector3(GetSlopeMoveDirection().x * 5f, GetSlopeMoveDirection().y, GetSlopeMoveDirection().z * 5f);
-            //rb.velocity = moveDirection;
             rb.velocity = GetSlopeMoveDirection() * 5f;
-            //rb.velocity = slopeMovement * 5f;
-            //Debug.Log(slopeDirection);
-            //rb.velocity = slopeDirection * 5f;
         }
         else
         {
-            transform.rotation = Quaternion.LookRotation(rb.velocity);
-
             rb.velocity = moveDirection;
         }
+        transform.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, originRotation.y, rb.velocity.z));
+
+    }
 
 
-
-        //Debug.Log(moveDirection);
+    public void ResetPlayerRotation()
+    {
+        transform.rotation = Quaternion.identity;
     }
 
     //public void Move()

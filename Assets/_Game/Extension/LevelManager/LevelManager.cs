@@ -12,7 +12,7 @@ public class LevelManager : Singleton<LevelManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        OnInit();
     }
 
     // Update is called once per frame
@@ -23,7 +23,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnInit()
     {
-
+        currentLevelIndex = 0;
+        InitLevel(currentLevelIndex);
     }
 
     public void OnDespawn()
@@ -31,10 +32,14 @@ public class LevelManager : Singleton<LevelManager>
 
     }
 
-    public void InitLevel()
+    public void InitLevel(int levelIndex)
     {
-
+        currentLevel = Instantiate(levelPrefabs[currentLevelIndex], Vector3.zero, Quaternion.identity);
     }
+
+    public Level GetCurrentLevel() => currentLevel;
+
+    public int GetCurrentLevelIndex() => currentLevelIndex;
 
     public void ReplayCurrentLevel()
     {
@@ -51,8 +56,5 @@ public class LevelManager : Singleton<LevelManager>
 
     }
 
-    public int GetCurrentLevelIndex()
-    {
-        return currentLevelIndex;
-    }
+    
 }

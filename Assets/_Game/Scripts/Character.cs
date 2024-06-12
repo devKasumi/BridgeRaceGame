@@ -14,23 +14,23 @@ public class Character : MonoBehaviour
     [SerializeField] private float firstBrickY = -0.5f;
     [SerializeField] private float firstBrickZ = -0.6f;
     [SerializeField] private Brick correspondBrickPrefab;
+    private List<Brick> bricks = new List<Brick>();
     private List<Transform> brickPositions = new List<Transform>();
+    public Dictionary<Brick, Vector3> platformBricks = new Dictionary<Brick, Vector3>();
 
     private Vector3 currentTargetPosition = Vector3.zero;
 
     //public bool isAI;
 
-    private List<Brick> bricks = new List<Brick>();
     //private List<Brick> platformBricks = new List<Brick>();
     
-    public Dictionary<Brick, Vector3> platformBricks = new Dictionary<Brick, Vector3>();
 
     private string currentAnimationName;
     private CommonEnum.ColorType currentColorType;
     //private CommonEnum.Direction currentDirection;
     //private MeshRenderer currentMeshRenderer;
 
-     
+    private int currentStageIndex = 0;
 
     //public bool isMoving;
 
@@ -105,6 +105,13 @@ public class Character : MonoBehaviour
 
     public Material GetCurrentMeshMaterial() => currentMeshRenderer.material;
 
+    public int GetCurrentStageIndex() => currentStageIndex; 
+
+    public void SetCurrentStageIndex(int index)
+    {
+        currentStageIndex = index;
+    }
+
     public void ChangeAnimation(string animationName)
     {
         if (currentAnimationName != animationName)
@@ -153,22 +160,10 @@ public class Character : MonoBehaviour
     //    return brickPositions[index].position;
     //}
 
-    public Brick GetLastBrick()
-    {
-        return bricks.Count > 0 ? bricks[bricks.Count - 1] : null;
-        //return platformBricks[0];
-    }
+    public Brick GetLastBrick() => bricks.Count > 0 ? bricks[bricks.Count - 1] : null;
 
-    //public Brick GetLastPlatfromBrick()
-    //{
-    //    return platformBricks[0];
-    //}
+    public int GetCurrentTotalBricks() => bricks.Count;
 
-    public int GetCurrentTotalBricks()
-    {
-        //Debug.Log("current total bricks: " + bricks.Count);
-        return bricks.Count;
-    }
 
     public int GetCurrentTotalPlatformBrick()
     {

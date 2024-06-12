@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
 
     private string currentAnimationName;
     private CommonEnum.ColorType currentColorType;
-    private CommonEnum.Direction currentDirection;
+    //private CommonEnum.Direction currentDirection;
     //private MeshRenderer currentMeshRenderer;
 
     private Vector3 currentTargetPosition = Vector3.zero;
@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
 
     //public bool canMove = true;
 
-    private float timer = 0f;
+    //private float timer = 0f;
 
 
     private void Awake()
@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
 
     public virtual void OnInit()
     {
-        currentDirection = CommonEnum.Direction.None;
+        //currentDirection = CommonEnum.Direction.None;
         GetData();
     }
 

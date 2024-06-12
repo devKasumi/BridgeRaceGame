@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PatrolState : IState
 {
-    private float randomTime;
-    private float timer;
+    //private float randomTime;
+    //private float timer;
 
     public void OnEnter(Bot bot)
     {
-        timer = 0f;
-        randomTime = Random.Range(4f, 7f);
+        //timer = 0f;
+        //randomTime = Random.Range(4f, 7f);
         //if (bot.GetTargetBrickPosition() != null)
         //{
         //    bot.MoveToBrick(bot.GetTargetBrickPosition());

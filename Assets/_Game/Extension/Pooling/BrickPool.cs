@@ -36,7 +36,10 @@ public static class BrickPool
             return null;
         }
 
-        //Debug.LogError("spwan brick" + colorType);
+        if (colorType == CommonEnum.ColorType.Green)
+        {
+            Debug.LogError("spwan brick" + colorType);
+        }
 
         return poolInstance[colorType].Spawn(pos, rot) as T;
     }
@@ -138,7 +141,7 @@ public class Pool
     {
         if (brick != null && brick.gameObject.activeSelf)
         {
-            Debug.LogError("despawn !!!!");
+            //Debug.LogError("despawn !!!!");
             actives.Remove(brick);
             inactives.Enqueue(brick);
             brick.gameObject.SetActive(false);

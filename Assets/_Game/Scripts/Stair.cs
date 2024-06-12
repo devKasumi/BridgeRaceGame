@@ -133,13 +133,15 @@ public class Stair : MonoBehaviour
         Quaternion rot = Quaternion.identity;
         character.RemoveBrick(brick);
         bridge.IncreaseStairActive();
-        StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
+        StartCoroutine(ReSpawnBrick(character, character.GetCurrentColor(), pos, rot));
     }
 
-    public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
+    public IEnumerator ReSpawnBrick(Character character, CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
     {
-        yield return new WaitForSeconds(Random.Range(10f, 15f));
+        yield return new WaitForSeconds(Random.Range(5f, 10f));
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
-        yield return new WaitForSeconds(Random.Range(10f, 15f));
+        character.AddBrickPosition(brick.transform);
+        character.AddPlatformBrick(brick, pos);
+        yield return new WaitForSeconds(Random.Range(5f, 7f));
     }
 }

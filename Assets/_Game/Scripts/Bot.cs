@@ -10,22 +10,30 @@ public class Bot : Character
     [SerializeField] private Transform finishBox;
     [SerializeField] private int minCollectedBricks;
     [SerializeField] private int maxCollectedBricks;
-    [SerializeField] private List<ResetPoint> resetPoints = new List<ResetPoint>(); 
+    [SerializeField] private List<ResetPoint> resetPoints = new List<ResetPoint>();
+    
 
     private int collectedBrick;
 
+    
 
     private IState currentState;
 
     // Start is called before the first frame update
     void Start()
     {
+        //if (GetTargetBrickPosition() == Vector3.zero)
+        //{
+            
+        //}
+        //SetTargetBrickPosition();
         OnInit();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        //Debug.Log(currentState.ToString()); 
         if (currentState != null)
         {
             currentState.OnExecute(this);
@@ -44,6 +52,12 @@ public class Bot : Character
                 SetTargetBrickPosition();
             }
         }
+
+        //if (IsCharacterReachTarget())
+        //{
+        //    //Debug.Log("set new target");
+        //    SetTargetBrickPosition();
+        //}
 
         //Debug.Log(Vector3.Distance(transform.position, navMeshAgent.destination));
     }
@@ -106,7 +120,7 @@ public class Bot : Character
     
     public bool BuildBridge()
     {
-        return GetCurrentTotalBricks() == collectedBrick;
+        return GetCurrentTotalBricks() >= collectedBrick;
     }
 
     public void SetRandomTarget()
@@ -117,6 +131,8 @@ public class Bot : Character
     public bool IsReachTarget()
     {
         
-        return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.5f;
+        return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.3f;
     }
+
+    
 }

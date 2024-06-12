@@ -11,7 +11,7 @@ public static class BrickPool
     public static int GetAmount() => amount;
 
     // khoi tao pool moi
-    public static void PreLoad(Brick prefab/*, int amount*/, Transform parent)
+    public static void PreLoad(Brick prefab, /*int amount,*/ Transform parent)
     {
         if (!prefab)
         {
@@ -138,7 +138,7 @@ public class Pool
     {
         if (brick != null && brick.gameObject.activeSelf)
         {
-            //Debug.Log("despawn !!!!");
+            Debug.LogError("despawn !!!!");
             actives.Remove(brick);
             inactives.Enqueue(brick);
             brick.gameObject.SetActive(false);

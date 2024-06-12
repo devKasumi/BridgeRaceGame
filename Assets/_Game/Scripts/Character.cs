@@ -14,12 +14,15 @@ public class Character : MonoBehaviour
     [SerializeField] private float firstBrickY = -0.5f;
     [SerializeField] private float firstBrickZ = -0.6f;
     [SerializeField] private Brick correspondBrickPrefab;
+    private List<Transform> brickPositions = new List<Transform>();
+
+    private Vector3 currentTargetPosition = Vector3.zero;
 
     //public bool isAI;
 
     private List<Brick> bricks = new List<Brick>();
     //private List<Brick> platformBricks = new List<Brick>();
-    private List<Transform> brickPositions = new List<Transform>();
+    
     public Dictionary<Brick, Vector3> platformBricks = new Dictionary<Brick, Vector3>();
 
     private string currentAnimationName;
@@ -27,7 +30,7 @@ public class Character : MonoBehaviour
     //private CommonEnum.Direction currentDirection;
     //private MeshRenderer currentMeshRenderer;
 
-    private Vector3 currentTargetPosition = Vector3.zero;
+     
 
     //public bool isMoving;
 
@@ -124,8 +127,9 @@ public class Character : MonoBehaviour
         if (bricks.Count > 0)
         {
             bricks.Remove(brick);
+            //brick.gameObject.SetActive(false);
             brick.transform.parent = null;
-            //BrickPool.Despawn(brick);
+            BrickPool.Despawn(brick);
         }
     }
 
@@ -162,7 +166,7 @@ public class Character : MonoBehaviour
 
     public int GetCurrentTotalBricks()
     {
-        Debug.Log("current total bricks: " + bricks.Count);
+        //Debug.Log("current total bricks: " + bricks.Count);
         return bricks.Count;
     }
 
@@ -197,10 +201,11 @@ public class Character : MonoBehaviour
         if (brickPositions.Count > 0)
         {
             int index = Random.Range(0, brickPositions.Count);
-            if (brickPositions[index] != null)
-            {
-                currentTargetPosition = brickPositions[index].position;
-            }
+            //if (brickPositions[index] != null)
+            //{
+            //    currentTargetPosition = brickPositions[index].position;
+            //}
+            currentTargetPosition = brickPositions[index].position;
         }
     }
 

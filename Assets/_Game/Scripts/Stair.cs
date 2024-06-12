@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using UnityEngine.TextCore.Text;
 
 public class Stair : MonoBehaviour
 {
@@ -11,11 +13,26 @@ public class Stair : MonoBehaviour
     [SerializeField] private BoxCollider boxCollider;
     private Vector3 originalScale;
     private Vector3 originalPosition;
+    //private float framerate = 5f;
+    //private float time = 0;
+    //private Character character;
+    //private Vector3 pos;
+    //private Quaternion rot;
 
     private void Start()
     {
         originalScale = transform.localScale;
         originalPosition = transform.position;
+    }
+
+    private void FixedUpdate()
+    {
+        //time += Time.deltaTime;
+        //if (time >= framerate)
+        //{
+        //    time -= framerate;
+        //    ReSpawnBrick(character.GetCurrentColor(), pos, rot);
+        //}
     }
 
     public void ChangeColor(CommonEnum.ColorType colorType)
@@ -55,60 +72,8 @@ public class Stair : MonoBehaviour
         Debug.LogError("origin localScale:  " + originalScale + "  istrigger:  " + boxCollider.isTrigger);
     }
 
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag(Constants.TAG_PLAYER) || other.CompareTag(Constants.TAG_BOT))
-        //{
-        //    Character character = other.GetComponent<Character>();
-        //    if (character.GetCurrentTotalBricks() > 0)
-        //    {
-        //        if (currentColorType != character.GetCurrentColor())
-        //        {
-        //            Brick brick = character.GetLastBrick();
-        //            ChangeColor(character.GetCurrentColor());
-        //            ChangeMaterial(character.GetCurrentMeshMaterial());
-        //            Vector3 pos = character.platformBricks[brick];
-        //            Quaternion rot = Quaternion.identity;
-        //            BrickPool.Despawn(brick);
-        //            character.RemoveBrick(brick);
-        //            bridge.IncreaseStairActive();
-        //            StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
-        //        }
-        //        currentMeshRenderer.enabled = true;
-
-        //        if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
-        //        {
-        //            // player or bot can not move 
-        //            //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
-        //            bridge.EnableWall(bridge.GetStairIndex(this));
-        //            if (other.CompareTag(Constants.TAG_BOT))
-        //            {
-        //                other.GetComponent<Bot>().ChangeState(new PatrolState());
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (currentColorType != character.GetCurrentColor())
-        //        {
-        //            //bridge.EnableBarrierBox(bridge.GetStairIndex(this));
-        //            bridge.EnableWall(bridge.GetStairIndex(this));
-        //            if (other.CompareTag(Constants.TAG_BOT))
-        //            {
-        //                other.GetComponent<Bot>().ChangeState(new PatrolState());
-        //            }
-        //        }
-        //    }
-        //}
-
         if (other.CompareTag(Constants.TAG_PLAYER))
         {
             Player character = other.GetComponent<Player>();
@@ -116,20 +81,11 @@ public class Stair : MonoBehaviour
             {
                 if (currentColorType != character.GetCurrentColor())
                 {
-                    Brick brick = character.GetLastBrick();
-                    ChangeColor(character.GetCurrentColor());
-                    ChangeMaterial(character.GetCurrentMeshMaterial());
-                    Vector3 pos = character.platformBricks[brick];
-                    Quaternion rot = Quaternion.identity;
-                    BrickPool.Despawn(brick);
-                    character.RemoveBrick(brick);
-                    bridge.IncreaseStairActive();
-                    StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
+                    NormalStairChecking(character, bridge);
                 }
                 currentMeshRenderer.enabled = true;
                 if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
                 {
-                    //bridge.EnableWall(bridge.GetStairIndex(this));
                     bridge.EnableBarrierBox(bridge.GetStairIndex(this));
                 }
             }
@@ -137,10 +93,8 @@ public class Stair : MonoBehaviour
             {
                 if (currentColorType != character.GetCurrentColor())
                 {
-                    bridge.ResetCurrentBarrier(bridge.GetStairIndex(this));
+                    Debug.LogError("brick = 0!!! player");
                     bridge.EnableBarrierBox(bridge.GetStairIndex(this));
-                    //bridge.ResetCurrentStair(this);
-                    //bridge.EnableWall(bridge.GetStairIndex(this));
                 }
             }
         }
@@ -151,17 +105,8 @@ public class Stair : MonoBehaviour
             {
                 if (currentColorType != character.GetCurrentColor())
                 {
-                    Brick brick = character.GetLastBrick();
-                    ChangeColor(character.GetCurrentColor());
-                    ChangeMaterial(character.GetCurrentMeshMaterial());
-                    Vector3 pos = character.platformBricks[brick];
-                    Quaternion rot = Quaternion.identity;
-                    BrickPool.Despawn(brick);
-                    character.RemoveBrick(brick);
-                    bridge.IncreaseStairActive();
-                    StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
+                    NormalStairChecking(character, bridge);
                 }
-                //bridge.ResetCurrentStair(this);
                 bridge.ResetCurrentBarrier(bridge.GetStairIndex(this));
                 currentMeshRenderer.enabled = true;
                 if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
@@ -173,16 +118,28 @@ public class Stair : MonoBehaviour
             {
                 if (currentColorType != character.GetCurrentColor())
                 {
-                    other.GetComponent<Bot>().ChangeState(new PatrolState());
+                    character.ChangeState(new PatrolState());
                 }
             }
         }
     }
 
+    private void NormalStairChecking(Character character, Bridge bridge)
+    {
+        Brick brick = character.GetLastBrick();
+        ChangeColor(character.GetCurrentColor());
+        ChangeMaterial(character.GetCurrentMeshMaterial());
+        Vector3 pos = character.platformBricks[brick];
+        Quaternion rot = Quaternion.identity;
+        character.RemoveBrick(brick);
+        bridge.IncreaseStairActive();
+        StartCoroutine(ReSpawnBrick(character.GetCurrentColor(), pos, rot));
+    }
+
     public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
     {
-        yield return new WaitForSeconds(Random.Range(7f, 15f));
+        yield return new WaitForSeconds(Random.Range(10f, 15f));
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
-        yield return new WaitForSeconds(Random.Range(3f, 6f));
+        yield return new WaitForSeconds(Random.Range(10f, 15f));
     }
 }

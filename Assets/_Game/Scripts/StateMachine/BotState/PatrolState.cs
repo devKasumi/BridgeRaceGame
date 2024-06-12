@@ -20,20 +20,8 @@ public class PatrolState : IState
 
     public void OnExecute(Bot bot)
     {
-        //timer += Time.deltaTime;
         bot.MoveToBrick(bot.GetTargetBrickPosition());
-        //if (bot.GetTargetBrickPosition() != null)
-        //{
 
-        //}
-        //else
-        //{
-        //    if (timer < randomTime)
-        //    {
-        //        Debug.Log("moving time");
-        //    }
-        //    else bot.ChangeState(new IdleState());
-        //}
         if (bot.BuildBridge())
         {
             bot.ChangeState(new BuildState());

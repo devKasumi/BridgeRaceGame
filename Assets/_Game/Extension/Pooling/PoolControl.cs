@@ -11,10 +11,18 @@ public class PoolControl : MonoBehaviour
         for (int i = 0; i < characters.Count; i++)
         {
             characters[i].GetData();
-            BrickPool.PreLoad(characters[i].GetCorrespondBrick()/*, SimplePool.GetAmount()*/, new GameObject("Brick_" + i).transform);
+            BrickPool.PreLoad(characters[i].GetCorrespondBrick(), new GameObject(characters[i].GetCurrentColor().ToString()).transform);
         }
     }
 
+}
+
+[System.Serializable]
+public class PoolAmount
+{
+    public Brick prefab;
+    public Transform parent;
+    public float amount;
 }
 
 //public enum PoolColorType

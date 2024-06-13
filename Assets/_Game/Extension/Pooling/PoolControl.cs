@@ -11,10 +11,14 @@ public class PoolControl : MonoBehaviour
     {
         //PreLoadPool(0);
         characters.Add(LevelManager.GetInstance.GetPlayer());
-        for (int i = 0; i < characters.Count; i++)
+        
+        if (LevelManager.GetInstance.GetCurrentLevelIndex() == 0)
         {
-            //Debug.LogError("p[re")
-            PreLoadPool(0, characters[i]);
+            for (int i = 0; i < characters.Count; i++)
+            {
+                //Debug.LogError("p[re")
+                PreLoadPool(0, characters[i]);
+            }
         }
     }
 
@@ -32,6 +36,7 @@ public class PoolControl : MonoBehaviour
         //}
         if (character.GetCurrentStageIndex() == currentStageIndex)
         {
+            Debug.LogError("current stage index:  " + currentStageIndex);
             character.GetData();
             BrickPool.PreLoad(character.GetCorrespondBrick(),
                               platforms[currentStageIndex].GetBrickAmount(),

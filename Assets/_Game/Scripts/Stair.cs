@@ -125,11 +125,14 @@ public class Stair : MonoBehaviour
         Brick brick = character.GetLastBrick();
         ChangeColor(character.GetCurrentColor());
         ChangeMaterial(character.GetCurrentMeshMaterial());
-        Vector3 pos = character.platformBricks[brick];
-        Quaternion rot = Quaternion.identity;
+        if (character.platformBricks[brick] != null)
+        {
+            Vector3 pos = character.platformBricks[brick];
+            Quaternion rot = Quaternion.identity;
+            StartCoroutine(ReSpawnBrick(character, character.GetCurrentColor(), pos, rot));
+        }
         character.RemoveBrick(brick);
         bridge.IncreaseStairActive();
-        StartCoroutine(ReSpawnBrick(character, character.GetCurrentColor(), pos, rot));
     }
 
     public IEnumerator ReSpawnBrick(Character character, CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)

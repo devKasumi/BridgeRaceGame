@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 8274942252980354819}
   - component: {fileID: 8876055749210095416}
   m_Layer: 0
-  m_Name: Platform
+  m_Name: Platform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,11 +462,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ed5d057494dc649a631af306abdd03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: 0
-  minZ: 0
-  maxX: 0
-  maxZ: 0
-  yPos: -0.8
+  minX: -5
+  minZ: 29
+  maxX: 4
+  maxZ: 34
+  yPos: 5.4
   characters:
   - {fileID: 6037894885175225039}
   - {fileID: 150996509456856298}
@@ -1585,7 +1585,7 @@ GameObject:
   - component: {fileID: 1540693522521530611}
   - component: {fileID: 2650875957360104180}
   m_Layer: 0
-  m_Name: Platform
+  m_Name: Platform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1778,7 +1778,7 @@ Transform:
   m_GameObject: {fileID: 3335646571285877035}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.7, z: 9.5}
+  m_LocalPosition: {x: 0, y: 6.7, z: 9.8}
   m_LocalScale: {x: 1, y: 1.1617, z: 0.084147}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1897,7 +1897,7 @@ Transform:
   m_GameObject: {fileID: 3359415788357720661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 6.7, z: 9.3}
+  m_LocalPosition: {x: -3, y: 6.7, z: 9.8}
   m_LocalScale: {x: 1, y: 1.1617, z: 0.084147}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2016,7 +2016,7 @@ Transform:
   m_GameObject: {fileID: 3507223782137396823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 6.7, z: 9.5}
+  m_LocalPosition: {x: 3, y: 6.7, z: 9.8}
   m_LocalScale: {x: 1, y: 1.1617, z: 0.084147}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3463,7 +3463,7 @@ Transform:
   m_GameObject: {fileID: 7165496071130524819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.27019024, y: 5.106491, z: 48.41518}
+  m_LocalPosition: {x: -0.27019024, y: 9.11, z: 46.66}
   m_LocalScale: {x: 0.82238406, y: 1, z: 0.41946}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3607,13 +3607,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7972802140435800774}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 5.17, z: 42.44}
-  m_LocalScale: {x: 0.15, y: 1, z: 0.8}
+  m_LocalRotation: {x: -0.29096106, y: 0, z: 0, w: 0.9567349}
+  m_LocalPosition: {x: -3, y: 7.18, z: 41.58}
+  m_LocalScale: {x: 0.15, y: 1, z: 0.738}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1697178015166678780}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -33.831, y: 0, z: 0}
 --- !u!33 &7263583511693164725
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3898,13 +3898,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8433435697370585140}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 5.17, z: 42.44}
-  m_LocalScale: {x: 0.15, y: 1, z: 0.8}
+  m_LocalRotation: {x: -0.29096106, y: 0, z: 0, w: 0.9567349}
+  m_LocalPosition: {x: 3, y: 7.18, z: 41.58}
+  m_LocalScale: {x: 0.15, y: 1, z: 0.738}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1697178015166678780}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -33.831, y: 0, z: 0}
 --- !u!33 &2429537659231830362
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4350,6 +4350,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978815644915997368, guid: e2698e6815969d44ab99bf2a24a13793, type: 3}
+      propertyPath: bridge
+      value: 
+      objectReference: {fileID: 7734979035688075762}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5099,6 +5103,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978815644915997368, guid: e2698e6815969d44ab99bf2a24a13793, type: 3}
+      propertyPath: bridge
+      value: 
+      objectReference: {fileID: 7366229981372079801}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

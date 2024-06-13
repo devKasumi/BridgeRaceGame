@@ -19,10 +19,6 @@ public class Character : MonoBehaviour
     public Dictionary<Brick, Vector3> platformBricks = new Dictionary<Brick, Vector3>();
 
     private Vector3 currentTargetPosition = Vector3.zero;
-
-    //public bool isAI;
-
-    //private List<Brick> platformBricks = new List<Brick>();
     
 
     private string currentAnimationName;
@@ -46,25 +42,7 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //timer += Time.deltaTime;
-        //if (timer >= 5f)
-        //{
-        //    Debug.LogError("timer xDDDDD");
-        //    for (int i = 0; i < platformBricks.Count; i++)
-        //    {
-        //        Debug.LogError("loop spawn brick!!!   " + platformBricks[i]);
-        //        if (platformBricks[i] != null) continue;
-        //        else
-        //        {
-        //            Debug.LogError("spawn brick xDDDDDDDDD!!!!");
-        //            Brick brick = BrickPool.Spawn<Brick>(GetCurrentColor(), platformBricks[i].transform.position, platformBricks[i].transform.rotation);
-        //            //AddBrickPosition(brick.transform);
-        //            platformBricks[i] = brick;
-        //        }
-        //        //platformBricks[i].gameObject.SetActive(true);
-        //    }
-        //    timer = 0f;
-        //}
+        
     }
 
     private void Start()
@@ -83,11 +61,6 @@ public class Character : MonoBehaviour
     {
         
     }
-
-    //public void AddPlatformBrick(Brick platformBrick)
-    //{
-    //    platformBricks.Add(platformBrick);
-    //}
 
     public float GetMoveSpeed() => moveSpeed;
 
@@ -212,6 +185,31 @@ public class Character : MonoBehaviour
     public bool IsCharacterReachTarget()
     {
         return (Vector3.Distance(transform.position, currentTargetPosition) < 1f);
+    }
+
+    public void RemovePlatformBrick(Brick brick)
+    {
+        //platformBricks.Remove()
+        //brickPositions.Remove()
+    }
+
+    public void ResetPlatformBrick()
+    {
+        //if (brickPositions.Count > 0)
+        //{
+        //    //for (int i = 0; i < brickPositions.Count; i++)
+        //    //{
+        //    //    brickPositions.Remove(brickPositions[i]);
+        //    //}
+        //}
+
+        ////if (platformBricks.Count > 0)
+        ////{
+
+        ////}
+        brickPositions.Clear();
+
+        platformBricks.Clear();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -26,10 +26,11 @@ public class Door : MonoBehaviour
             if (isNextStageDoor)
             {
                 Character character = other.GetComponent<Character>();
-                LevelManager.GetInstance.GetCurrentLevel().ProcessToNextStage();
-                LevelManager.GetInstance.GetCurrentLevel().LoadCurrentStage(character);
-                character.SetCurrentStageIndex(LevelManager.GetInstance.GetCurrentLevel().GetCurrentStageIndex());
+                //character.ResetPlatformBrick();
+                LevelManager.GetInstance.GetCurrentLevel().ProcessToNextStage(character);
+                character.SetCurrentStageIndex(LevelManager.GetInstance.GetCurrentLevel().GetCurrentStageIndex(character));
                 LevelManager.GetInstance.GetCurrentLevel().PreLoadPool(character);
+                LevelManager.GetInstance.GetCurrentLevel().LoadCurrentStage(character);
             }
         }
     }

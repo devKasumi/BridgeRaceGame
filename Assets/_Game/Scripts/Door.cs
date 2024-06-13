@@ -27,9 +27,9 @@ public class Door : MonoBehaviour
             {
                 Character character = other.GetComponent<Character>();
                 LevelManager.GetInstance.GetCurrentLevel().ProcessToNextStage();
-                LevelManager.GetInstance.GetCurrentLevel().LoadCurrentStage();
+                LevelManager.GetInstance.GetCurrentLevel().LoadCurrentStage(character);
                 character.SetCurrentStageIndex(LevelManager.GetInstance.GetCurrentLevel().GetCurrentStageIndex());
-                LevelManager.GetInstance.GetCurrentLevel().PreLoadPool();
+                LevelManager.GetInstance.GetCurrentLevel().PreLoadPool(character);
             }
         }
     }

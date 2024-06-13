@@ -130,7 +130,6 @@ public class Bot : Character
 
     public bool IsReachTarget()
     {
-        
         return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.3f;
     }
 

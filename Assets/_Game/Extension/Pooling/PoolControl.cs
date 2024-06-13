@@ -9,20 +9,33 @@ public class PoolControl : MonoBehaviour
 
     private void Awake()
     {
-        PreLoadPool(0);
-    }
-
-    public void PreLoadPool(int currentStageIndex)
-    {
+        //PreLoadPool(0);
+        characters.Add(LevelManager.GetInstance.GetPlayer());
         for (int i = 0; i < characters.Count; i++)
         {
-            if (characters[i].GetCurrentStageIndex() == currentStageIndex)
-            {
-                characters[i].GetData();
-                BrickPool.PreLoad(characters[i].GetCorrespondBrick(), 
-                                  platforms[currentStageIndex].GetBrickAmount(), 
-                                  new GameObject(characters[i].GetCurrentColor().ToString() + "_" + (characters[i].GetCurrentStageIndex()+1)).transform);
-            } 
+            //Debug.LogError("p[re")
+            PreLoadPool(0, characters[i]);
+        }
+    }
+
+    public void PreLoadPool(int currentStageIndex, Character character)
+    {
+        //for (int i = 0; i < characters.Count; i++)
+        //{
+        //    if (characters[i].GetCurrentStageIndex() == currentStageIndex)
+        //    {
+        //        characters[i].GetData();
+        //        BrickPool.PreLoad(characters[i].GetCorrespondBrick(),
+        //                          platforms[currentStageIndex].GetBrickAmount(),
+        //                          new GameObject(characters[i].GetCurrentColor().ToString() + "_" + (characters[i].GetCurrentStageIndex() + 1)).transform);
+        //    }
+        //}
+        if (character.GetCurrentStageIndex() == currentStageIndex)
+        {
+            character.GetData();
+            BrickPool.PreLoad(character.GetCorrespondBrick(),
+                              platforms[currentStageIndex].GetBrickAmount(),
+                              new GameObject(character.GetCurrentColor().ToString() + "_" + (character.GetCurrentStageIndex() + 1)).transform);
         }
     }
 

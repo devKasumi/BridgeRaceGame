@@ -5,8 +5,11 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     //[SerializeField] private Player player;
+    [SerializeField] private List<Character> characters = new List<Character>();
     [SerializeField] private Stage[] stages;
     [SerializeField] private PoolControl PoolControl;
+
+    public Vector3 originPos;
 
     private int currentStageIndex = 0;
 
@@ -14,7 +17,13 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadCurrentStage();
+        originPos = transform.position;
+        characters.Add(LevelManager.GetInstance.GetPlayer());
+        for (int i = 0; i < characters.Count; i++)
+        {
+            //PreLoadPool(characters[i]);
+            LoadCurrentStage(characters[i]);
+        }
     }
 
     // Update is called once per frame
@@ -30,13 +39,13 @@ public class Level : MonoBehaviour
         currentStageIndex++;
     }
 
-    public void LoadCurrentStage()
+    public void LoadCurrentStage(Character character)
     {
-        stages[currentStageIndex].GetCurrentStagePlatform().SpawnBrick(currentStageIndex);
+        stages[currentStageIndex].GetCurrentStagePlatform().SpawnBrick(currentStageIndex, character);
     }
 
-    public void PreLoadPool()
+    public void PreLoadPool(Character character)
     {
-        PoolControl.PreLoadPool(currentStageIndex);
+        PoolControl.PreLoadPool(currentStageIndex, character);
     }
 }

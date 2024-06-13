@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    [SerializeField] private Player player;
     [SerializeField] private List<Level> levelPrefabs = new List<Level>();
-
     private Level currentLevel;
     private int currentLevelIndex;  
 
@@ -32,9 +32,11 @@ public class LevelManager : Singleton<LevelManager>
 
     }
 
+    public Character GetPlayer() => player;
+
     public void InitLevel(int levelIndex)
     {
-        currentLevel = Instantiate(levelPrefabs[currentLevelIndex], Vector3.zero, Quaternion.identity);
+        currentLevel = Instantiate(levelPrefabs[currentLevelIndex], levelPrefabs[currentLevelIndex].originPos, Quaternion.identity);
     }
 
     public Level GetCurrentLevel() => currentLevel;

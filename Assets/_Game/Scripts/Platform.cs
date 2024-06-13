@@ -82,7 +82,7 @@ public class Platform : MonoBehaviour
         //InitPosForPlatform();
         int totalPosCount = brickAmount;
         //Debug.Log(totalPosCount);
-        character.ResetPlatformBrick();
+        //character.ResetPlatformBrick();
         if (character.GetCurrentStageIndex() == currentStageIndex)
         {
             while (totalPosCount > 0)

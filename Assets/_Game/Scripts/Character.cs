@@ -207,6 +207,8 @@ public class Character : MonoBehaviour
         ////{
 
         ////}
+        //
+
         brickPositions.Clear();
 
         platformBricks.Clear();

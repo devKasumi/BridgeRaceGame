@@ -26,8 +26,20 @@ public class Player : Character
         OnInit();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        //if (AdvanceNextStage())
+        //{
+        //    List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
+        //    for (int i = 0; i < nextStageLines.Count; i++)
+        //    {
+        //        nextStageLines[i].gameObject.SetActive(false);
+        //    }
+        //    LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).EnableGate();
+        //    ProcessToNextStage();
+        //    LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, GetCurrentStageIndex());
+        //}
+
         Move();
 
         rb.useGravity = !OnSlope();
@@ -83,6 +95,20 @@ public class Player : Character
     public void ResetPlayerRotation()
     {
         transform.rotation = Quaternion.identity;
+    }
+
+    public bool AdvanceNextStage()
+    {
+        //Debug.LogError(Vector3.Distance(transform.position, LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine().position));
+        List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
+        for (int i = 0; i < nextStageLines.Count; i++)
+        {
+            if (Vector3.Distance(transform.position, nextStageLines[i].position) < 1f)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

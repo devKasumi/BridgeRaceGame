@@ -131,4 +131,18 @@ public class Bot : Character
         return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.3f;
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(Constants.TAG_DOOR))
+        {
+            if (other.GetComponent<Door>().IsNextStageDoor())
+            {
+                Debug.LogError("process next stage!!!");
+                ProcessToNextStage();
+                LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, GetCurrentStageIndex());
+                SetTargetBrickPosition();
+            }
+        }
+    }
+
 }

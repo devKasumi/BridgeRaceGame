@@ -65,6 +65,11 @@ public class Bridge : MonoBehaviour
         return totalStairsActive == totalStairNumbers;
     }
 
+    public void ResetStairActive()
+    {
+        totalStairsActive = 0;
+    }
+
     public void ResetBarrier()
     {
         for (int i = 0; i < barriers.Count; i++)

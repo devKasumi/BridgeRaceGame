@@ -241,8 +241,7 @@ MonoBehaviour:
   firstBrickY: -0.5
   firstBrickZ: -0.6
   characterBrickPrefab: {fileID: -1791482452184180714, guid: f329c0129d601ac4f9a9048431026a6f, type: 3}
-  correspondBrickPrefab: {fileID: 0}
-  joystickManager: {fileID: 1291337995000746365, guid: 60765548e30a2004cb8c601b275a1df7, type: 3}
+  joystickManager: {fileID: 0}
   rb: {fileID: 8682268638805327699}
   playerHeight: 2
   maxSlopeAngle: 60

@@ -718,10 +718,6 @@ PrefabInstance:
       propertyPath: joystickManager
       value: 
       objectReference: {fileID: 2002182531}
-    - target: {fileID: 7529851621341978381, guid: 65bdec5416328584fac8ea7f79009ec1, type: 3}
-      propertyPath: correspondBrickPrefab
-      value: 
-      objectReference: {fileID: 6304859322704445671, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
     - target: {fileID: 8553094351915116136, guid: 65bdec5416328584fac8ea7f79009ec1, type: 3}
       propertyPath: m_Name
       value: PlayerParent

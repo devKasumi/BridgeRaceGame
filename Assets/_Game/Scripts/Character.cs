@@ -31,15 +31,11 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        //currentTargetPosition = brickPositions[0];
-        //SetTargetBrickPosition();
-        
+
     }
 
     public virtual void OnInit()
     {
-        //currentDirection = CommonEnum.Direction.None;
-        //correspondBrickPrefab = 
         GetData();
     }
 
@@ -54,13 +50,9 @@ public class Character : MonoBehaviour
     {
         currentColorType = data.color;
         currentMeshRenderer.material = data.GetMaterial(currentColorType);
-        //correspondBrickPrefab.ChangeColor(data.color);
-        //correspondBrickPrefab.ChangeMaterial(data.GetMaterial(data.color));
     }
 
     public CommonEnum.ColorType GetCurrentColor() => currentColorType;
-
-    //public Brick GetCorrespondBrick() => correspondBrickPrefab;
 
     public Material GetCurrentMeshMaterial() => currentMeshRenderer.material;
 
@@ -159,20 +151,6 @@ public class Character : MonoBehaviour
                 AddBrick(characterBrick);
                 BrickPool.Despawn(brick);
                 StartCoroutine(ReSpawnBrick(this.GetCurrentColor(), brick.transform.position, brick.transform.rotation));
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(Constants.TAG_DOOR))
-        {
-            if (other.GetComponent<Door>().IsNextStageDoor())
-            {
-                Debug.LogError("process next stage!!!");
-                ProcessToNextStage();
-                LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, currentStageIndex);
-                SetTargetBrickPosition();
             }
         }
     }

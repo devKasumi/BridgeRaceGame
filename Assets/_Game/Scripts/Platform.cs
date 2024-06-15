@@ -12,7 +12,9 @@ public class Platform : MonoBehaviour
     [SerializeField] private float yPos = -0.8f;
     [SerializeField] private int brickAmount;
     [SerializeField] private Transform[] resetPoints;
-
+    [SerializeField] private List<Transform> nextStageLines = new List<Transform>();
+    [SerializeField] private Transform gate;
+  
     private List<Vector3> listPos = new List<Vector3>();    
     private Dictionary<Character, List<Vector3>> platformBrickPos = new Dictionary<Character, List<Vector3>>();
 
@@ -27,16 +29,13 @@ public class Platform : MonoBehaviour
         if (!platformBrickPos.ContainsKey(character))
         {
             platformBrickPos.Add(character, new List<Vector3>());
-            if (character.GetCurrentStageIndex() == currentStageIndex)
+            while (totalPosCount > 0)
             {
-                while (totalPosCount > 0)
-                {
-                    int index = Random.Range(0, listPos.Count);
-                    Brick brick = BrickPool.Spawn<Brick>(character.GetCurrentColor(), listPos[index], Quaternion.identity);
-                    platformBrickPos[character].Add(listPos[index]);
-                    listPos.RemoveAt(index);
-                    totalPosCount--;
-                }
+                int index = Random.Range(0, listPos.Count);
+                Brick brick = BrickPool.Spawn<Brick>(character.GetCurrentColor(), listPos[index], Quaternion.identity);
+                platformBrickPos[character].Add(listPos[index]);
+                listPos.RemoveAt(index);
+                totalPosCount--;
             }
         }
     }
@@ -58,4 +57,11 @@ public class Platform : MonoBehaviour
 
     public int GetBrickAmount() => brickAmount;
 
+    public List<Transform> GetNextStageLine() => nextStageLines;
+
+
+    public void EnableGate()
+    {
+        gate.gameObject.SetActive(true);
+    }
 }

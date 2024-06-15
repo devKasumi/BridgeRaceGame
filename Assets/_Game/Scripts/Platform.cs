@@ -11,6 +11,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private int maxZ;
     [SerializeField] private float yPos = -0.8f;
     [SerializeField] private int brickAmount;
+    [SerializeField] private Transform[] resetPoints;
 
     private List<Vector3> listPos = new List<Vector3>();    
     private Dictionary<Character, List<Vector3>> platformBrickPos = new Dictionary<Character, List<Vector3>>();
@@ -40,8 +41,6 @@ public class Platform : MonoBehaviour
         }
     }
 
-    //public Dictionary<Character, List<Vector3>> GetPlatformBrickPos() => platformBrickPos;
-
     public void InitPosForPlatform()
     {
         for (int i = minX; i <= maxX; i++)
@@ -54,6 +53,8 @@ public class Platform : MonoBehaviour
     }
 
     public Dictionary<Character, List<Vector3>> GetPlatformBrickPos() => platformBrickPos;
+
+    public Transform[] GetResetPointPos() => resetPoints;
 
     public int GetBrickAmount() => brickAmount;
 

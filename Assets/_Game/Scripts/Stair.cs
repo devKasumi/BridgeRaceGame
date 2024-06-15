@@ -13,18 +13,11 @@ public class Stair : MonoBehaviour
     [SerializeField] private BoxCollider boxCollider;
     private Vector3 originalScale;
     private Vector3 originalPosition;
-    //private Vector3 originalBoxSize;
-    //private float framerate = 5f;
-    //private float time = 0;
-    //private Character character;
-    //private Vector3 pos;
-    //private Quaternion rot;
 
     private void Start()
     {
         originalScale = transform.localScale;
         originalPosition = transform.position;
-        //originalBoxSize = boxCollider.size;
     }
 
     public void ChangeColor(CommonEnum.ColorType colorType)

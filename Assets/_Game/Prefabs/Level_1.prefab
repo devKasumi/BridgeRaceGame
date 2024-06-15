@@ -467,6 +467,9 @@ MonoBehaviour:
   maxZ: 34
   yPos: 5.4
   brickAmount: 20
+  resetPoints:
+  - {fileID: 6211752707530558793}
+  - {fileID: 4129451176674697800}
 --- !u!1 &651099521512564147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,6 +1573,10 @@ MonoBehaviour:
   maxZ: 12
   yPos: -0.8
   brickAmount: 40
+  resetPoints:
+  - {fileID: 6777250473891582105}
+  - {fileID: 5898524459289475819}
+  - {fileID: 7525101659993904125}
 --- !u!1 &3178404275248599315
 GameObject:
   m_ObjectHideFlags: 0

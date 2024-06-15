@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Character : MonoBehaviour
 {
@@ -126,7 +127,13 @@ public class Character : MonoBehaviour
     {
         List<Vector3> bricksPos = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(currentStageIndex).GetPlatformBrickPos()[this];
         currentTargetPosition = bricksPos[Random.Range(0, bricksPos.Count)];
-        Debug.LogError("current stage:  " + currentStageIndex + "   pos:  " + currentTargetPosition);
+        //Debug.LogError("current stage:  " + currentStageIndex + "   pos:  " + currentTargetPosition);
+    }
+
+    public Vector3 GetRandomResetPointPos()
+    {
+        Transform[] resetPoints = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(currentStageIndex).GetResetPointPos();
+        return resetPoints[Random.Range(0, resetPoints.Length)].position;
     }
 
     public Vector3 GetTargetBrickPosition()

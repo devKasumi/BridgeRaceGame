@@ -9,13 +9,7 @@ public class PatrolState : IState
 
     public void OnEnter(Bot bot)
     {
-        //timer = 0f;
-        //randomTime = Random.Range(4f, 7f);
-        //if (bot.GetTargetBrickPosition() != null)
-        //{
-        //    bot.MoveToBrick(bot.GetTargetBrickPosition());
-
-        //}
+        
     }
 
     public void OnExecute(Bot bot)

@@ -123,7 +123,7 @@ public class Bot : Character
 
     public void SetRandomResetPoint()
     {
-        navMeshAgent.destination = resetPoints[Random.Range(0, resetPoints.Count)].transform.position;
+        navMeshAgent.destination = GetRandomResetPointPos();
     }
 
     public bool IsReachTarget()

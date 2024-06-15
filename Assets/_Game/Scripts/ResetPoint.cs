@@ -9,10 +9,7 @@ public class ResetPoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constants.TAG_PLAYER))
-        {
-            //bridge.ResetBarrier();  
-            //Debug.LogError("reset stair!!!" + bridge.stairs.Count);
-            //bridge.ResetStair();    
+        {   
             bridge.ResetBarrier();
         }
     }

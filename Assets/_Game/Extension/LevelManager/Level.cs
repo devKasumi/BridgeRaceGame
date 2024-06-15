@@ -38,10 +38,9 @@ public class Level : MonoBehaviour
 
     public void LoadStage(Character character, int characterStageIndex)
     {
-        Debug.LogError("load stage index:    " + characterStageIndex);
+        //Debug.LogError("load stage index:    " + characterStageIndex);
         Platform currentPlatform = stages[characterStageIndex].GetCurrentStagePlatform();
         int brickAmount = currentPlatform.GetBrickAmount();
-        //Debug.LogError(currentPlatform.name + "  " + brickAmount);
         PoolControl.PreLoadPool(character, brickAmount);
         currentPlatform.SpawnBrick(characterStageIndex, character);
     }

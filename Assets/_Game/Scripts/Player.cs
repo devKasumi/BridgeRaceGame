@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] private JoystickManager joystickManager;
-    //[SerializeField] private FixedJoystick joystick;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float playerHeight;
     [SerializeField] private float maxSlopeAngle;

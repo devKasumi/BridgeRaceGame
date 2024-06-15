@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class CanvasFail : MonoBehaviour
+public class CanvasFail : UICanvas
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI scoreText;
+
+    public void SetBextScore(int score)
     {
-        
+        scoreText.text = score.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MainMenuButton()
     {
-        
+        Close(0);
+        UIManager.GetInstance.OpenUI<CanvasMainMenu>(); 
     }
 }

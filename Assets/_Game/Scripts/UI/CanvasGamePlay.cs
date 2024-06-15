@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class CanvasGamePlay : MonoBehaviour
+public class CanvasGamePlay : UICanvas
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI coinText;
+
+    public override void Setup()
     {
-        
+        base.Setup();
+        UpdateCoin(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateCoin(int coin)
     {
-        
+        coinText.text = coin.ToString();
+    }
+
+    public void SettingsButton()
+    {
+        UIManager.GetInstance.OpenUI<CanvasSettings>().SetState(this);
     }
 }

@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanvasMainMenu : MonoBehaviour
+public class CanvasMainMenu : UICanvas
 {
-    // Start is called before the first frame update
-    void Start()
+    public void PlayButton()
     {
-        
+        Close(0);
+        UIManager.GetInstance.OpenUI<CanvasGamePlay>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SettingsButton()
     {
-        
+        UIManager.GetInstance.OpenUI<CanvasSettings>().SetState(this);
     }
 }

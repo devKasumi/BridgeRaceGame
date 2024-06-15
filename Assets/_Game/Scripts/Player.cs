@@ -28,17 +28,7 @@ public class Player : Character
 
     private void Update()
     {
-        //if (AdvanceNextStage())
-        //{
-        //    List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
-        //    for (int i = 0; i < nextStageLines.Count; i++)
-        //    {
-        //        nextStageLines[i].gameObject.SetActive(false);
-        //    }
-        //    LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).EnableGate();
-        //    ProcessToNextStage();
-        //    LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, GetCurrentStageIndex());
-        //}
+        AdvanceToNextStage();
 
         Move();
 
@@ -97,9 +87,23 @@ public class Player : Character
         transform.rotation = Quaternion.identity;
     }
 
-    public bool AdvanceNextStage()
+    public void AdvanceToNextStage()
     {
-        //Debug.LogError(Vector3.Distance(transform.position, LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine().position));
+        if (IsAdvanceNextStage())
+        {
+            List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
+            for (int i = 0; i < nextStageLines.Count; i++)
+            {
+                nextStageLines[i].gameObject.SetActive(false);
+            }
+            LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).EnableGate();
+            ProcessToNextStage();
+            LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, GetCurrentStageIndex());
+        }
+    }
+
+    public bool IsAdvanceNextStage()
+    {
         List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
         for (int i = 0; i < nextStageLines.Count; i++)
         {

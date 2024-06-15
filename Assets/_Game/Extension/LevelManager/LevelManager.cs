@@ -25,7 +25,6 @@ public class LevelManager : Singleton<LevelManager>
     {
         currentLevelIndex = 0;
         InitLevel(currentLevelIndex);
-        //currentLevel.GetPoolControl().PreLoadPool(currentLevelIndex)
     }
 
     public void OnDespawn()

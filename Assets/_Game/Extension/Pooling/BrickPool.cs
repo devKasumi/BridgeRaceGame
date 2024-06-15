@@ -5,10 +5,6 @@ using UnityEngine;
 public static class BrickPool
 {
     private static Dictionary<CommonEnum.ColorType, Pool> poolInstance = new Dictionary<CommonEnum.ColorType, Pool>();
-    //private static int amount = 40;
-    //private static int amountCount = 0;
-
-    //public static int GetAmount() => amount;
 
     // khoi tao pool moi
     public static void PreLoad(Brick prefab, int amount, Transform parent)
@@ -35,11 +31,6 @@ public static class BrickPool
             Debug.LogError(colorType + " IS NOT PRELOAD!");
             return null;
         }
-
-        //if (colorType == CommonEnum.ColorType.Green)
-        //{
-        //    Debug.LogError("spwan brick" + colorType);
-        //}
 
         return poolInstance[colorType].Spawn(pos, rot) as T;
     }
@@ -141,7 +132,6 @@ public class Pool
     {
         if (brick != null && brick.gameObject.activeSelf)
         {
-            //Debug.LogError("despawn !!!!");
             actives.Remove(brick);
             inactives.Enqueue(brick);
             brick.gameObject.SetActive(false);

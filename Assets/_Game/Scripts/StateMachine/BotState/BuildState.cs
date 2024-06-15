@@ -8,15 +8,11 @@ public class BuildState : IState
 
     public void OnEnter(Bot bot)
     {
-        //maxCollectedBrick
         bot.SetRandomResetPoint();
     }
 
     public void OnExecute(Bot bot)
     {
-        //Debug.Log(Vector3.Distance(bot.transform.position, ))
-        //bot.SetFinalTarget();
-        //Debug.Log(Vector3.Distance(bot.transform.position, bot.navMeshAgent.destination));
         if (bot.IsReachTarget())
         {
             Debug.Log("reach target!!!!!");

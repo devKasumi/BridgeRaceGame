@@ -22,44 +22,18 @@ public class Bot : Character
     // Start is called before the first frame update
     void Start()
     {
-        //if (GetTargetBrickPosition() == Vector3.zero)
-        //{
-            
-        //}
-        //SetTargetBrickPosition();
         OnInit();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(currentState.ToString()); 
         if (currentState != null)
         {
             currentState.OnExecute(this);
         }
 
-        if (GetTargetBrickPosition() == Vector3.zero)
-        {
-            SetTargetBrickPosition();
-        }
-        else
-        {
-            //Debug.Log("target not zero: " + Vector3.Distance(transform.position, GetTargetBrickPosition()));
-            if (IsCharacterReachTarget())
-            {
-                //Debug.Log("set new target");
-                SetTargetBrickPosition();
-            }
-        }
-
-        //if (IsCharacterReachTarget())
-        //{
-        //    //Debug.Log("set new target");
-        //    SetTargetBrickPosition();
-        //}
-
-        //Debug.Log(Vector3.Distance(transform.position, navMeshAgent.destination));
+        Moving();
     }
 
     public override void OnInit()
@@ -88,6 +62,21 @@ public class Bot : Character
         if (currentState != null)
         {
             currentState.OnEnter(this);
+        }
+    }
+
+    public void Moving()
+    {
+        if (GetTargetBrickPosition() == Vector3.zero)
+        {
+            SetTargetBrickPosition();
+        }
+        else
+        {
+            if (IsCharacterReachTarget())
+            {
+                SetTargetBrickPosition();
+            }
         }
     }
 

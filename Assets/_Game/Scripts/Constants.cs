@@ -16,10 +16,6 @@ public class Constants : MonoBehaviour
     public const string TAG_DOOR = "Door";
     public const string TAG_FINISH_BOX = "FinishBox";
 
-
-    //public const int LEVEL1_STAGE1_STAIRS = 30;
-    //public const int LEVEL2_STAGE2_STAIRS = 15;
-
     public const float STAIR_DISTANCE_Y = 0.2f;
     public const float STAIR_DISTANCE_Z = 0.3f;
 }

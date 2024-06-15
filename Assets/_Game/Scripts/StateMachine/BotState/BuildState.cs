@@ -9,7 +9,7 @@ public class BuildState : IState
     public void OnEnter(Bot bot)
     {
         //maxCollectedBrick
-        bot.SetRandomTarget();
+        bot.SetRandomResetPoint();
     }
 
     public void OnExecute(Bot bot)

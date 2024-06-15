@@ -27,11 +27,6 @@ public class Stair : MonoBehaviour
         //originalBoxSize = boxCollider.size;
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     public void ChangeColor(CommonEnum.ColorType colorType)
     {
         this.currentColorType = colorType;
@@ -64,7 +59,6 @@ public class Stair : MonoBehaviour
 
         transform.localScale = originalScale;
         transform.position = originalPosition;
-        //boxCollider.isTrigger = true;
         GetComponent<BoxCollider>().isTrigger = true;
         Debug.LogError("origin localScale:  " + originalScale + "  istrigger:  " + boxCollider.isTrigger);
     }
@@ -122,25 +116,11 @@ public class Stair : MonoBehaviour
 
     private void NormalStairChecking(Character character, Bridge bridge)
     {
-        Brick brick = character.GetLastBrick();
+        CharacterBrick brick = character.GetLastBrick();
         ChangeColor(character.GetCurrentColor());
         ChangeMaterial(character.GetCurrentMeshMaterial());
-        if (character.platformBricks[brick] != null)
-        {
-            Vector3 pos = character.platformBricks[brick];
-            Quaternion rot = Quaternion.identity;
-            StartCoroutine(ReSpawnBrick(character, character.GetCurrentColor(), pos, rot));
-        }
         character.RemoveBrick(brick);
         bridge.IncreaseStairActive();
     }
 
-    public IEnumerator ReSpawnBrick(Character character, CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
-    {
-        yield return new WaitForSeconds(Random.Range(5f, 10f));
-        Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
-        character.AddBrickPosition(brick.transform);
-        character.AddPlatformBrick(brick, pos);
-        //yield return new WaitForSeconds(Random.Range(5f, 7f));
-    }
 }

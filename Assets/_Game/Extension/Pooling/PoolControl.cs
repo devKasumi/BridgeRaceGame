@@ -4,44 +4,25 @@ using UnityEngine;
 
 public class PoolControl : MonoBehaviour
 {
-    [SerializeField] private List<Character> characters = new List<Character>();
-    [SerializeField] private List<Platform> platforms = new List<Platform>();
+    //[SerializeField] private List<Character> characters = new List<Character>();
+    //[SerializeField] private List<Platform> platforms = new List<Platform>();
+    [SerializeField] private Brick brick;
+    [SerializeField] Transform PoolParent;
 
     private void Awake()
     {
-        //PreLoadPool(0);
-        characters.Add(LevelManager.GetInstance.GetPlayer());
-        
-        if (LevelManager.GetInstance.GetCurrentLevelIndex() == 0)
-        {
-            for (int i = 0; i < characters.Count; i++)
-            {
-                //Debug.LogError("p[re")
-                PreLoadPool(0, characters[i]);
-            }
-        }
+
     }
 
-    public void PreLoadPool(int currentStageIndex, Character character)
+    public void PreLoadPool(Character character, int platformBrickAmount)
     {
-        //for (int i = 0; i < characters.Count; i++)
-        //{
-        //    if (characters[i].GetCurrentStageIndex() == currentStageIndex)
-        //    {
-        //        characters[i].GetData();
-        //        BrickPool.PreLoad(characters[i].GetCorrespondBrick(),
-        //                          platforms[currentStageIndex].GetBrickAmount(),
-        //                          new GameObject(characters[i].GetCurrentColor().ToString() + "_" + (characters[i].GetCurrentStageIndex() + 1)).transform);
-        //    }
-        //}
-        if (character.GetCurrentStageIndex() == currentStageIndex)
-        {
-            Debug.LogError("current stage index:  " + currentStageIndex);
-            character.GetData();
-            BrickPool.PreLoad(character.GetCorrespondBrick(),
-                              platforms[currentStageIndex].GetBrickAmount(),
-                              new GameObject(character.GetCurrentColor().ToString() + "_" + (character.GetCurrentStageIndex() + 1)).transform);
-        }
+        brick.ChangeColor(character.GetCurrentColor());
+        brick.ChangeMaterial(character.GetCurrentMeshMaterial());
+        GameObject pool = new GameObject(character.GetCurrentColor().ToString() + "_" + (character.GetCurrentStageIndex() + 1));
+        BrickPool.PreLoad(brick,
+                          platformBrickAmount,
+                          pool.transform);
+        pool.transform.SetParent(PoolParent);
     }
 
 }
@@ -54,14 +35,5 @@ public class PoolAmount
     public float amount;
 }
 
-//public enum PoolColorType
-//{
-//    None = 0,
-//    Red = 1,
-//    Blue = 2,
-//    Green = 3,
-//    Yellow = 4,
-//    Orange = 5,
-//    Purple = 6,
-//}
+
 

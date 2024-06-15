@@ -1,38 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
-    //[SerializeField] private List<Material> materials = new List<Material>();
     [SerializeField] private DataSO data;
     [SerializeField] private Animator animator;
     [SerializeField] private MeshRenderer currentMeshRenderer;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Transform characterImage;
     [SerializeField] private float firstBrickY = -0.5f;
     [SerializeField] private float firstBrickZ = -0.6f;
-    [SerializeField] private Brick correspondBrickPrefab;
-    private List<Brick> bricks = new List<Brick>();
-    private List<Transform> brickPositions = new List<Transform>();
-    public Dictionary<Brick, Vector3> platformBricks = new Dictionary<Brick, Vector3>();
+    [SerializeField] private CharacterBrick characterBrickPrefab;
+
+    private List<CharacterBrick> bricks = new List<CharacterBrick>();
 
     private Vector3 currentTargetPosition = Vector3.zero;
     
 
     private string currentAnimationName;
     private CommonEnum.ColorType currentColorType;
-    //private CommonEnum.Direction currentDirection;
-    //private MeshRenderer currentMeshRenderer;
 
     private int currentStageIndex = 0;
-
-    //public bool isMoving;
-
-    //public bool canMove = true;
-
-    //private float timer = 0f;
 
 
     private void Awake()
@@ -40,20 +28,17 @@ public class Character : MonoBehaviour
         OnInit();
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     private void Start()
     {
         //currentTargetPosition = brickPositions[0];
         //SetTargetBrickPosition();
+        
     }
 
     public virtual void OnInit()
     {
         //currentDirection = CommonEnum.Direction.None;
+        //correspondBrickPrefab = 
         GetData();
     }
 
@@ -68,21 +53,21 @@ public class Character : MonoBehaviour
     {
         currentColorType = data.color;
         currentMeshRenderer.material = data.GetMaterial(currentColorType);
-        correspondBrickPrefab.ChangeColor(data.color);
-        correspondBrickPrefab.ChangeMaterial(data.GetMaterial(data.color));
+        //correspondBrickPrefab.ChangeColor(data.color);
+        //correspondBrickPrefab.ChangeMaterial(data.GetMaterial(data.color));
     }
 
     public CommonEnum.ColorType GetCurrentColor() => currentColorType;
 
-    public Brick GetCorrespondBrick() => correspondBrickPrefab;
+    //public Brick GetCorrespondBrick() => correspondBrickPrefab;
 
     public Material GetCurrentMeshMaterial() => currentMeshRenderer.material;
 
     public int GetCurrentStageIndex() => currentStageIndex; 
 
-    public void SetCurrentStageIndex(int index)
+    public void ProcessToNextStage()
     {
-        currentStageIndex = index;
+        currentStageIndex++;
     }
 
     public void ChangeAnimation(string animationName)
@@ -95,21 +80,19 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void AddBrick(Brick brick)
+    public void AddBrick(CharacterBrick brick)
     {
-        brick.gameObject.SetActive(true);
+        //brick.gameObject.SetActive(true);
         bricks.Add(brick);
         StackBrick();
     }
 
-    public void RemoveBrick(Brick brick)
+    public void RemoveBrick(CharacterBrick brick)
     {
         if (bricks.Count > 0)
         {
             bricks.Remove(brick);
-            //brick.gameObject.SetActive(false);
-            brick.transform.parent = null;
-            BrickPool.Despawn(brick);
+            Destroy(brick.gameObject);
         }
     }
 
@@ -118,30 +101,10 @@ public class Character : MonoBehaviour
 
     }
 
-    public void AddPlatformBrick(Brick brick, Vector3 pos)
-    {
-        platformBricks[brick] = pos;
-    }
-
-    //public int GetPlatformBrickIndex(Brick brick)
-    //{
-    //    return platformBricks.IndexOf(brick);
-    //}
-
-    //public Vector3 GetPlatformBrickPosition(int index)
-    //{
-    //    return brickPositions[index].position;
-    //}
-
-    public Brick GetLastBrick() => bricks.Count > 0 ? bricks[bricks.Count - 1] : null;
+    public CharacterBrick GetLastBrick() => bricks.Count > 0 ? bricks[bricks.Count - 1] : null;
 
     public int GetCurrentTotalBricks() => bricks.Count;
 
-
-    public int GetCurrentTotalPlatformBrick()
-    {
-        return brickPositions.Count;
-    }
 
     public void StackBrick()
     {
@@ -159,22 +122,11 @@ public class Character : MonoBehaviour
         //Debug.Log("is set active: " + bricks[bricks.Count - 1].gameObject.activeSelf);
     }
 
-    public void AddBrickPosition(Transform pos)
-    {
-        brickPositions.Add(pos);
-    }
-
     public void SetTargetBrickPosition()
     {
-        if (brickPositions.Count > 0)
-        {
-            int index = Random.Range(0, brickPositions.Count);
-            //if (brickPositions[index] != null)
-            //{
-            //    currentTargetPosition = brickPositions[index].position;
-            //}
-            currentTargetPosition = brickPositions[index].position;
-        }
+        List<Vector3> bricksPos = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(currentStageIndex).GetPlatformBrickPos()[this];
+        currentTargetPosition = bricksPos[Random.Range(0, bricksPos.Count)];
+        Debug.LogError("current stage:  " + currentStageIndex + "   pos:  " + currentTargetPosition);
     }
 
     public Vector3 GetTargetBrickPosition()
@@ -187,44 +139,40 @@ public class Character : MonoBehaviour
         return (Vector3.Distance(transform.position, currentTargetPosition) < 1f);
     }
 
-    public void RemovePlatformBrick(Brick brick)
-    {
-        //platformBricks.Remove()
-        //brickPositions.Remove()
-    }
-
-    public void ResetPlatformBrick()
-    {
-        //if (brickPositions.Count > 0)
-        //{
-        //    //for (int i = 0; i < brickPositions.Count; i++)
-        //    //{
-        //    //    brickPositions.Remove(brickPositions[i]);
-        //    //}
-        //}
-
-        ////if (platformBricks.Count > 0)
-        ////{
-
-        ////}
-        //
-
-        brickPositions.Clear();
-
-        platformBricks.Clear();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constants.TAG_BRICK))
         {
             Brick brick = other.GetComponent<Brick>();
-            if ((int)currentColorType == (int)brick.GetColorType())
+            if (currentColorType == brick.GetColorType())
             {
-                AddBrick(brick);
-                brickPositions.Remove(brick.transform);
-                //platformBricks.Remove(brick);
+                CharacterBrick characterBrick = Instantiate(characterBrickPrefab);
+                characterBrick.ChangeColor(currentColorType);
+                characterBrick.ChangeMaterial(GetCurrentMeshMaterial());
+                AddBrick(characterBrick);
+                BrickPool.Despawn(brick);
+                StartCoroutine(ReSpawnBrick(this.GetCurrentColor(), brick.transform.position, brick.transform.rotation));
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(Constants.TAG_DOOR))
+        {
+            if (other.GetComponent<Door>().IsNextStageDoor())
+            {
+                Debug.LogError("process next stage!!!");
+                ProcessToNextStage();
+                LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, currentStageIndex);
+                SetTargetBrickPosition();
+            }
+        }
+    }
+
+    public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
+    {
+        yield return new WaitForSeconds(Random.Range(5f, 10f));
+        Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
     }
 }

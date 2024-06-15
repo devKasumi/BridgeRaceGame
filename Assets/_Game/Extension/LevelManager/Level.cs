@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    //[SerializeField] private Player player;
     [SerializeField] private List<Character> characters = new List<Character>();
     [SerializeField] private Stage[] stages;
     [SerializeField] private PoolControl PoolControl;
-    private Dictionary<Character, int> currentStageCharacter = new Dictionary<Character, int>();
 
     public Vector3 originPos;
 
@@ -16,23 +14,17 @@ public class Level : MonoBehaviour
 
     private void Awake()
     {
-        characters.Add(LevelManager.GetInstance.GetPlayer());
-
-        for (int i = 0; i < characters.Count; i++)
-        {
-            Debug.LogError("pokemon xDDDDD");
-            currentStageCharacter[characters[i]] = 0;
-        }
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        characters.Add(LevelManager.GetInstance.GetPlayer());
         originPos = transform.position;
         for (int i = 0; i < characters.Count; i++)
         {
-            //PreLoadPool(characters[i]);
-            LoadCurrentStage(characters[i]);
+            LoadStage(characters[i], 0);
         }
     }
 
@@ -44,22 +36,19 @@ public class Level : MonoBehaviour
 
     public PoolControl GetPoolControl() => PoolControl;
 
-    public int GetCurrentStageIndex(Character character) => currentStageCharacter[character];
-
-    public void ProcessToNextStage(Character character)
+    public void LoadStage(Character character, int characterStageIndex)
     {
-        //currentStageIndex++;
-        currentStageCharacter[character]++;
+        Debug.LogError("load stage index:    " + characterStageIndex);
+        Platform currentPlatform = stages[characterStageIndex].GetCurrentStagePlatform();
+        int brickAmount = currentPlatform.GetBrickAmount();
+        //Debug.LogError(currentPlatform.name + "  " + brickAmount);
+        PoolControl.PreLoadPool(character, brickAmount);
+        currentPlatform.SpawnBrick(characterStageIndex, character);
     }
 
-    public void LoadCurrentStage(Character character)
+    public Platform GetCurrentStagePlatform(int characterStageIndex)
     {
-        stages[currentStageCharacter[character]].GetCurrentStagePlatform().SpawnBrick(currentStageCharacter[character], character);
+        return stages[characterStageIndex].GetCurrentStagePlatform();
     }
 
-    public void PreLoadPool(Character character)
-    {
-        Debug.LogError("current stage: " + currentStageCharacter[character] + "  player:  " + character);
-        PoolControl.PreLoadPool(currentStageCharacter[character], character);
-    }
 }

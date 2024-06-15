@@ -9,6 +9,7 @@ TagManager:
   - Stair
   - Bridge
   - FinishBox
+  - Door
   layers:
   - Default
   - TransparentFX

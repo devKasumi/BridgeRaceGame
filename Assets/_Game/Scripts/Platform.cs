@@ -10,96 +10,37 @@ public class Platform : MonoBehaviour
     [SerializeField] private int maxX;
     [SerializeField] private int maxZ;
     [SerializeField] private float yPos = -0.8f;
-    [SerializeField] private List<Character> characters = new List<Character>();
     [SerializeField] private int brickAmount;
 
     private List<Vector3> listPos = new List<Vector3>();    
+    private Dictionary<Character, List<Vector3>> platformBrickPos = new Dictionary<Character, List<Vector3>>();
 
     private void Awake()
     {
-        characters.Add(LevelManager.GetInstance.GetPlayer());
-
-        for (int i = minX; i <= maxX; i++)
-        {
-            for (int j = minZ; j <= maxZ; j++)
-            {
-                listPos.Add(new Vector3(i, yPos, j));
-            }
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //SpawnBrick();
-        
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
+        InitPosForPlatform();
     }
 
     public void SpawnBrick(int currentStageIndex, Character character)
     {
-        //if (currentStageIndex == 0)
-        //{
-
-        //    int totalPosCount = brickAmount;
-        //    //Debug.Log(totalPosCount);
-        //    if (character.GetCurrentStageIndex() == currentStageIndex)
-        //    {
-        //        while (totalPosCount > 0)
-        //        {
-        //            int index = Random.Range(0, listPos.Count);
-        //            Brick brick = BrickPool.Spawn<Brick>(character.GetCurrentColor(), listPos[index], Quaternion.identity);
-        //            character.AddBrickPosition(brick.transform);
-        //            character.AddPlatformBrick(brick, listPos[index]);
-        //            totalPosCount--;
-        //            listPos.RemoveAt(index);
-        //            Debug.LogError(totalPosCount);
-        //        }
-        //    }
-
-        //}
-        //else
-        //{
-        //    for (int i = minX; i <= maxX; i++)
-        //    {
-        //        for (int j = minZ; j <= maxZ; j++)
-        //        {
-        //            listPos.Add(new Vector3(i, yPos, j));
-        //        }
-        //    }
-        //}
-        //if (currentStageIndex != 0)
-        //{
-        //    InitPosForPlatform();
-
-        //}
-        //InitPosForPlatform();
         int totalPosCount = brickAmount;
-        //Debug.Log(totalPosCount);
-        //character.ResetPlatformBrick();
-        if (character.GetCurrentStageIndex() == currentStageIndex)
+        if (!platformBrickPos.ContainsKey(character))
         {
-            while (totalPosCount > 0)
+            platformBrickPos.Add(character, new List<Vector3>());
+            if (character.GetCurrentStageIndex() == currentStageIndex)
             {
-                //Debug.Log()
-                int index = Random.Range(0, listPos.Count);
-                Brick brick = BrickPool.Spawn<Brick>(character.GetCurrentColor(), listPos[index], Quaternion.identity);
-                character.AddBrickPosition(brick.transform);
-                character.AddPlatformBrick(brick, listPos[index]);
-                listPos.RemoveAt(index);
-                totalPosCount--;
-                //Debug.LogError(totalPosCount);
+                while (totalPosCount > 0)
+                {
+                    int index = Random.Range(0, listPos.Count);
+                    Brick brick = BrickPool.Spawn<Brick>(character.GetCurrentColor(), listPos[index], Quaternion.identity);
+                    platformBrickPos[character].Add(listPos[index]);
+                    listPos.RemoveAt(index);
+                    totalPosCount--;
+                }
             }
         }
-
-
     }
+
+    //public Dictionary<Character, List<Vector3>> GetPlatformBrickPos() => platformBrickPos;
 
     public void InitPosForPlatform()
     {
@@ -111,6 +52,8 @@ public class Platform : MonoBehaviour
             }
         }
     }
+
+    public Dictionary<Character, List<Vector3>> GetPlatformBrickPos() => platformBrickPos;
 
     public int GetBrickAmount() => brickAmount;
 

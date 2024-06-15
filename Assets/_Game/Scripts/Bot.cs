@@ -31,7 +31,7 @@ public class Bot : Character
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //Debug.Log(currentState.ToString()); 
         if (currentState != null)
@@ -98,9 +98,7 @@ public class Bot : Character
 
     public void MoveToBrick(Vector3 pos)
     {
-        //Debug.LogError("bot move!!!!" + pos);
         navMeshAgent.destination = pos;
-        //isMoving = true;
     }
 
     public void SetFinalTarget()
@@ -123,7 +121,7 @@ public class Bot : Character
         return GetCurrentTotalBricks() >= collectedBrick;
     }
 
-    public void SetRandomTarget()
+    public void SetRandomResetPoint()
     {
         navMeshAgent.destination = resetPoints[Random.Range(0, resetPoints.Count)].transform.position;
     }
@@ -133,5 +131,4 @@ public class Bot : Character
         return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.3f;
     }
 
-    
 }

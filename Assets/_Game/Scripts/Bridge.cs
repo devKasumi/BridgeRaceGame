@@ -7,6 +7,8 @@ public class Bridge : MonoBehaviour
     [SerializeField] private Stair stair;
     [SerializeField] private Barrier barrier;
     [SerializeField] private int totalStairNumbers;
+    [SerializeField] private Transform stairParent;
+    [SerializeField] private Transform barrierParent;
     private List<Stair> stairs = new List<Stair>();
     private List<Barrier> barriers = new List<Barrier>();
     private Vector3 firstStairPos;
@@ -24,15 +26,20 @@ public class Bridge : MonoBehaviour
         barriers.Add(barrier);
         for (int i = 1; i < totalStairNumbers; i++)
         {
-            stairs.Add(Instantiate(stair, new Vector3(
+            Stair stair = Instantiate(this.stair, new Vector3(
                 firstStairPos.x,
                 firstStairPos.y + count * Constants.STAIR_DISTANCE_Y,
-                firstStairPos.z + count * Constants.STAIR_DISTANCE_Z), stair.transform.rotation));
+                firstStairPos.z + count * Constants.STAIR_DISTANCE_Z), this.stair.transform.rotation);
+            stair.transform.SetParent(stairParent);
+            stairs.Add(stair);
 
-            barriers.Add(Instantiate(barrier, new Vector3(
+
+            Barrier barrier = Instantiate(this.barrier, new Vector3(
                 firstBarrierPos.x,
                 firstBarrierPos.y + count * Constants.STAIR_DISTANCE_Y,
-                firstBarrierPos.z + count * Constants.STAIR_DISTANCE_Z), barrier.transform.rotation));
+                firstBarrierPos.z + count * Constants.STAIR_DISTANCE_Z), this.barrier.transform.rotation);
+            barrier.transform.SetParent(barrierParent);
+            barriers.Add(barrier);
 
             count++;    
         }
@@ -42,11 +49,6 @@ public class Bridge : MonoBehaviour
     {
         return stairs.IndexOf(stair);
     }
-
-    //public int GetBarrierIndex(Barrier barrier)
-    //{
-    //    return barriers.IndexOf(barrier);
-    //}
 
     public void EnableBarrierBox(int index)
     {
@@ -75,12 +77,4 @@ public class Bridge : MonoBehaviour
     {
         barriers[index].GetObjectBoxCollider().isTrigger = true;
     }
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag(Constants.TAG_PLAYER))
-    //    {
-    //        collision.gameObject.GetComponent<Player>().ResetPlayerRotation();
-    //    }
-    //}
 }

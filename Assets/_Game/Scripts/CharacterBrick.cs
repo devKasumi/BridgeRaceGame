@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Brick : MonoBehaviour
+public class CharacterBrick : MonoBehaviour
 {
     [SerializeField] private MeshRenderer currentMeshRenderer;
     [SerializeField] private CommonEnum.ColorType currentColorType;
-
-    private Transform tf;
 
     public void ChangeColor(CommonEnum.ColorType colorType)
     {
@@ -22,19 +20,5 @@ public class Brick : MonoBehaviour
     public CommonEnum.ColorType GetColorType()
     {
         return currentColorType;
-    } 
-
-    public Transform TF
-    {
-        get
-        {
-            if (!tf)
-            {
-                tf = transform;
-
-            }
-
-            return tf;
-        }
     }
 }

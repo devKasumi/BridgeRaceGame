@@ -46,4 +46,8 @@ public class GameManager : Singleton<GameManager>
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
     }
 
+    public void UpdateGameState()
+    {
+
+    }
 }

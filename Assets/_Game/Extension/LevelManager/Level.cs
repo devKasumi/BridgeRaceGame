@@ -8,10 +8,6 @@ public class Level : MonoBehaviour
     [SerializeField] private Stage[] stages;
     [SerializeField] private PoolControl PoolControl;
 
-    public Vector3 originPos;
-
-    //private int currentStageIndex = 0;
-
     private void Awake()
     {
         
@@ -21,7 +17,7 @@ public class Level : MonoBehaviour
     void Start()
     {
         characters.Add(LevelManager.GetInstance.GetPlayer());
-        originPos = transform.position;
+
         for (int i = 0; i < characters.Count; i++)
         {
             LoadStage(characters[i], 0);

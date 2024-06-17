@@ -27,35 +27,32 @@ public class LevelManager : Singleton<LevelManager>
         InitLevel(currentLevelIndex);
     }
 
-    public void OnDespawn()
-    {
-
-    }
-
     public Character GetPlayer() => player;
 
     public void InitLevel(int levelIndex)
     {
-        currentLevel = Instantiate(levelPrefabs[currentLevelIndex], levelPrefabs[currentLevelIndex].originPos, Quaternion.identity);
+        currentLevel = Instantiate(levelPrefabs[currentLevelIndex]/*, levelPrefabs[currentLevelIndex].originPos, Quaternion.identity*/);
     }
 
     public Level GetCurrentLevel() => currentLevel;
 
     public int GetCurrentLevelIndex() => currentLevelIndex;
 
-    public void ReplayCurrentLevel()
+    // reset trang thai khi ket thuc game
+    public void OnReset()
     {
-
+        BrickPool.CollectAll();
     }
 
-    public void LoadNextLevel()
+    // tao prefab level moi
+    public void OnLoadLevel(int levelIndex)
     {
+        if (currentLevel != null)
+        {
+            Destroy(currentLevel.gameObject);
+        }
 
-    }
-
-    public void LoadLevel()
-    {
-
+        currentLevel = Instantiate(levelPrefabs[levelIndex]);
     }
 
     

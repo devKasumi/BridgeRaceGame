@@ -19,12 +19,6 @@ public class Level : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public PoolControl GetPoolControl() => PoolControl;
 
     public void LoadStage(Character character, int characterStageIndex)

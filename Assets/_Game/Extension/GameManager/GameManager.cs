@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
@@ -51,5 +52,6 @@ public class GameManager : Singleton<GameManager>
         ChangeState(state);
     }
 
-    
+    public bool CurrentState(GameState state) => IsState(state);
+
 }

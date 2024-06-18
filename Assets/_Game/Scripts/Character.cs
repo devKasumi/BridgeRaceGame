@@ -16,7 +16,8 @@ public class Character : MonoBehaviour
     private List<CharacterBrick> bricks = new List<CharacterBrick>();
 
     private Vector3 currentTargetPosition = Vector3.zero;
-    
+
+    private IState currentState;
 
     private string currentAnimationName;
     private CommonEnum.ColorType currentColorType;
@@ -136,7 +137,7 @@ public class Character : MonoBehaviour
         if (other.CompareTag(Constants.TAG_BRICK))
         {
             Brick brick = other.GetComponent<Brick>();
-            if (currentColorType == brick.GetColorType())
+            if (currentColorType == brick.GetColorType() && GameManager.GetInstance.CurrentState(GameState.GamePlay))
             {
                 CharacterBrick characterBrick = Instantiate(characterBrickPrefab);
                 characterBrick.ChangeColor(currentColorType);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     [SerializeField] private List<Character> characters = new List<Character>();
+    [SerializeField] private List<Bot> bots = new List<Bot>();
     [SerializeField] private Stage[] stages;
     [SerializeField] private PoolControl PoolControl;
 
@@ -34,4 +35,5 @@ public class Level : MonoBehaviour
         return stages[characterStageIndex].GetCurrentStagePlatform();
     }
 
+    public List<Bot> GetBots() => bots;
 }

@@ -330,9 +330,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8301975658095401284}
-        m_TargetAssemblyTypeName: UICanvas, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 4
+        m_TargetAssemblyTypeName: CanvasSettings, Assembly-CSharp
+        m_MethodName: CloseButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -463,9 +463,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8301975658095401284}
-        m_TargetAssemblyTypeName: UICanvas, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 4
+        m_TargetAssemblyTypeName: CanvasSettings, Assembly-CSharp
+        m_MethodName: ContinueButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -845,7 +845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7014603312679320939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -942,10 +942,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDestroyOnClose: 0
-  buttons:
-  - {fileID: 355184442817658835}
-  - {fileID: 709805386149921652}
-  - {fileID: 643292178328903208}
+  mainMenuButton: {fileID: 355184442817658835}
+  continueButton: {fileID: 709805386149921652}
+  closeButton: {fileID: 643292178328903208}
 --- !u!1 &8928224491643249461
 GameObject:
   m_ObjectHideFlags: 0

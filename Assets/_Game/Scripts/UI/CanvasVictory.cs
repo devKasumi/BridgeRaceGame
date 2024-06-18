@@ -16,5 +16,6 @@ public class CanvasVictory : UICanvas
     {
         Close(0);
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
+        GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }
 }

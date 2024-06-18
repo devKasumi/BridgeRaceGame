@@ -10,13 +10,8 @@ public class Bot : Character
     [SerializeField] private Transform finishBox;
     [SerializeField] private int minCollectedBricks;
     [SerializeField] private int maxCollectedBricks;
-    [SerializeField] private List<ResetPoint> resetPoints = new List<ResetPoint>();
-    
 
     private int collectedBrick;
-
-    
-
     private IState currentState;
 
     // Start is called before the first frame update
@@ -33,7 +28,15 @@ public class Bot : Character
             currentState.OnExecute(this);
         }
 
-        Moving();
+        if (GameManager.GetInstance.CurrentState(GameState.GamePlay))
+        {
+            Moving();
+        }
+        else
+        {
+            ChangeState(new IdleState());
+            return;
+        }
     }
 
     public override void OnInit()
@@ -42,7 +45,7 @@ public class Bot : Character
 
         collectedBrick = Random.Range(GetMinCollectedBrick(), GetMaxCollectedBrick());
 
-        ChangeState(new PatrolState());
+        ChangeState(new IdleState());
     }
 
     public override void OnDespawn()

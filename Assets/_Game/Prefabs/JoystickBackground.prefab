@@ -166,4 +166,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageJoystickBackground: {fileID: 3586130805222235341}
   imageJoystickHandler: {fileID: 2837022956030343072}
-  isResetJoystick: 0

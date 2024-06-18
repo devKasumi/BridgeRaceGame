@@ -7,7 +7,7 @@ public class CanvasFail : UICanvas
 {
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    public void SetBextScore(int score)
+    public void SetBestScore(int score)
     {
         scoreText.text = score.ToString();
     }

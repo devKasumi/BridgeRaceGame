@@ -41,7 +41,7 @@ public class JoystickManager : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.LogError("reset joystick");
+        //Debug.LogError("reset joystick");
         isResetJoystick = true;
         posInput = Vector2.zero;
         imageJoystickHandler.rectTransform.anchoredPosition = Vector2.zero;

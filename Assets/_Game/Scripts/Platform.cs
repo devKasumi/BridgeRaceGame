@@ -23,6 +23,11 @@ public class Platform : MonoBehaviour
         InitPosForPlatform();
     }
 
+    private void Start()
+    {
+        InitPosForPlatform();
+    }
+
     public void SpawnBrick(int currentStageIndex, Character character)
     {
         int totalPosCount = brickAmount;

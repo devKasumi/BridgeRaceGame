@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     [SerializeField] private float firstBrickZ = -0.6f;
     [SerializeField] private CharacterBrick characterBrickPrefab;
 
-    private List<CharacterBrick> bricks;
+    private List<CharacterBrick> bricks = new List<CharacterBrick>();
 
     private Vector3 currentTargetPosition = Vector3.zero;
 
@@ -31,7 +31,9 @@ public class Character : MonoBehaviour
 
     public virtual void OnInit()
     {
+        //ClearBrick();
         GetData();
+        currentStageIndex = 0;
         bricks = new List<CharacterBrick>();
     }
 

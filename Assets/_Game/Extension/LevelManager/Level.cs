@@ -39,4 +39,17 @@ public class Level : MonoBehaviour
     public List<Bot> GetBots() => bots;
 
     public List<Transform> GetFinalLines() => finalLines;
+
+    //public void DeletePool()
+    //{
+    //    Destroy(PoolControl.gameObject);
+    //}
+
+    public void ReloadStage()
+    {
+        for (int i = 0; i < characters.Count; i++)
+        {
+            LoadStage(characters[i], 0);
+        }
+    }
 }

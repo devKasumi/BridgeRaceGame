@@ -6,6 +6,7 @@ public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Player player;
     [SerializeField] private List<Level> levelPrefabs = new List<Level>();
+    [SerializeField] private PoolControl poolControl;
     private Level currentLevel;
     private int currentLevelIndex;  
 
@@ -66,5 +67,8 @@ public class LevelManager : Singleton<LevelManager>
         currentLevel = Instantiate(levelPrefabs[levelIndex]);
     }
 
-    
+    public void ResetPool()
+    {
+        poolControl.ResetPool();
+    }
 }

@@ -161,7 +161,7 @@ public class Character : MonoBehaviour
 
     public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
     {
-        yield return new WaitForSeconds(Random.Range(0f, 2f));
+        yield return new WaitForSeconds(Random.Range(5f, 10f));
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
     }
 }

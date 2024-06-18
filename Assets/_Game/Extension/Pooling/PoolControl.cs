@@ -5,7 +5,8 @@ using UnityEngine;
 public class PoolControl : MonoBehaviour
 {
     [SerializeField] private Brick brick;
-    [SerializeField] Transform PoolParent;
+    //[SerializeField] Transform PoolParent;
+    private List<GameObject> pools = new List<GameObject>();
 
     public void PreLoadPool(Character character, int platformBrickAmount)
     {
@@ -15,18 +16,21 @@ public class PoolControl : MonoBehaviour
         BrickPool.PreLoad(brick,
                           platformBrickAmount,
                           pool.transform);
-        pool.transform.SetParent(PoolParent);
+        pools.Add(pool);
+        //pool.transform.SetParent(PoolParent);
+    }
+
+    public void ResetPool()
+    {
+        for (int i =0;i<pools.Count;i++)
+        {
+            Destroy(pools[i]);
+        }
+        pools.Clear();
     }
 
 }
 
-[System.Serializable]
-public class PoolAmount
-{
-    public Brick prefab;
-    public Transform parent;
-    public float amount;
-}
 
 
 

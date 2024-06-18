@@ -2910,7 +2910,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brick: {fileID: 6304859322704445671, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
-  PoolParent: {fileID: 6415617144840850983}
 --- !u!1 &3530908043562057872
 GameObject:
   m_ObjectHideFlags: 0
@@ -4488,7 +4487,7 @@ MonoBehaviour:
   stages:
   - {fileID: 1030417033404697522}
   - {fileID: 8529399231511175443}
-  PoolControl: {fileID: 3264657150534104786}
+  PoolControl: {fileID: 8713621960487426256, guid: eb4f6ea162fcd7744ae8e207410e248f, type: 3}
   finalLines:
   - {fileID: 8626423969009545532}
   - {fileID: 3069969262210490126}
@@ -7182,6 +7181,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: 3fbc230ca3680ea4091b9f7412eaef64, type: 2}
+    - target: {fileID: 426391302580075328, guid: ed29ff3f26e4ae34a96d0d1649c0aa89, type: 3}
+      propertyPath: finishBox
+      value: 
+      objectReference: {fileID: 372740727050873841}
     - target: {fileID: 5916340219650495173, guid: ed29ff3f26e4ae34a96d0d1649c0aa89, type: 3}
       propertyPath: m_Name
       value: BotParent (2)

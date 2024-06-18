@@ -2865,52 +2865,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3178404275248599315
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1512974243171202900}
-  - component: {fileID: 3264657150534104786}
-  m_Layer: 0
-  m_Name: Pooling
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1512974243171202900
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3178404275248599315}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.27019024, y: -0.0745095, z: -0.024819195}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6415617144840850983}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3264657150534104786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3178404275248599315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22bb7d8e88fb2d144a64f2b9d2314093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brick: {fileID: 6304859322704445671, guid: c1f8c2eff6b8024488c7cfb605def762, type: 3}
-  PoolParent: {fileID: 6415617144840850983}
 --- !u!1 &3530908043562057872
 GameObject:
   m_ObjectHideFlags: 0
@@ -4460,7 +4414,6 @@ Transform:
   - {fileID: 461142129563746606}
   - {fileID: 757155353896990560}
   - {fileID: 7131860930730818531}
-  - {fileID: 1512974243171202900}
   - {fileID: 6570856122058027747}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4485,7 +4438,7 @@ MonoBehaviour:
   stages:
   - {fileID: 1030417033404697522}
   - {fileID: 8529399231511175443}
-  PoolControl: {fileID: 3264657150534104786}
+  PoolControl: {fileID: 8713621960487426256, guid: eb4f6ea162fcd7744ae8e207410e248f, type: 3}
   finalLines:
   - {fileID: 8626423969009545532}
   - {fileID: 3069969262210490126}

@@ -18,7 +18,6 @@ public class CanvasVictory : UICanvas
         UIManager.GetInstance.CloseAll();
         LevelManager.GetInstance.GetPlayer().ClearBrick();
         LevelManager.GetInstance.GetPlayer().OnInit();
-        LevelManager.GetInstance.ResetPool();
         LevelManager.GetInstance.OnLoadNextLevel();
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
@@ -30,7 +29,6 @@ public class CanvasVictory : UICanvas
         UIManager.GetInstance.CloseAll();
         LevelManager.GetInstance.GetPlayer().ClearBrick();
         LevelManager.GetInstance.GetPlayer().OnInit();
-        LevelManager.GetInstance.ResetPool();
         LevelManager.GetInstance.OnRetryLevel();
         UIManager.GetInstance.OpenUI<CanvasGamePlay>();
         GameManager.GetInstance.UpdateGameState(GameState.GamePlay);

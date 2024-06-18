@@ -32,8 +32,8 @@ public class Character : MonoBehaviour
     public virtual void OnInit()
     {
         //ClearBrick();
-        GetData();
         currentStageIndex = 0;
+        GetData();
         bricks = new List<CharacterBrick>();
     }
 
@@ -66,7 +66,7 @@ public class Character : MonoBehaviour
     {
         if (currentAnimationName != animationName)
         {
-            animator.ResetTrigger(animationName);
+            animator.ResetTrigger(currentAnimationName);
             currentAnimationName = animationName;
             animator.SetTrigger(currentAnimationName);
         }
@@ -146,9 +146,11 @@ public class Character : MonoBehaviour
     {
         if (other.CompareTag(Constants.TAG_BRICK))
         {
+            //TODO FIX Cache
             Brick brick = other.GetComponent<Brick>();
             if (currentColorType == brick.GetColorType() && GameManager.GetInstance.CurrentState(GameState.GamePlay))
             {
+                //TODO sap xep, phan chia lai code - khong viet logic vao ham va cham!
                 CharacterBrick characterBrick = Instantiate(characterBrickPrefab);
                 characterBrick.ChangeColor(currentColorType);
                 characterBrick.ChangeMaterial(GetCurrentMeshMaterial());
@@ -161,7 +163,7 @@ public class Character : MonoBehaviour
 
     public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
     {
-        yield return new WaitForSeconds(Random.Range(5f, 10f));
+        yield return new WaitForSeconds(Random.Range(0f, 2f));
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
     }
 }

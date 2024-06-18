@@ -18,7 +18,6 @@ public class BuildState : IState
         {
             Debug.Log("reach target!!!!!");
             bot.SetFinalTarget();
-            //bot.ChangeAnimation(Constants.ANIMATION_RUN);
         }
     }
 

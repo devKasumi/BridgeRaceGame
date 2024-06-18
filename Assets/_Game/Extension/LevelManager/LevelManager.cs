@@ -35,6 +35,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnLoadNextLevel()
     {
+        BrickPool.ReleaseAll();
         currentLevelIndex++;
         OnLoadLevel(currentLevelIndex);
     }
@@ -49,6 +50,11 @@ public class LevelManager : Singleton<LevelManager>
     public void OnReset()
     {
         BrickPool.CollectAll();
+    }
+
+    public void OnRelease()
+    {
+        BrickPool.ReleaseAll();
     }
 
     // tao prefab level moi
@@ -67,8 +73,9 @@ public class LevelManager : Singleton<LevelManager>
         currentLevel = Instantiate(levelPrefabs[levelIndex]);
     }
 
-    public void ResetPool()
-    {
-        poolControl.ResetPool();
-    }
+    //public void ResetPool()
+    //{
+    //    poolControl.ResetPool();
+    //    BrickPool.ReleaseAll();
+    //}
 }

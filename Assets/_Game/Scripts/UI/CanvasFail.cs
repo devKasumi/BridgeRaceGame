@@ -16,6 +16,7 @@ public class CanvasFail : UICanvas
     {
         Close(0);
         UIManager.GetInstance.CloseAll();
+        //TODO fix: 
         LevelManager.GetInstance.GetPlayer().ClearBrick();
         LevelManager.GetInstance.GetPlayer().OnInit();
         LevelManager.GetInstance.OnRetryLevel();

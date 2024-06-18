@@ -127,6 +127,7 @@ public class Bot : Character
     {
         if (other.CompareTag(Constants.TAG_DOOR))
         {
+            //TODO: cache
             if (other.GetComponent<Door>().IsNextStageDoor())
             {
                 Debug.LogError("process next stage!!!");

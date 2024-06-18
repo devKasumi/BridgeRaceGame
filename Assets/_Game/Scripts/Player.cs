@@ -70,7 +70,7 @@ public class Player : Character
         inputX = joystickManager.InputHorizontal();
         inputZ = joystickManager.InputVertical();
 
-        moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
+        moveDirection = new Vector3(inputX * GetMoveSpeed(), -9.8f, inputZ * GetMoveSpeed());
 
         if (OnSlope())
         {

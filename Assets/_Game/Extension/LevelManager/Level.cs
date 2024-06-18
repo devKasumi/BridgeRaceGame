@@ -45,11 +45,11 @@ public class Level : MonoBehaviour
     //    Destroy(PoolControl.gameObject);
     //}
 
-    public void ReloadStage()
-    {
-        for (int i = 0; i < characters.Count; i++)
-        {
-            LoadStage(characters[i], 0);
-        }
-    }
+    //public void ReloadStage()
+    //{
+    //    for (int i = 0; i < characters.Count; i++)
+    //    {
+    //        LoadStage(characters[i], 0);
+    //    }
+    //}
 }

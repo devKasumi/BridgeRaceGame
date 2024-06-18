@@ -8,6 +8,7 @@ public class Level : MonoBehaviour
     [SerializeField] private List<Bot> bots = new List<Bot>();
     [SerializeField] private Stage[] stages;
     [SerializeField] private PoolControl PoolControl;
+    [SerializeField] private List<Transform> finalLines = new List<Transform>();
 
     // Start is called before the first frame update
     void Start()
@@ -36,4 +37,6 @@ public class Level : MonoBehaviour
     }
 
     public List<Bot> GetBots() => bots;
+
+    public List<Transform> GetFinalLines() => finalLines;
 }

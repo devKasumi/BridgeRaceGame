@@ -386,8 +386,7 @@ MonoBehaviour:
   resetPoints:
   - {fileID: 6211752707530558793}
   - {fileID: 4129451176674697800}
-  nextStageLines:
-  - {fileID: 8626423969009545532}
+  nextStageLines: []
   gate: {fileID: 7380910918073998660}
 --- !u!1 &651099521512564147
 GameObject:
@@ -1228,7 +1227,7 @@ GameObject:
   - component: {fileID: 1473763350066735894}
   - component: {fileID: 7348643558972220801}
   m_Layer: 0
-  m_Name: NextStageLine (1)
+  m_Name: FinalLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1243,7 +1242,7 @@ Transform:
   m_GameObject: {fileID: 2055654638696182738}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.25, y: 9, z: 17}
+  m_LocalPosition: {x: 4.25, y: 9, z: 16.79}
   m_LocalScale: {x: 1.5, y: 1, z: 0.12}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1521,7 +1520,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2933203291980142140}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2083,7 +2082,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4710887449825846981}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2451,7 +2450,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5283531434282923588}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2792,6 +2791,7 @@ MonoBehaviour:
   - {fileID: 1030417033404697522}
   - {fileID: 8529399231511175443}
   PoolControl: {fileID: 3264657150534104786}
+  finalLines: []
 --- !u!1 &6078056245260126975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3664,7 +3664,7 @@ GameObject:
   - component: {fileID: 270439924591861812}
   - component: {fileID: 3686216152111684644}
   m_Layer: 0
-  m_Name: NextStageLine (2)
+  m_Name: FinalLine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3679,7 +3679,7 @@ Transform:
   m_GameObject: {fileID: 8537937646534571734}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7, y: 9, z: 17}
+  m_LocalPosition: {x: -1.7, y: 9, z: 16.79}
   m_LocalScale: {x: 1.5, y: 1, z: 0.12}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5520,6 +5520,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3933226432699302417, guid: 326b4da02bfb230438aed015c46bb5d6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8410326508367757280, guid: 326b4da02bfb230438aed015c46bb5d6, type: 3}
       propertyPath: BoxCollider
       value: 
@@ -5668,6 +5672,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3211411913531806401, guid: 326b4da02bfb230438aed015c46bb5d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933226432699302417, guid: 326b4da02bfb230438aed015c46bb5d6, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8410326508367757280, guid: 326b4da02bfb230438aed015c46bb5d6, type: 3}

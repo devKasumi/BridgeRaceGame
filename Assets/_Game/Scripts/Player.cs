@@ -99,9 +99,10 @@ public class Player : Character
 
     public void AdvanceToNextStage()
     {
-        if (IsAdvanceNextStage())
+        List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
+        List<Transform> finalStageLines = LevelManager.GetInstance.GetCurrentLevel().GetFinalLines();
+        if (IsClearStage(nextStageLines) && nextStageLines.Count > 0)
         {
-            List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
             for (int i = 0; i < nextStageLines.Count; i++)
             {
                 nextStageLines[i].gameObject.SetActive(false);
@@ -110,19 +111,26 @@ public class Player : Character
             ProcessToNextStage();
             LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, GetCurrentStageIndex());
         }
+        else if (IsClearStage(finalStageLines))
+        {
+            for (int i = 0; i < nextStageLines.Count; i++)
+            {
+                finalStageLines[i].gameObject.SetActive(false);
+            }
+            LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).EnableGate();
+        }
     }
 
-    public bool IsAdvanceNextStage()
+    public bool IsClearStage(List<Transform> nextStageLines)
     {
-        List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
         for (int i = 0; i < nextStageLines.Count; i++)
         {
-            if (Vector3.Distance(transform.position, nextStageLines[i].position) < 1f)
+            Debug.LogError(Vector3.Distance(transform.position, nextStageLines[i].position));
+            if (Vector3.Distance(transform.position, nextStageLines[i].position) < 0.1f)
             {
                 return true;
             }
         }
         return false;
     }
-
 }

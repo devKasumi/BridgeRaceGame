@@ -11,30 +11,24 @@ public class CanvasSettings : UICanvas
 
     public void SetState(UICanvas canvas)
     {
-        //for (int i = 0; i < buttons.Length; i++)
-        //{
-        //    buttons[i].gameObject.SetActive(false);
-        //}
         mainMenuButton.SetActive(false);
         continueButton.SetActive(false);
         closeButton.SetActive(false);
 
         if (canvas is CanvasMainMenu)
         {
-            //buttons[2].gameObject.SetActive(true);
             closeButton.SetActive(true);
         }
         else if (canvas is CanvasGamePlay)
         {
-            //buttons[0].gameObject.SetActive(true);
             mainMenuButton.gameObject.SetActive(true);
-            //buttons[1].gameObject.SetActive(true);
             continueButton.gameObject.SetActive(true);
         }
     }
 
     public void MainMenuButton()
     {
+        Close(0);
         UIManager.GetInstance.CloseAll();
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
@@ -42,16 +36,18 @@ public class CanvasSettings : UICanvas
 
     public void ContinueButton()
     {
-        //UIManager.GetInstance.CloseAll();
-        //UIManager.GetInstance.OpenUI<CanvasGamePlay>();
         Close(0);
+        UIManager.GetInstance.OpenUI<CanvasGamePlay>();
         GameManager.GetInstance.UpdateGameState(GameState.GamePlay);
+        List<Bot> bots = LevelManager.GetInstance.GetCurrentLevel().GetBots();
+        for (int i = 0; i < bots.Count; i++)
+        {
+            bots[i].ChangeState(new PatrolState());
+        }
     }
 
     public void CloseButton()
     {
-        //UIManager.GetInstance.CloseAll();
-        //UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         Close(0);
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }

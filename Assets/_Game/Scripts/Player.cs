@@ -38,7 +38,6 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
-        Debug.LogError("Init player");
         ChangeAnimation(Constants.ANIMATION_IDLE);
     }
 
@@ -68,12 +67,6 @@ public class Player : Character
     {
         inputX = joystickManager.InputHorizontal();
         inputZ = joystickManager.InputVertical();
-
-        //if (inputX != 0 || inputZ != 0)
-        //{
-        //    ChangeAnimation(Constants.ANIMATION_RUN);
-        //}
-        //else ChangeAnimation(Constants.ANIMATION_IDLE);
 
         moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 

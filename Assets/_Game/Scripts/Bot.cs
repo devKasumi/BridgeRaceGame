@@ -82,7 +82,7 @@ public class Bot : Character
 
     public void StopMoving()
     {
-        rb.velocity = Vector3.zero;
+        navMeshAgent.destination = transform.position;
     }
 
     public void MoveToBrick(Vector3 pos)

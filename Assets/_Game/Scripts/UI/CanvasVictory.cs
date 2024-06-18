@@ -12,10 +12,21 @@ public class CanvasVictory : UICanvas
         scoreText.text = score.ToString();
     }
 
-    public void MainMenuButton()
+    public void NextButton()
     {
         Close(0);
+        LevelManager.GetInstance.OnLoadNextLevel();
+        LevelManager.GetInstance.GetPlayer().OnInit();
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
+    }
+
+    public void RetryButton()
+    {
+        Close(0);
+        LevelManager.GetInstance.OnRetryLevel();
+        LevelManager.GetInstance.GetPlayer().OnInit();
+        UIManager.GetInstance.OpenUI<CanvasGamePlay>();
+        GameManager.GetInstance.UpdateGameState(GameState.GamePlay);
     }
 }

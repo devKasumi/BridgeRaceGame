@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     [SerializeField] private float firstBrickZ = -0.6f;
     [SerializeField] private CharacterBrick characterBrickPrefab;
 
-    private List<CharacterBrick> bricks = new List<CharacterBrick>();
+    private List<CharacterBrick> bricks;
 
     private Vector3 currentTargetPosition = Vector3.zero;
 
@@ -32,6 +32,7 @@ public class Character : MonoBehaviour
     public virtual void OnInit()
     {
         GetData();
+        bricks = new List<CharacterBrick>();
     }
 
     public virtual void OnDespawn()
@@ -70,7 +71,6 @@ public class Character : MonoBehaviour
 
     public void AddBrick(CharacterBrick brick)
     {
-        //brick.gameObject.SetActive(true);
         bricks.Add(brick);
         StackBrick();
     }
@@ -86,7 +86,14 @@ public class Character : MonoBehaviour
 
     public void ClearBrick()
     {
-
+        if (bricks.Count > 0)
+        {
+            for (int i = 0; i < bricks.Count; i++)
+            {
+                Destroy(bricks[i]);
+            }
+        }
+        bricks.Clear();
     }
 
     public CharacterBrick GetLastBrick() => bricks.Count > 0 ? bricks[bricks.Count - 1] : null;

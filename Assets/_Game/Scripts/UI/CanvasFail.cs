@@ -12,10 +12,11 @@ public class CanvasFail : UICanvas
         scoreText.text = score.ToString();
     }
 
-    public void MainMenuButton()
+    public void RetryButton()
     {
         Close(0);
-        UIManager.GetInstance.OpenUI<CanvasMainMenu>();
-        GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
+        LevelManager.GetInstance.OnRetryLevel();
+        UIManager.GetInstance.OpenUI<CanvasGamePlay>();
+        GameManager.GetInstance.UpdateGameState(GameState.GamePlay);
     }
 }

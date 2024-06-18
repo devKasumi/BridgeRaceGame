@@ -800,6 +800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - Setting
       objectReference: {fileID: 0}
+    - target: {fileID: 4941672362526638633, guid: 02e5e21aa50aac24a8b399669a82b314, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7014603312679320939, guid: 02e5e21aa50aac24a8b399669a82b314, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -896,6 +900,10 @@ PrefabInstance:
     - target: {fileID: 3830794177236512891, guid: 5f1d8edf5e67fab4d81ebc6b691c3d3c, type: 3}
       propertyPath: m_Name
       value: Canvas - Fail
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830794177236512891, guid: 5f1d8edf5e67fab4d81ebc6b691c3d3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6947297063023881057, guid: 5f1d8edf5e67fab4d81ebc6b691c3d3c, type: 3}
       propertyPath: m_Pivot.x
@@ -1171,6 +1179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - Victory
       objectReference: {fileID: 0}
+    - target: {fileID: 7370582755520308479, guid: 7502df541383b3042a01e793d2739d6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1187,6 +1199,10 @@ PrefabInstance:
     - target: {fileID: 4767847320248705123, guid: eff6b8a18b172b34b85858cc069e7fb3, type: 3}
       propertyPath: m_Name
       value: Canvas - GamePlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 4767847320248705123, guid: eff6b8a18b172b34b85858cc069e7fb3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6529815159219774284, guid: eff6b8a18b172b34b85858cc069e7fb3, type: 3}
       propertyPath: m_Pivot.x
@@ -1284,6 +1300,10 @@ PrefabInstance:
     - target: {fileID: 2447487799372780395, guid: a26eaec7c04c7b0449b50f5c81715fc6, type: 3}
       propertyPath: m_Name
       value: Canvas - MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447487799372780395, guid: a26eaec7c04c7b0449b50f5c81715fc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554912287632465090, guid: a26eaec7c04c7b0449b50f5c81715fc6, type: 3}
       propertyPath: m_Pivot.x

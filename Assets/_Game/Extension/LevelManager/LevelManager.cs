@@ -32,6 +32,18 @@ public class LevelManager : Singleton<LevelManager>
 
     public int GetCurrentLevelIndex() => currentLevelIndex;
 
+    public void OnLoadNextLevel()
+    {
+        currentLevelIndex++;
+        OnLoadLevel(currentLevelIndex);
+    }
+
+    public void OnRetryLevel()
+    {
+        OnReset();
+        OnLoadLevel(currentLevelIndex);
+    }
+
     // reset trang thai khi ket thuc game
     public void OnReset()
     {
@@ -41,6 +53,11 @@ public class LevelManager : Singleton<LevelManager>
     // tao prefab level moi
     public void OnLoadLevel(int levelIndex)
     {
+        if (currentLevel == levelPrefabs[levelPrefabs.Count - 1])
+        {
+            
+        }
+
         if (currentLevel != null)
         {
             Destroy(currentLevel.gameObject);

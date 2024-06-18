@@ -39,6 +39,8 @@ public class Player : Character
     {
         base.OnInit();
         ChangeAnimation(Constants.ANIMATION_IDLE);
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
     }
 
     public override void OnDespawn()

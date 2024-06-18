@@ -236,7 +236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Main Menu
+  m_text: 'Retry
 
 '
   m_isRightToLeft: 0
@@ -326,7 +326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6947297063023881057
 RectTransform:
   m_ObjectHideFlags: 0
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 6365973437987113817}
   - component: {fileID: 4017501472364241672}
   m_Layer: 5
-  m_Name: Button - MainMenu
+  m_Name: Button - Retry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,7 +625,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2385259216551274396}
         m_TargetAssemblyTypeName: CanvasFail, Assembly-CSharp
-        m_MethodName: MainMenuButton
+        m_MethodName: RetryButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

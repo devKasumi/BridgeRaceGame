@@ -127,7 +127,6 @@ public class Player : Character
     {
         for (int i = 0; i < nextStageLines.Count; i++)
         {
-            Debug.LogError(Vector3.Distance(transform.position, nextStageLines[i].position));
             if (Vector3.Distance(transform.position, nextStageLines[i].position) < 0.8f)
             {
                 return true;

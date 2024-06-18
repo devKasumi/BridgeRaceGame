@@ -37,7 +37,8 @@ public class Character : MonoBehaviour
 
     public virtual void OnDespawn()
     {
-        
+        ClearBrick();
+
     }
 
     public float GetMoveSpeed() => moveSpeed;
@@ -90,7 +91,7 @@ public class Character : MonoBehaviour
         {
             for (int i = 0; i < bricks.Count; i++)
             {
-                Destroy(bricks[i]);
+                Destroy(bricks[i].gameObject);
             }
         }
         bricks.Clear();
@@ -158,7 +159,7 @@ public class Character : MonoBehaviour
 
     public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
     {
-        yield return new WaitForSeconds(Random.Range(5f, 10f));
+        yield return new WaitForSeconds(Random.Range(0f, 2f));
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
     }
 }

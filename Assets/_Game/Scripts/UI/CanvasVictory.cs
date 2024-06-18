@@ -15,8 +15,10 @@ public class CanvasVictory : UICanvas
     public void NextButton()
     {
         Close(0);
-        LevelManager.GetInstance.OnLoadNextLevel();
+        UIManager.GetInstance.CloseAll();
+        LevelManager.GetInstance.GetPlayer().OnDespawn();
         LevelManager.GetInstance.GetPlayer().OnInit();
+        LevelManager.GetInstance.OnLoadNextLevel();
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }
@@ -24,8 +26,10 @@ public class CanvasVictory : UICanvas
     public void RetryButton()
     {
         Close(0);
-        LevelManager.GetInstance.OnRetryLevel();
+        UIManager.GetInstance.CloseAll();
+        LevelManager.GetInstance.GetPlayer().OnDespawn();
         LevelManager.GetInstance.GetPlayer().OnInit();
+        LevelManager.GetInstance.OnRetryLevel();
         UIManager.GetInstance.OpenUI<CanvasGamePlay>();
         GameManager.GetInstance.UpdateGameState(GameState.GamePlay);
     }

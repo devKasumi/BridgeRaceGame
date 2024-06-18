@@ -43,11 +43,13 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        UIManager.GetInstance.OpenUI<CanvasMainMenu>();
+        //UIManager.GetInstance.OpenUI<CanvasMainMenu>();
     }
 
-    public void UpdateGameState()
+    public void UpdateGameState(GameState state)
     {
-
+        ChangeState(state);
     }
+
+    
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class IdleState : IState
 {
-    private float randomTime;
-    private float timer;
 
     public void OnEnter(Bot bot)
     {

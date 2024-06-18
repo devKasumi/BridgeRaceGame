@@ -15,6 +15,7 @@ public class CanvasFail : UICanvas
     public void MainMenuButton()
     {
         Close(0);
-        UIManager.GetInstance.OpenUI<CanvasMainMenu>(); 
+        UIManager.GetInstance.OpenUI<CanvasMainMenu>();
+        GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }
 }

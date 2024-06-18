@@ -10,7 +10,7 @@ public class JoystickManager : MonoBehaviour, IDragHandler, IPointerDownHandler,
     [SerializeField] private Image imageJoystickHandler;
     private Vector2 posInput;
 
-    public bool isResetJoystick;
+    private bool isResetJoystick = true;
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -35,21 +35,22 @@ public class JoystickManager : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        isResetJoystick = false;
         OnDrag(eventData);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        Debug.LogError("reset joystick");
+        isResetJoystick = true;
         posInput = Vector2.zero;
         imageJoystickHandler.rectTransform.anchoredPosition = Vector2.zero;
-        isResetJoystick = true;
     }
 
     public float InputHorizontal()
     {
         if (posInput.x != 0)
         {
-            isResetJoystick = false;
             return posInput.x;
         }
         else return Input.GetAxis("Horizontal");
@@ -59,9 +60,10 @@ public class JoystickManager : MonoBehaviour, IDragHandler, IPointerDownHandler,
     {
         if (posInput.y != 0)
         {
-            isResetJoystick = false;
             return posInput.y;
         }
         else return Input.GetAxis("Vertical");
     }
+
+    public bool IsResetJoystick() => isResetJoystick;
 }

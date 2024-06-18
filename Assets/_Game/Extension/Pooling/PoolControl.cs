@@ -7,11 +7,6 @@ public class PoolControl : MonoBehaviour
     [SerializeField] private Brick brick;
     [SerializeField] Transform PoolParent;
 
-    private void Awake()
-    {
-
-    }
-
     public void PreLoadPool(Character character, int platformBrickAmount)
     {
         brick.ChangeColor(character.GetCurrentColor());

@@ -8,6 +8,7 @@ public class BuildState : IState
 
     public void OnEnter(Bot bot)
     {
+        bot.ChangeAnimation(Constants.ANIMATION_RUN);
         bot.SetRandomResetPoint();
     }
 
@@ -17,7 +18,7 @@ public class BuildState : IState
         {
             Debug.Log("reach target!!!!!");
             bot.SetFinalTarget();
-
+            //bot.ChangeAnimation(Constants.ANIMATION_RUN);
         }
     }
 

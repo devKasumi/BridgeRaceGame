@@ -15,12 +15,6 @@ public class LevelManager : Singleton<LevelManager>
         OnInit();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnInit()
     {
         currentLevelIndex = 0;

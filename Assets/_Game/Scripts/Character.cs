@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private DataSO data;
     [SerializeField] private Animator animator;
-    [SerializeField] private MeshRenderer currentMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float firstBrickY = -0.5f;
     [SerializeField] private float firstBrickZ = -0.6f;
@@ -23,15 +23,9 @@ public class Character : MonoBehaviour
 
     private int currentStageIndex = 0;
 
-
     private void Awake()
     {
         OnInit();
-    }
-
-    private void Start()
-    {
-
     }
 
     public virtual void OnInit()
@@ -49,12 +43,12 @@ public class Character : MonoBehaviour
     public void GetData()
     {
         currentColorType = data.color;
-        currentMeshRenderer.material = data.GetMaterial(currentColorType);
+        skinnedMeshRenderer.material = data.GetMaterial(currentColorType);
     }
 
     public CommonEnum.ColorType GetCurrentColor() => currentColorType;
 
-    public Material GetCurrentMeshMaterial() => currentMeshRenderer.material;
+    public Material GetCurrentMeshMaterial() => skinnedMeshRenderer.material;
 
     public int GetCurrentStageIndex() => currentStageIndex; 
 
@@ -112,7 +106,6 @@ public class Character : MonoBehaviour
         {
             brickTransform.localPosition = new Vector3(0f, firstBrickY + (bricks.Count - 1) * 0.3f, firstBrickZ);
         }
-        //Debug.Log("is set active: " + bricks[bricks.Count - 1].gameObject.activeSelf);
     }
 
     public void SetTargetBrickPosition()

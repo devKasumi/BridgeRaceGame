@@ -28,16 +28,18 @@ public class Player : Character
 
     private void Update()
     {
-        AdvanceToNextStage();
-
         Move();
 
         rb.useGravity = !OnSlope();
+
+        AdvanceToNextStage();
     }
 
     public override void OnInit()
     {
         base.OnInit();
+        Debug.LogError("Init player");
+        ChangeAnimation(Constants.ANIMATION_IDLE);
     }
 
     public override void OnDespawn()
@@ -67,6 +69,12 @@ public class Player : Character
         inputX = joystickManager.InputHorizontal();
         inputZ = joystickManager.InputVertical();
 
+        //if (inputX != 0 || inputZ != 0)
+        //{
+        //    ChangeAnimation(Constants.ANIMATION_RUN);
+        //}
+        //else ChangeAnimation(Constants.ANIMATION_IDLE);
+
         moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 
         if (OnSlope())
@@ -77,8 +85,17 @@ public class Player : Character
         {
             rb.velocity = moveDirection;
         }
-        transform.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, originRotation.y, rb.velocity.z));
 
+        if (!joystickManager.IsResetJoystick())
+        {
+            ChangeAnimation(Constants.ANIMATION_RUN);
+        }
+        else
+        {
+            ChangeAnimation(Constants.ANIMATION_IDLE);
+        }
+
+        transform.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, originRotation.y, rb.velocity.z));
     }
 
 

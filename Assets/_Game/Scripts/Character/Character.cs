@@ -72,9 +72,12 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void AddBrick(CharacterBrick brick)
+    public void AddBrick()
     {
-        bricks.Add(brick);
+        CharacterBrick characterBrick = Instantiate(characterBrickPrefab);
+        characterBrick.ChangeColor(currentColorType);
+        characterBrick.ChangeMaterial(GetCurrentMeshMaterial());
+        bricks.Add(characterBrick);
         StackBrick();
     }
 
@@ -147,14 +150,12 @@ public class Character : MonoBehaviour
         if (other.CompareTag(Constants.TAG_BRICK))
         {
             //TODO FIX Cache
-            Brick brick = other.GetComponent<Brick>();
-            if (currentColorType == brick.GetColorType() && GameManager.GetInstance.CurrentState(GameState.GamePlay))
+            //Brick brick = other.GetComponent<Brick>();
+            Brick brick = Cache.GetBrick(other);
+            if (currentColorType == brick.GetColorType() && GameManager.GetInstance.CurrentState(GameState.GamePlay)) // logic
             {
                 //TODO sap xep, phan chia lai code - khong viet logic vao ham va cham!
-                CharacterBrick characterBrick = Instantiate(characterBrickPrefab);
-                characterBrick.ChangeColor(currentColorType);
-                characterBrick.ChangeMaterial(GetCurrentMeshMaterial());
-                AddBrick(characterBrick);
+                AddBrick();
                 BrickPool.Despawn(brick);
                 StartCoroutine(ReSpawnBrick(this.GetCurrentColor(), brick.transform.position, brick.transform.rotation));
             }

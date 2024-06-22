@@ -70,11 +70,11 @@ public class Player : Character
         inputX = joystickManager.InputHorizontal();
         inputZ = joystickManager.InputVertical();
 
-        moveDirection = new Vector3(inputX * GetMoveSpeed(), -9.8f, inputZ * GetMoveSpeed());
+        moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 
         if (OnSlope())
         {
-            rb.velocity = GetSlopeMoveDirection() * 5f;
+            rb.velocity = new Vector3(GetSlopeMoveDirection().x * 5f, GetSlopeMoveDirection().y*5f-1f, GetSlopeMoveDirection().z*5f);   
         }
         else
         {
@@ -101,6 +101,7 @@ public class Player : Character
 
     public void AdvanceToNextStage()
     {
+        // TODO fix:
         List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
         List<Transform> finalStageLines = LevelManager.GetInstance.GetCurrentLevel().GetFinalLines();
         if (IsClearStage(nextStageLines) && nextStageLines.Count > 0)

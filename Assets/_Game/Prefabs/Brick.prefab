@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMeshRenderer: {fileID: 8175429513897393483}
-  currentColorType: 1
+  currentColorType: 6

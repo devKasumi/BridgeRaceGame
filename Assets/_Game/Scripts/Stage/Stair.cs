@@ -60,7 +60,8 @@ public class Stair : MonoBehaviour
     {
         if (other.CompareTag(Constants.TAG_PLAYER))
         {
-            Player character = other.GetComponent<Player>();
+            //Player character = other.GetComponent<Player>();
+            Player character = Cache.GetPlayer(other);
             if (character.GetCurrentTotalBricks() > 0)
             {
                 if (currentColorType != character.GetCurrentColor())
@@ -83,7 +84,8 @@ public class Stair : MonoBehaviour
         }
         else if (other.CompareTag(Constants.TAG_BOT))
         {
-            Bot character = other.GetComponent<Bot>();
+            //Bot character = other.GetComponent<Bot>();
+            Bot character = Cache.GetBot(other);
             if (character.GetCurrentTotalBricks() > 0)
             {
                 if (currentColorType != character.GetCurrentColor())

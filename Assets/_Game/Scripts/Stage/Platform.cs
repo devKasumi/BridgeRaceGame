@@ -37,7 +37,7 @@ public class Platform : MonoBehaviour
             while (totalPosCount > 0)
             {
                 int index = Random.Range(0, listPos.Count);
-                Brick brick = BrickPool.Spawn<Brick>(character.GetCurrentColor(), listPos[index], Quaternion.identity);
+                Brick brick = BrickPool.Spawn<Brick>(character.CurrentCharacterColor(), listPos[index], Quaternion.identity);
                 platformBrickPos[character].Add(listPos[index]);
                 listPos.RemoveAt(index);
                 totalPosCount--;

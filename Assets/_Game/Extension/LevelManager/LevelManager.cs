@@ -20,6 +20,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         currentLevelIndex = 0;
         InitLevel(currentLevelIndex);
+        //player.ClearBrick();
+        //player.OnInit();
     }
 
     public Character GetPlayer() => player;
@@ -35,13 +37,17 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnLoadNextLevel()
     {
-        BrickPool.ReleaseAll();
+        player.ClearBrick();
+        player.OnInit();
+        OnRelease();
         currentLevelIndex++;
         OnLoadLevel(currentLevelIndex);
     }
 
     public void OnRetryLevel()
     {
+        player.ClearBrick();
+        player.OnInit();
         OnReset();
         OnLoadLevel(currentLevelIndex);
     }
@@ -73,9 +79,8 @@ public class LevelManager : Singleton<LevelManager>
         currentLevel = Instantiate(levelPrefabs[levelIndex]);
     }
 
-    //public void ResetPool()
-    //{
-    //    poolControl.ResetPool();
-    //    BrickPool.ReleaseAll();
-    //}
+    public void OnPlay()
+    {
+        currentLevel.SetPatrolStateBot();
+    }
 }

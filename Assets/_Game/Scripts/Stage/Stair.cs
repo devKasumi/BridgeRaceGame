@@ -35,87 +35,22 @@ public class Stair : MonoBehaviour
         return currentColorType;
     }
 
-    public Vector3 GetOriginalScale()
-    {
-        return originalScale;
-    }
+    public MeshRenderer StairMeshRenderer() => currentMeshRenderer;
 
-    public void EnableWall()
-    {
-        transform.localScale = new Vector3(originalScale.x, originalScale.y * 10f, originalScale.z);
-        boxCollider.isTrigger = false;
-        Debug.LogError("adasdasd:  " + transform.localScale);
-    }
-
-    public void ResetStairToNormal()
-    {
-
-        transform.localScale = originalScale;
-        transform.position = originalPosition;
-        GetComponent<BoxCollider>().isTrigger = true;
-        Debug.LogError("origin localScale:  " + originalScale + "  istrigger:  " + boxCollider.isTrigger);
-    }
+    public Bridge Bridge() => bridge;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Constants.TAG_PLAYER))
+        Character character = Cache.GetCharacter(other);
+        if (character is Player)
         {
-            //Player character = other.GetComponent<Player>();
-            Player character = Cache.GetPlayer(other);
-            if (character.GetCurrentTotalBricks() > 0)
-            {
-                if (currentColorType != character.GetCurrentColor())
-                {
-                    NormalStairChecking(character, bridge);
-                }
-                currentMeshRenderer.enabled = true;
-                if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
-                {
-                    bridge.EnableBarrierBox(bridge.GetStairIndex(this));
-                }
-            }
-            else
-            {
-                if (currentColorType != character.GetCurrentColor())
-                {
-                    bridge.EnableBarrierBox(bridge.GetStairIndex(this));
-                }
-            }
+            Player player = (Player)character;
+            player.CheckStair(this);
         }
-        else if (other.CompareTag(Constants.TAG_BOT))
+        else
         {
-            //Bot character = other.GetComponent<Bot>();
-            Bot character = Cache.GetBot(other);
-            if (character.GetCurrentTotalBricks() > 0)
-            {
-                if (currentColorType != character.GetCurrentColor())
-                {
-                    NormalStairChecking(character, bridge);
-                }
-                bridge.ResetCurrentBarrier(bridge.GetStairIndex(this));
-                currentMeshRenderer.enabled = true;
-                if (!bridge.IsEnoughStairForBridge() && character.GetCurrentTotalBricks() == 0)
-                {
-                    character.ChangeState(new PatrolState());
-                }
-            }
-            else
-            {
-                if (currentColorType != character.GetCurrentColor())
-                {
-                    character.ChangeState(new PatrolState());
-                }
-            }
+            Bot bot = (Bot)character;
+            bot.CheckStair(this);
         }
     }
-
-    private void NormalStairChecking(Character character, Bridge bridge)
-    {
-        CharacterBrick brick = character.GetLastBrick();
-        ChangeColor(character.GetCurrentColor());
-        ChangeMaterial(character.GetCurrentMeshMaterial());
-        character.RemoveBrick(brick);
-        bridge.IncreaseStairActive();
-    }
-
 }

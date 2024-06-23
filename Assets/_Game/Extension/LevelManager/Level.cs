@@ -40,16 +40,12 @@ public class Level : MonoBehaviour
 
     public List<Transform> GetFinalLines() => finalLines;
 
-    //public void DeletePool()
-    //{
-    //    Destroy(PoolControl.gameObject);
-    //}
-
-    //public void ReloadStage()
-    //{
-    //    for (int i = 0; i < characters.Count; i++)
-    //    {
-    //        LoadStage(characters[i], 0);
-    //    }
-    //}
+    public void SetPatrolStateBot()
+    {
+        for (int i = 0; i < bots.Count; i++)
+        {
+            bots[i].SetTargetBrickPosition();
+            bots[i].ChangeState(new PatrolState());
+        }
+    }
 }

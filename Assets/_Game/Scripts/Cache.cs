@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class Cache
 {
-    //private static Dictionary<Collider, Character> characters = new Dictionary<Collider, Character>();  
+    private static Dictionary<Collider, Character> characters = new Dictionary<Collider, Character>();
 
-    //public static Character GetCharacter(Collider collider)
-    //{
-    //    if (!characters.ContainsKey(collider))
-    //    {
-    //        characters.Add(collider, collider.GetComponent<Character>());
-    //    }
+    public static Character GetCharacter(Collider collider)
+    {
+        if (!characters.ContainsKey(collider))
+        {
+            characters.Add(collider, collider.GetComponent<Character>());
+        }
 
-    //    return characters[collider];
-    //}
+        return characters[collider];
+    }
 
     private static Dictionary<Collider, Brick> bricks = new Dictionary<Collider, Brick>();
 
@@ -30,29 +30,29 @@ public class Cache
         return bricks[collider];
     }
 
-    private static Dictionary<Collider, Player> players = new Dictionary<Collider, Player>();
+    //private static Dictionary<Collider, Player> players = new Dictionary<Collider, Player>();
 
-    public static Player GetPlayer(Collider collider)
-    {
-        if (!players.ContainsKey(collider))
-        {
-            players.Add(collider, collider.GetComponent<Player>());
-        }
+    //public static Player GetPlayer(Collider collider)
+    //{
+    //    if (!players.ContainsKey(collider))
+    //    {
+    //        players.Add(collider, collider.GetComponent<Player>());
+    //    }
 
-        return players[collider];
-    }
+    //    return players[collider];
+    //}
 
-    private static Dictionary<Collider, Bot> bots = new Dictionary<Collider, Bot>();
+    //private static Dictionary<Collider, Bot> bots = new Dictionary<Collider, Bot>();
 
-    public static Bot GetBot(Collider collider)
-    {
-        if (!bots.ContainsKey(collider))
-        {
-            bots.Add(collider, collider.GetComponent<Bot>());
-        }
+    //public static Bot GetBot(Collider collider)
+    //{
+    //    if (!bots.ContainsKey(collider))
+    //    {
+    //        bots.Add(collider, collider.GetComponent<Bot>());
+    //    }
 
-        return bots[collider];  
-    }
+    //    return bots[collider];  
+    //}
 
     private static Dictionary<Collider, Door> doors = new Dictionary<Collider, Door>();
 

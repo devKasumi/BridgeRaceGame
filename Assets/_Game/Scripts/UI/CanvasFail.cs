@@ -14,13 +14,10 @@ public class CanvasFail : UICanvas
 
     public void RetryButton()
     {
-        Close(0);
         UIManager.GetInstance.CloseAll();
         //TODO fix: 
-        LevelManager.GetInstance.GetPlayer().ClearBrick();
-        LevelManager.GetInstance.GetPlayer().OnInit();
+        UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         LevelManager.GetInstance.OnRetryLevel();
-        UIManager.GetInstance.OpenUI<CanvasGamePlay>();
-        GameManager.GetInstance.UpdateGameState(GameState.GamePlay);
+        GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }
 }

@@ -12,7 +12,7 @@ public class IdleState : IState
 
     public void OnExecute(Bot bot) 
     {
-        bot.StopMoving();
+        bot.SetTarget(bot.transform.position);
     }
 
     public void OnExit(Bot bot)

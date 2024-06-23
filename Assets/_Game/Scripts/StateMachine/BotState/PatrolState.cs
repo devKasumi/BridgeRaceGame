@@ -12,7 +12,7 @@ public class PatrolState : IState
 
     public void OnExecute(Bot bot)
     {
-        bot.MoveToBrick(bot.GetTargetBrickPosition());
+        bot.SetTarget(bot.GetTargetBrickPosition());
 
         if (bot.BuildBridge())
         {

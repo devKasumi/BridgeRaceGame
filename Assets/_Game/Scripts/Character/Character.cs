@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
         skinnedMeshRenderer.material = data.GetMaterial(currentColorType);
     }
 
-    public CommonEnum.ColorType GetCurrentColor() => currentColorType;
+    public CommonEnum.ColorType CurrentCharacterColor() => currentColorType;
 
     public Material GetCurrentMeshMaterial() => skinnedMeshRenderer.material;
 
@@ -145,6 +145,15 @@ public class Character : MonoBehaviour
         return (Vector3.Distance(transform.position, currentTargetPosition) < 1f);
     }
 
+    public void NormalStairChecking(Bridge bridge, Stair stair)
+    {
+        CharacterBrick brick = GetLastBrick();
+        stair.ChangeColor(CurrentCharacterColor());
+        stair.ChangeMaterial(GetCurrentMeshMaterial());
+        RemoveBrick(brick);
+        bridge.IncreaseStairActive();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constants.TAG_BRICK))
@@ -157,7 +166,7 @@ public class Character : MonoBehaviour
                 //TODO sap xep, phan chia lai code - khong viet logic vao ham va cham!
                 AddBrick();
                 BrickPool.Despawn(brick);
-                StartCoroutine(ReSpawnBrick(this.GetCurrentColor(), brick.transform.position, brick.transform.rotation));
+                StartCoroutine(ReSpawnBrick(this.CurrentCharacterColor(), brick.transform.position, brick.transform.rotation));
             }
         }
     }

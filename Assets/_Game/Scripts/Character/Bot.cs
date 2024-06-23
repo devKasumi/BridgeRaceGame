@@ -7,7 +7,7 @@ public class Bot : Character
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private NavMeshAgent navMeshAgent;
-    [SerializeField] private Transform finishBox;
+    [SerializeField] public Transform finishBox;
     [SerializeField] private int minCollectedBricks;
     [SerializeField] private int maxCollectedBricks;
 
@@ -70,32 +70,15 @@ public class Bot : Character
 
     public void Moving()
     {
-        if (GetTargetBrickPosition() == Vector3.zero)
+        if (IsCharacterReachTarget())
         {
             SetTargetBrickPosition();
         }
-        else
-        {
-            if (IsCharacterReachTarget())
-            {
-                SetTargetBrickPosition();
-            }
-        }
     }
 
-    public void StopMoving()
-    {
-        navMeshAgent.destination = transform.position;
-    }
-
-    public void MoveToBrick(Vector3 pos)
+    public void SetTarget(Vector3 pos)
     {
         navMeshAgent.destination = pos;
-    }
-
-    public void SetFinalTarget()
-    {
-        navMeshAgent.destination = finishBox.position;
     }
 
     public int GetMinCollectedBrick()
@@ -121,6 +104,31 @@ public class Bot : Character
     public bool IsReachTarget()
     {
         return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.3f;
+    }
+
+    public void CheckStair(Stair stair)
+    {
+        if (GetCurrentTotalBricks() > 0)
+        {
+            if (stair.GetColorType() != CurrentCharacterColor())
+            {
+                NormalStairChecking(stair.Bridge(), stair);
+            }
+            stair.Bridge().ResetCurrentBarrier(stair.Bridge().GetStairIndex(stair));
+            stair.StairMeshRenderer().enabled = true;
+
+            if (!stair.Bridge().IsEnoughStairForBridge() && GetCurrentTotalBricks() == 0)
+            {
+                ChangeState(new PatrolState());
+            }
+        }
+        else
+        {
+            if (stair.GetColorType() != CurrentCharacterColor())
+            {
+                ChangeState(new PatrolState());
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)

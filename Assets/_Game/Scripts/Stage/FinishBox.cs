@@ -8,13 +8,13 @@ public class FinishBox : MonoBehaviour
     {
         if (other.CompareTag(Constants.TAG_PLAYER))
         {
-            UIManager.GetInstance.CloseAll();
+            UIManager.GetInstance.CloseUI<CanvasGamePlay>(0);
             UIManager.GetInstance.OpenUI<CanvasVictory>();
             GameManager.GetInstance.UpdateGameState(GameState.Finish);
         }
         else if (other.CompareTag(Constants.TAG_BOT))
         {
-            UIManager.GetInstance.CloseAll();
+            UIManager.GetInstance.CloseUI<CanvasGamePlay>(0);
             UIManager.GetInstance.OpenUI<CanvasFail>();
             GameManager.GetInstance.UpdateGameState(GameState.Finish);
         }

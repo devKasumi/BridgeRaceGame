@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Player : Character
@@ -28,10 +29,16 @@ public class Player : Character
 
     private void Update()
     {
-        Move();
-
-        rb.useGravity = !OnSlope();
-
+        if (GameManager.GetInstance.CurrentState(GameState.GamePlay))
+        {
+            Move();
+            rb.useGravity = !OnSlope();
+        }
+        else
+        {
+            ChangeAnimation(Constants.ANIMATION_IDLE);
+            return;
+        }
         AdvanceToNextStage();
     }
 
@@ -109,12 +116,6 @@ public class Player : Character
         
     }
 
-
-    public void ResetPlayerRotation()
-    {
-        transform.rotation = Quaternion.identity;
-    }
-
     public void AdvanceToNextStage()
     {
         // TODO fix:
@@ -150,5 +151,29 @@ public class Player : Character
             }
         }
         return false;
+    }
+
+    public void CheckStair(Stair stair)
+    {
+        if (GetCurrentTotalBricks() > 0)
+        {
+            if (stair.GetColorType() != CurrentCharacterColor())
+            {
+                NormalStairChecking(stair.Bridge(), stair);
+            }
+            stair.StairMeshRenderer().enabled = true;
+
+            if (!stair.Bridge().IsEnoughStairForBridge() && GetCurrentTotalBricks() == 0)
+            {
+                stair.Bridge().EnableBarrierBox(stair.Bridge().GetStairIndex(stair));
+            }
+        }
+        else
+        {
+            if (stair.GetColorType() != CurrentCharacterColor())
+            {
+                stair.Bridge().EnableBarrierBox(stair.Bridge().GetStairIndex(stair));
+            }
+        }
     }
 }

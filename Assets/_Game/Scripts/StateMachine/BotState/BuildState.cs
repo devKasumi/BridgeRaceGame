@@ -17,7 +17,8 @@ public class BuildState : IState
         if (bot.IsReachTarget())
         {
             Debug.Log("reach target!!!!!");
-            bot.SetFinalTarget();
+            //bot.SetFinalTarget();
+            bot.SetTarget(bot.finishBox.position);
         }
     }
 

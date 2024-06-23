@@ -40,11 +40,7 @@ public class CanvasSettings : UICanvas
         UIManager.GetInstance.OpenUI<CanvasGamePlay>();
         GameManager.GetInstance.UpdateGameState(GameState.GamePlay);
         // TODO fix:
-        List<Bot> bots = LevelManager.GetInstance.GetCurrentLevel().GetBots();
-        for (int i = 0; i < bots.Count; i++)
-        {
-            bots[i].ChangeState(new PatrolState());
-        }
+        LevelManager.GetInstance.OnPlay();
     }
 
     public void CloseButton()

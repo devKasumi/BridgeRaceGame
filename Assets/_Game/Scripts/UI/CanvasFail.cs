@@ -16,8 +16,8 @@ public class CanvasFail : UICanvas
     {
         UIManager.GetInstance.CloseAll();
         //TODO fix: 
-        UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         LevelManager.GetInstance.OnRetryLevel();
+        UIManager.GetInstance.OpenUI<CanvasMainMenu>();
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }
 }

@@ -404,6 +404,7 @@ MonoBehaviour:
   target: {fileID: 1380684232}
   offset: {x: 0, y: 10, z: -8}
   moveSpeed: 20
+  Tf: {fileID: 963194228}
 --- !u!1 &1372952564
 GameObject:
   m_ObjectHideFlags: 0

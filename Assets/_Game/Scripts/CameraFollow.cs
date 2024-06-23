@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target;
+    [SerializeField] private Transform Tf;
     [SerializeField] private Vector3 offset;
     [SerializeField] private float moveSpeed = 20;
 
@@ -12,6 +13,6 @@ public class CameraFollow : MonoBehaviour
     void LateUpdate()
     {
         //TODO fix:
-        transform.position = Vector3.Lerp(transform.position, target.position + offset, Time.deltaTime * moveSpeed);
+        Tf.position = Vector3.Lerp(transform.position, target.position + offset, Time.deltaTime * moveSpeed);
     }
 }

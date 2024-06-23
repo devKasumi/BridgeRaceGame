@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [SerializeField] private JoystickManager joystickManager;
+    [SerializeField] private FloatingJoystick floatingJoystick;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float playerHeight;
     [SerializeField] private float maxSlopeAngle;
@@ -67,8 +67,8 @@ public class Player : Character
 
     public void Move()
     {
-        inputX = joystickManager.InputHorizontal();
-        inputZ = joystickManager.InputVertical();
+        inputX = floatingJoystick.Horizontal;
+        inputZ = floatingJoystick.Vertical;
 
         moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 
@@ -81,12 +81,14 @@ public class Player : Character
             rb.velocity = moveDirection;
         }
 
-        if (!joystickManager.IsResetJoystick())
+        if (!floatingJoystick.IsResetJoystick())
         {
+            rb.isKinematic = false;
             ChangeAnimation(Constants.ANIMATION_RUN);
         }
         else
         {
+            rb.isKinematic = true;
             ChangeAnimation(Constants.ANIMATION_IDLE);
         }
 

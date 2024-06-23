@@ -615,7 +615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043269, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -627,6 +627,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
   m_PrefabInstance: {fileID: 1378766011}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1378766013 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+  m_PrefabInstance: {fileID: 1378766011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1380684232 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1023837874910635386, guid: 65bdec5416328584fac8ea7f79009ec1, type: 3}
@@ -798,17 +809,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1727541588117789059, guid: 60765548e30a2004cb8c601b275a1df7, type: 3}
   m_PrefabInstance: {fileID: 5194830378712030984}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2002182531 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1291337995000746365, guid: 60765548e30a2004cb8c601b275a1df7, type: 3}
-  m_PrefabInstance: {fileID: 5194830378712030984}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91d48ac067787d46b5b5d3bbedfc73a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3441366659110386321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -858,16 +858,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7529851621341978381, guid: 65bdec5416328584fac8ea7f79009ec1, type: 3}
-      propertyPath: joystickManager
+      propertyPath: floatingJoystick
       value: 
-      objectReference: {fileID: 2002182531}
+      objectReference: {fileID: 1378766013}
     - target: {fileID: 8553094351915116136, guid: 65bdec5416328584fac8ea7f79009ec1, type: 3}
       propertyPath: m_Name
       value: PlayerParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 8553094351915116136, guid: 65bdec5416328584fac8ea7f79009ec1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -968,7 +964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3055397222300423452, guid: 60765548e30a2004cb8c601b275a1df7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

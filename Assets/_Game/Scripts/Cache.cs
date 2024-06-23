@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class Cache
 {
-    private static Dictionary<Collider, Character> characters = new Dictionary<Collider, Character>();  
+    //private static Dictionary<Collider, Character> characters = new Dictionary<Collider, Character>();  
 
-    public static Character GetCharacter(Collider collider)
-    {
-        if (!characters.ContainsKey(collider))
-        {
-            characters.Add(collider, collider.GetComponent<Character>());
-        }
+    //public static Character GetCharacter(Collider collider)
+    //{
+    //    if (!characters.ContainsKey(collider))
+    //    {
+    //        characters.Add(collider, collider.GetComponent<Character>());
+    //    }
 
-        return characters[collider];
-    }
+    //    return characters[collider];
+    //}
 
     private static Dictionary<Collider, Brick> bricks = new Dictionary<Collider, Brick>();
 

@@ -80,10 +80,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &7529851621341978381
 MonoBehaviour:
@@ -104,9 +104,9 @@ MonoBehaviour:
   firstBrickY: -0.5
   firstBrickZ: -0.6
   characterBrickPrefab: {fileID: -1791482452184180714, guid: f329c0129d601ac4f9a9048431026a6f, type: 3}
-  joystickManager: {fileID: 0}
+  floatingJoystick: {fileID: 0}
   rb: {fileID: 8682268638805327699}
-  playerHeight: 2
+  playerHeight: 1
   maxSlopeAngle: 60
   bridgeLayer:
     serializedVersion: 2

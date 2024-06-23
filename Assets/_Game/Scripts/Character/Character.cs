@@ -154,26 +154,29 @@ public class Character : MonoBehaviour
         bridge.IncreaseStairActive();
     }
 
+    public void NormalBrickChecking(Brick brick)
+    {
+        if (currentColorType == brick.GetColorType() && GameManager.GetInstance.CurrentState(GameState.GamePlay))
+        {
+            AddBrick();
+            BrickPool.Despawn(brick);
+            StartCoroutine(ReSpawnBrick(CurrentCharacterColor(), brick.TF.position, brick.TF.rotation));
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constants.TAG_BRICK))
         {
             //TODO FIX Cache
-            //Brick brick = other.GetComponent<Brick>();
             Brick brick = Cache.GetBrick(other);
-            if (currentColorType == brick.GetColorType() && GameManager.GetInstance.CurrentState(GameState.GamePlay)) // logic
-            {
-                //TODO sap xep, phan chia lai code - khong viet logic vao ham va cham!
-                AddBrick();
-                BrickPool.Despawn(brick);
-                StartCoroutine(ReSpawnBrick(this.CurrentCharacterColor(), brick.transform.position, brick.transform.rotation));
-            }
+            NormalBrickChecking(brick);
         }
     }
 
     public IEnumerator ReSpawnBrick(CommonEnum.ColorType colorType, Vector3 pos, Quaternion ros)
     {
-        yield return new WaitForSeconds(Random.Range(0f, 2f));
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
         Brick brick = BrickPool.Spawn<Brick>(colorType, pos, ros);
     }
 }

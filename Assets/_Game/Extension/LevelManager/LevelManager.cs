@@ -68,7 +68,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (currentLevel == levelPrefabs[levelPrefabs.Count - 1])
         {
-            
+            return;
         }
 
         if (currentLevel != null)

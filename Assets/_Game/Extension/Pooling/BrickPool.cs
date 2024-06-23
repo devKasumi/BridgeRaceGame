@@ -80,10 +80,11 @@ public static class BrickPool
     {
         foreach(var item in poolInstance.Values)
         {
-            Debug.LogError("release item:   " + item);
             item.Release();
         }
     }
+
+    public static Pool GetPool(CommonEnum.ColorType color) => poolInstance[color];
 }
 
 public class Pool
@@ -155,9 +156,10 @@ public class Pool
 
         while (inactives.Count > 0)
         {
-            Debug.LogError("destroy pool:   " + inactives.Dequeue().gameObject);
             GameObject.Destroy(inactives.Dequeue().gameObject);
         }
         inactives.Clear();
     }
+
+    public Queue<Brick> InactiveBricks() => inactives;
 }

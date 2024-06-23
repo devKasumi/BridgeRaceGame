@@ -48,4 +48,17 @@ public class Level : MonoBehaviour
             bots[i].ChangeState(new PatrolState());
         }
     }
+
+    public void StopRespawnBrick()
+    {
+        for (int i = 0; i < characters.Count; i++)
+        {
+            //StopCoroutine(characters[i].ReSpawnBrick(characters[i].CurrentCharacterColor(), BrickPool));
+            Queue<Brick> inactiveBricks = BrickPool.GetPool(characters[i].CurrentCharacterColor()).InactiveBricks();
+            while (inactiveBricks.Count > 0)
+            {
+                StopCoroutine(characters[i].ReSpawnBrick(characters[i].CurrentCharacterColor(), inactiveBricks.Dequeue().transform.position, Quaternion.identity));
+            }
+        }
+    }
 }

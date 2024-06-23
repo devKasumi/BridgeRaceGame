@@ -15,16 +15,16 @@ public class CanvasVictory : UICanvas
     public void NextButton()
     {
         UIManager.GetInstance.CloseAll();
-        LevelManager.GetInstance.OnLoadNextLevel();
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
+        LevelManager.GetInstance.OnLoadNextLevel();
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }
 
     public void RetryButton()
     {
         UIManager.GetInstance.CloseAll();
-        LevelManager.GetInstance.OnRetryLevel();
         UIManager.GetInstance.OpenUI<CanvasMainMenu>();
+        LevelManager.GetInstance.OnRetryLevel();
         GameManager.GetInstance.UpdateGameState(GameState.MainMenu);
     }
 }

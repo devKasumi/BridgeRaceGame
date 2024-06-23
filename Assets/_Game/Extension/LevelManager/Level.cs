@@ -36,29 +36,36 @@ public class Level : MonoBehaviour
         return stages[characterStageIndex].GetCurrentStagePlatform();
     }
 
-    public List<Bot> GetBots() => bots;
-
     public List<Transform> GetFinalLines() => finalLines;
 
     public void SetPatrolStateBot()
     {
         for (int i = 0; i < bots.Count; i++)
         {
-            bots[i].SetTargetBrickPosition();
             bots[i].ChangeState(new PatrolState());
         }
     }
 
-    public void StopRespawnBrick()
+    public List<Transform> GetNextStageLines(Character character)
     {
-        for (int i = 0; i < characters.Count; i++)
-        {
-            //StopCoroutine(characters[i].ReSpawnBrick(characters[i].CurrentCharacterColor(), BrickPool));
-            Queue<Brick> inactiveBricks = BrickPool.GetPool(characters[i].CurrentCharacterColor()).InactiveBricks();
-            while (inactiveBricks.Count > 0)
-            {
-                StopCoroutine(characters[i].ReSpawnBrick(characters[i].CurrentCharacterColor(), inactiveBricks.Dequeue().transform.position, Quaternion.identity));
-            }
-        }
+        return GetCurrentStagePlatform(character.GetCurrentStageIndex()).GetNextStageLine();
     }
+
+    public void EnablePlatformGate(Character character)
+    {
+        GetCurrentStagePlatform(character.GetCurrentStageIndex()).EnableGate();
+    }
+
+    //public void StopRespawnBrick()
+    //{
+    //    for (int i = 0; i < characters.Count; i++)
+    //    {
+    //        //StopCoroutine(characters[i].ReSpawnBrick(characters[i].CurrentCharacterColor(), BrickPool));
+    //        Queue<Brick> inactiveBricks = BrickPool.GetPool(characters[i].CurrentCharacterColor()).InactiveBricks();
+    //        while (inactiveBricks.Count > 0)
+    //        {
+    //            StopCoroutine(characters[i].ReSpawnBrick(characters[i].CurrentCharacterColor(), inactiveBricks.Dequeue().transform.position, Quaternion.identity));
+    //        }
+    //    }
+    //}
 }

@@ -8,14 +8,18 @@ public class PatrolState : IState
     public void OnEnter(Bot bot)
     {
         bot.ChangeAnimation(Constants.ANIMATION_RUN);
+        bot.SetDestination(bot.RandomBrickPos());
     }
 
     public void OnExecute(Bot bot)
     {
-        bot.SetTarget(bot.GetTargetBrickPosition());
+        if (bot.IsReachTarget())
+        {
+            bot.SetDestination(bot.RandomBrickPos());
+        }
 
         if (bot.BuildBridge())
-        {
+        {   
             bot.ChangeState(new BuildState());
         }
     }

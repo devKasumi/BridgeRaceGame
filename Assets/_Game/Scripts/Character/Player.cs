@@ -7,18 +7,16 @@ public class Player : Character
 {
     [SerializeField] private FloatingJoystick floatingJoystick;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] Transform tf;
     [SerializeField] private float playerHeight;
     [SerializeField] private float maxSlopeAngle;
     [SerializeField] private LayerMask bridgeLayer;
 
     private Quaternion originRotation;
-
+    private RaycastHit slopeHit;
+    private Vector3 moveDirection;
     private float inputX;
     private float inputZ;
-
-    private RaycastHit slopeHit;
-
-    private Vector3 moveDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +44,8 @@ public class Player : Character
     {
         base.OnInit();
         ChangeAnimation(Constants.ANIMATION_IDLE);
-        transform.position = Vector3.zero;
-        transform.rotation = Quaternion.identity;
+        tf.position = Vector3.zero;
+        tf.rotation = Quaternion.identity;
     }
 
     public override void OnDespawn()
@@ -57,9 +55,9 @@ public class Player : Character
 
     private bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 1f, bridgeLayer))
+        if (Physics.Raycast(tf.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 1f, bridgeLayer))
         {
-            Debug.DrawLine(transform.position, transform.position + Vector3.down * playerHeight, Color.yellow);
+            Debug.DrawLine(tf.position, tf.position + Vector3.down * playerHeight, Color.yellow);
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
         }
@@ -106,11 +104,11 @@ public class Player : Character
         {
             if (OnSlope())
             {
-                transform.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, originRotation.y, rb.velocity.z));
+                tf.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, originRotation.y, rb.velocity.z));
             }
             else
             {
-                transform.rotation = Quaternion.LookRotation(rb.velocity);
+                tf.rotation = Quaternion.LookRotation(rb.velocity);
             }
         }
         
@@ -119,17 +117,17 @@ public class Player : Character
     public void AdvanceToNextStage()
     {
         // TODO fix:
-        List<Transform> nextStageLines = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetNextStageLine();
-        List<Transform> finalStageLines = LevelManager.GetInstance.GetCurrentLevel().GetFinalLines();
+        List<Transform> nextStageLines = LevelManager.GetInstance.CurrentLevel().GetNextStageLines(this);
+        List<Transform> finalStageLines = LevelManager.GetInstance.CurrentLevel().GetFinalLines();
         if (IsClearStage(nextStageLines) && nextStageLines.Count > 0)
         {
             for (int i = 0; i < nextStageLines.Count; i++)
             {
                 nextStageLines[i].gameObject.SetActive(false);
             }
-            LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).EnableGate();
+            LevelManager.GetInstance.CurrentLevel().EnablePlatformGate(this);
             ProcessToNextStage();
-            LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, GetCurrentStageIndex());
+            LevelManager.GetInstance.CurrentLevel().LoadStage(this, GetCurrentStageIndex());
         }
         else if (IsClearStage(finalStageLines))
         {
@@ -137,7 +135,7 @@ public class Player : Character
             {
                 finalStageLines[i].gameObject.SetActive(false);
             }
-            LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).EnableGate();
+            LevelManager.GetInstance.CurrentLevel().EnablePlatformGate(this);
         }
     }
 
@@ -145,7 +143,7 @@ public class Player : Character
     {
         for (int i = 0; i < nextStageLines.Count; i++)
         {
-            if (Vector3.Distance(transform.position, nextStageLines[i].position) < 0.8f)
+            if (Vector3.Distance(tf.position, nextStageLines[i].position) < 0.8f)
             {
                 return true;
             }
@@ -155,21 +153,25 @@ public class Player : Character
 
     public void CheckStair(Stair stair)
     {
+        // check neu player dang co brick
         if (GetCurrentTotalBricks() > 0)
         {
+            // neu mau stair khac voi mau player
             if (stair.GetColorType() != CurrentCharacterColor())
             {
                 NormalStairChecking(stair.Bridge(), stair);
             }
             stair.StairMeshRenderer().enabled = true;
 
+            // neu ma bridge chua du active stair va play khong con gach
             if (!stair.Bridge().IsEnoughStairForBridge() && GetCurrentTotalBricks() == 0)
             {
                 stair.Bridge().EnableBarrierBox(stair.Bridge().GetStairIndex(stair));
             }
         }
         else
-        {
+        {   
+            // neu player het gach va mau stair dang khac voi mau player
             if (stair.GetColorType() != CurrentCharacterColor())
             {
                 stair.Bridge().EnableBarrierBox(stair.Bridge().GetStairIndex(stair));

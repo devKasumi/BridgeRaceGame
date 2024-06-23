@@ -16,9 +16,4 @@ public class CharacterBrick : MonoBehaviour
     {
         this.currentMeshRenderer.material = material;
     }
-
-    public CommonEnum.ColorType GetColorType()
-    {
-        return currentColorType;
-    }
 }

@@ -9,6 +9,7 @@ public class Bridge : MonoBehaviour
     [SerializeField] private int totalStairNumbers;
     [SerializeField] private Transform stairParent;
     [SerializeField] private Transform barrierParent;
+
     private List<Stair> stairs = new List<Stair>();
     private List<Barrier> barriers = new List<Barrier>();
     private Vector3 firstStairPos;
@@ -52,7 +53,10 @@ public class Bridge : MonoBehaviour
 
     public void EnableBarrierBox(int index)
     {
-        barriers[index + 1].GetObjectBoxCollider().isTrigger = false;
+        if (index + 1 < barriers.Count)
+        {
+            barriers[index + 1].GetObjectBoxCollider().isTrigger = false;
+        }
     }
 
     public void IncreaseStairActive()
@@ -63,11 +67,6 @@ public class Bridge : MonoBehaviour
     public bool IsEnoughStairForBridge()
     {
         return totalStairsActive == totalStairNumbers;
-    }
-
-    public void ResetStairActive()
-    {
-        totalStairsActive = 0;
     }
 
     public void ResetBarrier()

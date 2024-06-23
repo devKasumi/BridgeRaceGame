@@ -14,14 +14,10 @@ public class Character : MonoBehaviour
     [SerializeField] private CharacterBrick characterBrickPrefab;
 
     private List<CharacterBrick> bricks = new List<CharacterBrick>();
-
-    private Vector3 currentTargetPosition = Vector3.zero;
-
+    
     private IState currentState;
-
-    private string currentAnimationName = Constants.ANIMATION_IDLE;
     private CommonEnum.ColorType currentColorType;
-
+    private string currentAnimationName = Constants.ANIMATION_IDLE;
     private int currentStageIndex = 0;
 
     private void Awake()
@@ -31,7 +27,6 @@ public class Character : MonoBehaviour
 
     public virtual void OnInit()
     {
-        //ClearBrick();
         currentStageIndex = 0;
         GetData();
         bricks = new List<CharacterBrick>();
@@ -122,28 +117,13 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void SetTargetBrickPosition()
-    {
-        List<Vector3> bricksPos = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(currentStageIndex).GetPlatformBrickPos()[this];
-        currentTargetPosition = bricksPos[Random.Range(0, bricksPos.Count)];
-        //Debug.LogError("current stage:  " + currentStageIndex + "   pos:  " + currentTargetPosition);
-    }
 
     public Vector3 GetRandomResetPointPos()
     {
-        Transform[] resetPoints = LevelManager.GetInstance.GetCurrentLevel().GetCurrentStagePlatform(currentStageIndex).GetResetPointPos();
+        Transform[] resetPoints = LevelManager.GetInstance.CurrentLevel().GetCurrentStagePlatform(currentStageIndex).GetResetPointPos();
         return resetPoints[Random.Range(0, resetPoints.Length)].position;
     }
 
-    public Vector3 GetTargetBrickPosition()
-    {
-        return currentTargetPosition;
-    }
-
-    public bool IsCharacterReachTarget()
-    {
-        return (Vector3.Distance(transform.position, currentTargetPosition) < 1f);
-    }
 
     public void NormalStairChecking(Bridge bridge, Stair stair)
     {
@@ -169,7 +149,7 @@ public class Character : MonoBehaviour
         if (other.CompareTag(Constants.TAG_BRICK))
         {
             //TODO FIX Cache
-            Brick brick = Cache.GetBrick(other);
+            Brick brick = Cache.GenBrick(other);
             NormalBrickChecking(brick);
         }
     }

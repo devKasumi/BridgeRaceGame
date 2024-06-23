@@ -13,6 +13,7 @@ public class Bot : Character
 
     private int collectedBrick;
     private IState currentState;
+    private Vector3 currentTargetPosition = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +24,14 @@ public class Bot : Character
     // Update is called once per frame
     void Update()
     {
-        if (currentState != null)
+        if (currentState != null && GameManager.GetInstance.CurrentState(GameState.GamePlay))
         {
             currentState.OnExecute(this);
         }
 
         if (GameManager.GetInstance.CurrentState(GameState.GamePlay))
         {
-            Moving();
+            //Moving();
         }
         else
         {
@@ -70,16 +71,12 @@ public class Bot : Character
 
     public void Moving()
     {
-        if (IsCharacterReachTarget())
+        if (IsReachTarget())
         {
-            SetTargetBrickPosition();
+            SetDestination(RandomBrickPos());
         }
     }
-
-    public void SetTarget(Vector3 pos)
-    {
-        navMeshAgent.destination = pos;
-    }
+   
 
     public int GetMinCollectedBrick()
     {
@@ -96,20 +93,23 @@ public class Bot : Character
         return GetCurrentTotalBricks() >= collectedBrick;
     }
 
-    public void SetRandomResetPoint()
-    {
-        navMeshAgent.destination = GetRandomResetPointPos();
-    }
-
     public bool IsReachTarget()
     {
-        return Vector3.Distance(transform.position, navMeshAgent.destination) < 1.3f;
+        return Vector3.Distance(transform.position, currentTargetPosition) < 0.8f;
+    }
+
+    public void SetDestination(Vector3 pos)
+    {
+        currentTargetPosition = pos;
+        navMeshAgent.destination = pos;
     }
 
     public void CheckStair(Stair stair)
     {
+        // check neu bot dang co brick
         if (GetCurrentTotalBricks() > 0)
         {
+            // neu mau stair khac mau bot
             if (stair.GetColorType() != CurrentCharacterColor())
             {
                 NormalStairChecking(stair.Bridge(), stair);
@@ -117,6 +117,7 @@ public class Bot : Character
             stair.Bridge().ResetCurrentBarrier(stair.Bridge().GetStairIndex(stair));
             stair.StairMeshRenderer().enabled = true;
 
+            // neu bridge chua du active stair va bot het brick
             if (!stair.Bridge().IsEnoughStairForBridge() && GetCurrentTotalBricks() == 0)
             {
                 ChangeState(new PatrolState());
@@ -124,11 +125,18 @@ public class Bot : Character
         }
         else
         {
+            // check neu bot het gach va mau stair dang khac mau bot
             if (stair.GetColorType() != CurrentCharacterColor())
             {
                 ChangeState(new PatrolState());
             }
         }
+    }
+
+    public Vector3 RandomBrickPos()
+    {
+        List<Vector3> bricksPos = LevelManager.GetInstance.CurrentLevel().GetCurrentStagePlatform(GetCurrentStageIndex()).GetPlatformBrickPos()[this];
+        return bricksPos[Random.Range(0, bricksPos.Count)];
     }
 
     private void OnTriggerExit(Collider other)
@@ -139,10 +147,9 @@ public class Bot : Character
             Door door = Cache.GetDoor(other);
             if (door.IsNextStageDoor())
             {
-                Debug.LogError("process next stage!!!");
                 ProcessToNextStage();
-                LevelManager.GetInstance.GetCurrentLevel().LoadStage(this, GetCurrentStageIndex());
-                SetTargetBrickPosition();
+                LevelManager.GetInstance.CurrentLevel().LoadStage(this, GetCurrentStageIndex());
+                SetDestination(RandomBrickPos());
             }
         }
     }

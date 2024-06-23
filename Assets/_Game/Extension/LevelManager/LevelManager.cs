@@ -7,6 +7,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Player player;
     [SerializeField] private List<Level> levelPrefabs = new List<Level>();
     [SerializeField] private PoolControl poolControl;
+
     private Level currentLevel;
     private int currentLevelIndex;  
 
@@ -20,20 +21,16 @@ public class LevelManager : Singleton<LevelManager>
     {
         currentLevelIndex = 0;
         InitLevel(currentLevelIndex);
-        //player.ClearBrick();
-        //player.OnInit();
     }
 
     public Character GetPlayer() => player;
 
     public void InitLevel(int levelIndex)
     {
-        currentLevel = Instantiate(levelPrefabs[currentLevelIndex]/*, levelPrefabs[currentLevelIndex].originPos, Quaternion.identity*/);
+        currentLevel = Instantiate(levelPrefabs[currentLevelIndex]);
     }
 
-    public Level GetCurrentLevel() => currentLevel;
-
-    public int GetCurrentLevelIndex() => currentLevelIndex;
+    public Level CurrentLevel() => currentLevel;
 
     public void OnLoadNextLevel()
     {

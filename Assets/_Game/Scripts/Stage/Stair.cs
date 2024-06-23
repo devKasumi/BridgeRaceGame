@@ -11,14 +11,6 @@ public class Stair : MonoBehaviour
     [SerializeField] private CommonEnum.ColorType currentColorType = CommonEnum.ColorType.None;
     [SerializeField] private Bridge bridge;
     [SerializeField] private BoxCollider boxCollider;
-    private Vector3 originalScale;
-    private Vector3 originalPosition;
-
-    private void Start()
-    {
-        originalScale = transform.localScale;
-        originalPosition = transform.position;
-    }
 
     public void ChangeColor(CommonEnum.ColorType colorType)
     {
@@ -41,13 +33,13 @@ public class Stair : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Character character = Cache.GetCharacter(other);
+        Character character = Cache.GenCharacter(other);
         if (character is Player)
         {
             Player player = (Player)character;
             player.CheckStair(this);
         }
-        else
+        else if (character is Bot)
         {
             Bot bot = (Bot)character;
             bot.CheckStair(this);

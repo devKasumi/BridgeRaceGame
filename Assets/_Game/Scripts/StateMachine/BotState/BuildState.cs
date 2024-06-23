@@ -9,16 +9,14 @@ public class BuildState : IState
     public void OnEnter(Bot bot)
     {
         bot.ChangeAnimation(Constants.ANIMATION_RUN);
-        bot.SetRandomResetPoint();
+        bot.SetDestination(bot.GetRandomResetPointPos());
     }
 
     public void OnExecute(Bot bot)
     {
         if (bot.IsReachTarget())
         {
-            Debug.Log("reach target!!!!!");
-            //bot.SetFinalTarget();
-            bot.SetTarget(bot.finishBox.position);
+            bot.SetDestination(bot.finishBox.position);
         }
     }
 

@@ -10,7 +10,7 @@ public class PoolControl : MonoBehaviour
     {
         brick.ChangeColor(character.CurrentCharacterColor());
         brick.ChangeMaterial(character.GetCurrentMeshMaterial());
-        GameObject pool = new GameObject(LevelManager.GetInstance.GetCurrentLevel().name + "_" + character.CurrentCharacterColor().ToString() + "_" + (character.GetCurrentStageIndex() + 1));
+        GameObject pool = new GameObject(LevelManager.GetInstance.CurrentLevel().name + "_" + character.CurrentCharacterColor().ToString() + "_" + (character.GetCurrentStageIndex() + 1));
         BrickPool.PreLoad(brick,
                           platformBrickAmount,
                           pool.transform);

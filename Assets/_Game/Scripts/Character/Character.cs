@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
 
     private IState currentState;
 
-    private string currentAnimationName;
+    private string currentAnimationName = Constants.ANIMATION_IDLE;
     private CommonEnum.ColorType currentColorType;
 
     private int currentStageIndex = 0;

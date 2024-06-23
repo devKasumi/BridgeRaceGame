@@ -72,13 +72,16 @@ public class Player : Character
 
         moveDirection = new Vector3(inputX * GetMoveSpeed(), 0f, inputZ * GetMoveSpeed());
 
-        if (OnSlope())
+        if (!rb.isKinematic)
         {
-            rb.velocity = new Vector3(GetSlopeMoveDirection().x * 5f, GetSlopeMoveDirection().y*5f-1f, GetSlopeMoveDirection().z*5f);   
-        }
-        else
-        {
-            rb.velocity = moveDirection;
+            if (OnSlope())
+            {
+                rb.velocity = new Vector3(GetSlopeMoveDirection().x * 5f, GetSlopeMoveDirection().y * 5f - 1f, GetSlopeMoveDirection().z * 5f);
+            }
+            else
+            {
+                rb.velocity = moveDirection;
+            }
         }
 
         if (!floatingJoystick.IsResetJoystick())
@@ -92,7 +95,18 @@ public class Player : Character
             ChangeAnimation(Constants.ANIMATION_IDLE);
         }
 
-        transform.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, originRotation.y, rb.velocity.z));
+        if (inputX != 0f && inputZ != 0f)
+        {
+            if (OnSlope())
+            {
+                transform.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, originRotation.y, rb.velocity.z));
+            }
+            else
+            {
+                transform.rotation = Quaternion.LookRotation(rb.velocity);
+            }
+        }
+        
     }
 
 

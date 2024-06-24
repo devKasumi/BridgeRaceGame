@@ -29,12 +29,9 @@ public class Bot : Character
             currentState.OnExecute(this);
         }
 
-        if (GameManager.GetInstance.CurrentState(GameState.GamePlay))
+        if (!GameManager.GetInstance.CurrentState(GameState.GamePlay))
         {
-            //Moving();
-        }
-        else
-        {
+            SetDestination(transform.position);
             ChangeState(new IdleState());
             return;
         }

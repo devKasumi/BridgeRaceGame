@@ -14,7 +14,6 @@ public class Character : MonoBehaviour
     [SerializeField] private CharacterBrick characterBrickPrefab;
 
     private List<CharacterBrick> bricks = new List<CharacterBrick>();
-    
     private IState currentState;
     private CommonEnum.ColorType currentColorType;
     private string currentAnimationName = Constants.ANIMATION_IDLE;
@@ -148,7 +147,6 @@ public class Character : MonoBehaviour
     {
         if (other.CompareTag(Constants.TAG_BRICK))
         {
-            //TODO FIX Cache
             Brick brick = Cache.GenBrick(other);
             NormalBrickChecking(brick);
         }

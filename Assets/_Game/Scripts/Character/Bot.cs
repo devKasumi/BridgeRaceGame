@@ -140,7 +140,6 @@ public class Bot : Character
     {
         if (other.CompareTag(Constants.TAG_DOOR))
         {
-            //TODO: cache
             Door door = Cache.GetDoor(other);
             if (door.IsNextStageDoor())
             {

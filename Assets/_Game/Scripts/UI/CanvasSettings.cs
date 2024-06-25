@@ -39,7 +39,6 @@ public class CanvasSettings : UICanvas
         Close(0);
         UIManager.GetInstance.OpenUI<CanvasGamePlay>();
         GameManager.GetInstance.UpdateGameState(GameState.GamePlay);
-        // TODO fix:
         LevelManager.GetInstance.OnPlay();
     }
 
